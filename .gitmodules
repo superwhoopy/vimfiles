@@ -43,3 +43,6 @@
 [submodule "bundle/vim"]
 	path = bundle/vim
 	url = ssh://git@ssh.alexetmanu.fr/home/git/vim
+[submodule "bundle/nerdcommenter"]
+	path = bundle/nerdcommenter
+	url = https://github.com/scrooloose/nerdcommenter.git

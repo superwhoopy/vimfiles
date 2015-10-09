@@ -22,10 +22,11 @@
 ":set bg=light               " background general color tone
 :set bg=dark
 ":set guifont=Neep\ 11
-:set guifont=Consolas:h8:cANSI
+":set guifont=Consolas:h8:cANSI
+:set guifont=Monospace\ 8
 " :colors morning
-:colors desert
-" colorscheme solarized
+":colors desert
+colorscheme solarized
 :set go-=T                  " ne pas afficher la toolbar
 :set go-=m                  " ne pas afficher la menubar
 :set lines=60 columns=85   " taille de la fenêtre au démarrage

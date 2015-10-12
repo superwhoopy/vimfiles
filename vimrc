@@ -207,3 +207,5 @@ vmap <Leader>, :Tabularize /,<CR>
 vmap <Leader>; :Tabularize /;<CR>
 vmap <Leader>: :Tabularize /:<CR>
 
+" Force Jedi interpreter
+let g:jedi#force_py_version = 3

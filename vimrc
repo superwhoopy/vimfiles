@@ -82,9 +82,6 @@ set foldmethod=indent      " Folding base sur l'indentation
 " :set foldlevel=100       " deplier tous les folds jusqu'au nv. 100
 set diffopt+=iwhite        " en mode 'diff', ignorer les espaces
 
-" Windows dark magic to make the backspace key work properly...
-set backspace=2
-
 " Mappings
 " Ouvrir le Buffer explorer avec la touche F12
 nnoremap <F12> :BufExplorerVerticalSplit<CR>

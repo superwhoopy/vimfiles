@@ -89,7 +89,7 @@ set backspace=2
 
 " Mappings
 " Ouvrir le Buffer explorer avec la touche F12
-nnoremap <F12> :BufExplorer<CR> 
+nnoremap <F12> :BufExplorerVerticalSplit<CR>
 " Ctrl+Space : suivre un lien dans une fenetre splittee
 map <C-Space> :vsp<CR><C-]>
 " Ctrl-S : sauvegarder fichier courant, même si on est en mode d'édition
@@ -98,7 +98,7 @@ nmap <C-S> :w<CR>:echo "File saved."<CR>
 imap <C-Q> <Esc>:w<CR>:mak<CR>
 nmap <C-Q> :w<CR>:mak<CR>
 " Touche F8 : set encoding = UTF8
-nmap <F8>  :set encoding=utf8<CR> 
+nmap <F8>  :set encoding=utf8<CR>
 " <C-Space> for omnicompletion
 inoremap <C-Space> <C-X><C-o>
 " Navigation entre fenetres
@@ -106,7 +106,7 @@ nnoremap <A-l> :wincmd l<CR>
 nnoremap <A-k> :wincmd k<CR>
 nnoremap <A-j> :wincmd j<CR>
 nnoremap <A-h> :wincmd h<CR>
-"nnoremap <Tab> :exe wincmd 
+"nnoremap <Tab> :exe wincmd
 
 " Tag navigation
 nmap     <C-Tab>    <C-]>

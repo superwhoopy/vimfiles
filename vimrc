@@ -59,6 +59,7 @@ set bg=dark
 
 filetype plugin on          " Invoke adequate plugins according to the filetype
 
+set grepprg=/bin/grep\ -Irn\ --exclude-dir=\\.git\ --exclude=tags\ $*
 " Vim options
 set ic                     " ignore case
 set incsearch              " incremental search
@@ -139,7 +140,7 @@ let Tlist_Use_Right_Window = 1
 let Tlist_Show_One_File = 1
 
 " NerdTree
-let NERDTreeIgnore=['\.vim$', '\~$', '\.o$', '\.a$', '\.gcno$']
+let NERDTreeIgnore=['\.vim$', '\~$', '\.o$', '\.a$', '\.gcno$', '__pycache__', '\.pyc$']
 
 " Pathogen
 execute pathogen#infect()

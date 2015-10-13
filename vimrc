@@ -33,9 +33,9 @@ set background=light
 " Uncomment the following to have Vim load indentation rules according to the
 " detected filetype. Per default Debian Vim only load filetype specific
 " plugins.
-"if has("autocmd")
-"  filetype indent on
-"endif
+if has("autocmd")
+  filetype indent on
+endif
 
 " The following are commented out as they cause vim to behave a lot
 " differently from regular Vi. They are highly recommended though.
@@ -149,6 +149,9 @@ au BufNewFile,BufRead,BufEnter *.c,*.h,*.cpp,*.hpp set omnifunc=omni#cpp#complet
 let OmniCpp_ShowPrototypeInAbbr = 1
 set completeopt=menu
 
+" visual autocomplete for command menu
+set wildmenu
+
 " Leader key is ','
 :let mapleader=","
 
@@ -205,4 +208,4 @@ vmap <Leader>; :Tabularize /;<CR>
 vmap <Leader>: :Tabularize /:<CR>
 
 " Force Jedi interpreter
-let g:jedi#force_py_version = 3
+" let g:jedi#force_py_version = 3

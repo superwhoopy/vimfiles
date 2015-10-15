@@ -190,9 +190,9 @@ set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*%=%f\ %m\ %r\ %{fugitive#statusline()}
 
 " SYNTASTIC OPTIONS
-let g:syntastic_python_pylint_args='--rcfile=~/.pylintrc'
 let g:syntastic_cpp_check_header=1
 let g:syntastic_cpp_compiler='gcc'
+let g:syntastic_python_pylint_args='--rcfile=~/.pylintrc'
 let g:syntastic_python_checkers=['pylint']
 
 " ExtraWhitespace highlighting

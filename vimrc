@@ -30,13 +30,6 @@ set background=light
 "    \| exe "normal g'\"" | endif
 "endif
 
-" Uncomment the following to have Vim load indentation rules according to the
-" detected filetype. Per default Debian Vim only load filetype specific
-" plugins.
-if has("autocmd")
-  filetype indent on
-endif
-
 " The following are commented out as they cause vim to behave a lot
 " differently from regular Vi. They are highly recommended though.
 "set showcmd		" Show (partial) command in status line.
@@ -57,7 +50,9 @@ endif
 set hlsearch
 set bg=dark
 
-filetype plugin on          " Invoke adequate plugins according to the filetype
+" Invoke adequate plugins according to the filetype
+filetype off
+filetype plugin indent on
 
 set grepprg=c:/cygwin/bin/grep.exe\ -IRn\ --exclude-dir=\\.git\ --exclude=tags\ $*
 

@@ -214,3 +214,6 @@ vmap <Leader>: :Tabularize /:<CR>
 " Surround plugin shortcuts: use 's' (lower-case) rather than 'S' in visual mode
 vmap s <Plug>VSurround
 
+" Search for visually selected text
+vnoremap // y/<C-R>"<CR>
+

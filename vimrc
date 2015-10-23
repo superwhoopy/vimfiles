@@ -30,13 +30,6 @@ set background=light
 "    \| exe "normal g'\"" | endif
 "endif
 
-" Uncomment the following to have Vim load indentation rules according to the
-" detected filetype. Per default Debian Vim only load filetype specific
-" plugins.
-if has("autocmd")
-  filetype indent on
-endif
-
 " The following are commented out as they cause vim to behave a lot
 " differently from regular Vi. They are highly recommended though.
 "set showcmd		" Show (partial) command in status line.
@@ -57,7 +50,9 @@ endif
 set hlsearch
 set bg=dark
 
-filetype plugin on          " Invoke adequate plugins according to the filetype
+" Invoke adequate plugins according to the filetype
+filetype off
+filetype plugin indent on
 
 set grepprg=/bin/grep\ -Irn\ --exclude-dir=\\.git\ --exclude=tags\ $*
 " Vim options
@@ -167,8 +162,6 @@ nmap <C-h> <Leader><Leader>b
 " Open the notebook
 nmap <F11>  :e ~/notebook.otl<CR>
 
-nmap <F10>  :StripWhitespace<CR>
-
 " Diffmode switch
 nmap <A-d>  :if &diff<CR>diffoff<CR>else<CR>diffthis<CR>endif<CR><CR>
 
@@ -190,20 +183,29 @@ set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*%=%f\ %m\ %r\ %{fugitive#statusline()}
 
 " SYNTASTIC OPTIONS
+let g:syntastic_python_pylint_args='--rcfile=~/.pylintrc'
 let g:syntastic_cpp_check_header=1
 let g:syntastic_cpp_compiler='gcc'
-let g:syntastic_python_pylint_args='--rcfile=~/.pylintrc'
 let g:syntastic_python_checkers=['pylint']
 
 " ExtraWhitespace highlighting
 hi ExtraWhitespace guibg=red ctermbg=red
+" Strip trailing whitespaces
+nmap <F10>  :StripWhitespace<CR>
 
 " tell NerdTree to display all files
 " let NERDTreeIgnore=[]
 
+" Tabularize plugin shortcuts
 vmap <Leader>= :Tabularize /=<CR>
 vmap <Leader>\ :Tabularize /\<CR>
 vmap <Leader>, :Tabularize /,<CR>
 vmap <Leader>; :Tabularize /;<CR>
 vmap <Leader>: :Tabularize /:<CR>
+
+" Surround plugin shortcuts: use 's' (lower-case) rather than 'S' in visual mode
+vmap s <Plug>VSurround
+
+" Search for visually selected text
+vnoremap // y/<C-R>"<CR>
 

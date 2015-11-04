@@ -84,7 +84,7 @@ set backspace=2
 
 " Mappings
 " Ouvrir le Buffer explorer avec la touche F12
-nnoremap <F12> :BufExplorerVerticalSplit<CR>
+nnoremap <F12> :BufExplorer<CR>
 " Ctrl+Space : suivre un lien dans une fenetre splittee
 map <C-Space> :vsp<CR><C-]>
 " Ctrl-S : sauvegarder fichier courant, même si on est en mode d'édition
@@ -139,7 +139,7 @@ let Tlist_Use_Right_Window = 1
 let Tlist_Show_One_File = 1
 
 " NerdTree
-let NERDTreeIgnore=['\.vim$', '\~$', '\.o$', '\.a$', '\.gcno$']
+let NERDTreeIgnore=['\.vim$', '\~$', '\.o$', '\.a$', '\.gcno$', '__pycache__']
 
 " Pathogen
 execute pathogen#infect()

@@ -80,7 +80,7 @@ set diffopt+=iwhite        " en mode 'diff', ignorer les espaces
 
 " Mappings
 " Ouvrir le Buffer explorer avec la touche F12
-nnoremap <F12> :BufExplorerVerticalSplit<CR>
+nnoremap <F12> :BufExplorer<CR>
 " Ctrl+Space : suivre un lien dans une fenetre splittee
 map <C-Space> :vsp<CR><C-]>
 " Ctrl-S : sauvegarder fichier courant, même si on est en mode d'édition

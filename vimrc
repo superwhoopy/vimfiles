@@ -141,6 +141,9 @@ let Tlist_Show_One_File = 1
 " NerdTree
 let NERDTreeIgnore=['\.vim$', '\~$', '\.o$', '\.a$', '\.gcno$', '__pycache__']
 
+" CtrlP
+let g:ctrlp_custom_ignore= '\v[\/]\.o$'
+
 " Pathogen
 execute pathogen#infect()
 

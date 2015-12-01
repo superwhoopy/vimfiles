@@ -50,10 +50,6 @@ set background=light
 set hlsearch
 set bg=dark
 
-" Invoke adequate plugins according to the filetype
-filetype off
-filetype plugin indent on
-
 set grepprg=c:/cygwin/bin/grep.exe\ -IRn\ --exclude-dir=\\.git\ --exclude=tags\ $*
 
 " Vim options
@@ -142,10 +138,14 @@ let Tlist_Show_One_File = 1
 let NERDTreeIgnore=['\.vim$', '\~$', '\.o$', '\.a$', '\.gcno$', '__pycache__']
 
 " CtrlP
-let g:ctrlp_custom_ignore= '\v[\/]\.o$'
+let g:ctrlp_custom_ignore= '\v[\/]\.o$\|\v[\/]\.obj$\|\v[\/]\.sbr$'
 
 " Pathogen
 execute pathogen#infect()
+
+" Invoke adequate plugins according to the filetype
+filetype on
+filetype plugin indent on
 
 " Omnicpp stuff
 au BufNewFile,BufRead,BufEnter *.c,*.h,*.cpp,*.hpp set omnifunc=omni#cpp#complete#Main

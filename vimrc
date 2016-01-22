@@ -138,7 +138,7 @@ let Tlist_Show_One_File = 1
 let NERDTreeIgnore=['\.vim$', '\~$', '\.o$', '\.a$', '\.gcno$', '__pycache__', '\.pyc$']
 
 " CtrlP
-let g:ctrlp_custom_ignore= '\v[\/]\.o$'
+let g:ctrlp_custom_ignore= '\v[\/]\.o$\|\v[\/]\.obj$\|\v[\/]\.sbr$'
 
 " Pathogen
 execute pathogen#infect()
@@ -186,12 +186,13 @@ set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*%=%f\ %m\ %r\ %{fugitive#statusline()}
 
 " SYNTASTIC OPTIONS
+" Disable indentation error messages
+let g:syntastic_python_pylint_args='--rcfile=~/.pylintrc'
 let g:syntastic_cpp_check_header=1
 let g:syntastic_cpp_compiler='gcc'
 let g:syntastic_python_python_exe = 'python3'
 let g:syntastic_python_pylint_exe = 'pylint3'
 let g:syntastic_python_checkers=['pylint']
-let g:syntastic_python_pylint_args='--rcfile=~/.pylintrc'
 
 " ExtraWhitespace highlighting
 hi ExtraWhitespace guibg=red ctermbg=red

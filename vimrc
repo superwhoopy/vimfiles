@@ -135,7 +135,7 @@ let Tlist_Use_Right_Window = 1
 let Tlist_Show_One_File = 1
 
 " NerdTree
-let NERDTreeIgnore=['\.vim$', '\~$', '\.o$', '\.a$', '\.gcno$', '__pycache__']
+let NERDTreeIgnore=['\.vim$', '\~$', '\.o$', '\.a$', '\.gcno$', '__pycache__', '\.pyc$']
 
 " CtrlP
 let g:ctrlp_custom_ignore= '\v[\/]\.o$\|\v[\/]\.obj$\|\v[\/]\.sbr$'

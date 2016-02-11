@@ -166,7 +166,7 @@ nmap <C-h> <Leader><Leader>b
 nmap <F11>  :e ~/notebook.otl<CR>
 
 " Diffmode switch
-nmap <A-d>  :if &diff<CR>diffoff<CR>else<CR>diffthis<CR>endif<CR><CR>
+nmap <A-d>  :if &diff<CR>diffoff<CR>set nocrb<CR>else<CR>diffthis<CR>endif<CR><CR>
 
 " Height of the preview window (24=twice default size)
 set previewheight=24

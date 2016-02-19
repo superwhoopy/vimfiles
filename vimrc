@@ -84,8 +84,9 @@ nnoremap <F12> :BufExplorer<CR>
 " Ctrl+Space : suivre un lien dans une fenetre splittee
 map <C-Space> :vsp<CR><C-]>
 " Ctrl-S : sauvegarder fichier courant, même si on est en mode d'édition
-imap <C-S> <Esc>:w<CR>a
-nmap <C-S> :w<CR>:echo "File saved."<CR>
+imap <C-s> <Esc>:w<CR>a
+nmap <C-s> :w<CR>:echo "File saved."<CR>
+
 imap <C-Q> <Esc>:w<CR>:mak<CR>
 nmap <C-Q> :w<CR>:mak<CR>
 " Touche F8 : set encoding = UTF8
@@ -169,6 +170,10 @@ nmap <C-h> <Leader><Leader>b
 " Gundo map
 :noremap <F5> :GundoToggle<CR>
 
+" run syntastic check
+:noremap  <F6> :SyntasticCheck<CR>
+:inoremap <F6> <Esc>:SyntasticCheck<CR>a
+
 " Open the notebook
 nmap <F11>  :e ~/notebook.otl<CR>
 
@@ -198,6 +203,8 @@ let g:syntastic_python_pylint_args='--rcfile=~/.pylintrc'
 let g:syntastic_cpp_check_header=1
 let g:syntastic_cpp_compiler='gcc'
 let g:syntastic_python_checkers=['pylint']
+" Uncomment the following line to disable syntastic check upon saving
+" let g:syntastic_mode_map = { "mode": "passive" }
 
 " ExtraWhitespace highlighting
 hi ExtraWhitespace guibg=red ctermbg=red

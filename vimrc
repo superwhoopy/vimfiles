@@ -139,7 +139,7 @@ let Tlist_Show_One_File = 1
 let NERDTreeIgnore=['\.vim$', '\~$', '\.o$', '\.a$', '\.gcno$', '__pycache__', '\.pyc$']
 
 " CtrlP
-let g:ctrlp_custom_ignore= '\v[\/]\.o$\|\v[\/]\.obj$\|\v[\/]\.sbr$'
+let g:ctrlp_custom_ignore= '\v[\/]\.o$\|\v[\/]\.obj$\|\v[\/]\.pyc$\|\v[\/]\.sbr$'
 
 " Pathogen
 execute pathogen#infect()
@@ -154,7 +154,8 @@ let OmniCpp_ShowPrototypeInAbbr = 1
 set completeopt=menu
 
 " Windows TMP directory handling
-set directory+=,~/tmp,$TMP
+set directory+=,~/tmp,$TMP,$TEMP
+behave mswin
 
 " visual autocomplete for command menu
 set wildmenu

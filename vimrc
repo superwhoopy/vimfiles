@@ -155,7 +155,6 @@ set completeopt=menu
 
 " Windows TMP directory handling
 set directory+=,~/tmp,$TMP,$TEMP
-behave mswin
 
 " visual autocomplete for command menu
 set wildmenu
@@ -203,7 +202,7 @@ set statusline+=%*%=%f\ %m\ %r\ %{fugitive#statusline()}
 let g:syntastic_python_pylint_args='--rcfile=~/.pylintrc'
 let g:syntastic_cpp_check_header=1
 let g:syntastic_cpp_compiler='gcc'
-let g:syntastic_python_checkers=['pylint']
+let g:syntastic_python_checkers=['pyflakes']
 " Uncomment the following line to disable syntastic check upon saving
 " let g:syntastic_mode_map = { "mode": "passive" }
 

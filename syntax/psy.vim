@@ -1,8 +1,8 @@
 " Vim syntax file
 
 " PsyC keywords
-syn keyword psycStatement application agent with global body advance before send receive display endbody next consult firstof other endof when then sendto delayed latest jump count fafter fbefore
-syn keyword psycType      starttime defaultclock uses source clock U_CHAR U_LONG U_SHORT interval modulo temporal messagebox
+syn keyword psycStatement application agent with global body advance before send receive display endbody next consult firstof other endof when then sendto delayed latest jump count waitfor releasein within
+syn keyword psycType      starttime defaultclock uses source clock fractional U_CHAR U_LONG U_SHORT interval modulo temporal messagebox
 
 " A bunch of useful C keywords
 syn keyword	cStatement	goto break return continue asm

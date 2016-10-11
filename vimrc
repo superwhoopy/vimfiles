@@ -50,7 +50,7 @@ set background=light
 set hlsearch
 set bg=dark
 
-set grepprg=c:/cygwin/bin/grep.exe\ -IRn\ --exclude-dir=\\.git\ --exclude=tags\ $*
+set grepprg=c:/cygwin/bin/grep.exe\ -IRn\ --exclude-dir=\\.git\ --exclude=tags\ --exclude-dir=\\.env\ $*
 
 " Vim options
 set ic                     " ignore case
@@ -108,6 +108,8 @@ nmap     <C-S-Tab>  :ptag  <C-R><C-W><CR>
 nnoremap k         gk
 nnoremap j         gj
 
+" reformat inner paragraph
+nmap <A-q>  vipgq
 
 " Build a Ctags file
 command Mktags     !ctags -R --c++-kinds=+p --fields=+iaS --extra=+q --languages=c++,c .
@@ -227,3 +229,31 @@ vmap s <Plug>VSurround
 " Search for visually selected text
 vnoremap // y/<C-R>"<CR>
 
+" Personal Wiki stuff
+let g:vimwiki_list = [
+  \   {'maxhi'                     : 0,
+  \    'css_name'                  : 'style.css',
+  \    'auto_export'               : 0,
+  \    'diary_index'               : 'diary',
+  \    'template_default'          : 'default',
+  \    'nested_syntaxes'           : {},
+  \    'auto_toc'                  : 1,
+  \    'auto_tags'                 : 1,
+  \    'diary_sort'                : 'desc',
+  \    'path'                      : 'E:/vimwiki/',
+  \    'diary_link_fmt'            : '%Y-%m-%d',
+  \    'template_ext'              : '.tpl',
+  \    'syntax'                    : 'default',
+  \    'custom_wiki2html'          : '',
+  \    'automatic_nested_syntaxes' : 1,
+  \    'index'                     : 'index',
+  \    'diary_header'              : 'Diary',
+  \    'ext'                       : '.wiki',
+  \    'path_html'                 : 'C:/Users/eohayon/vimwiki_html/',
+  \    'temp'                      : 0,
+  \    'template_path'             : 'C:/Users/eohayon/vimwiki/templates/',
+  \    'list_margin'               : -1,
+  \    'diary_rel_path'            : 'diary/'
+  \    }]
+nmap <Leader>ww <Plug>VimwikiIndex:VimwikiGenerateTags<CR>
+nmap <Leader>wi <Plug>VimwikiDiaryIndex:VimwikiDiaryGenerateLinks<CR>

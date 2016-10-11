@@ -20,4 +20,5 @@ augroup filetypedetect
   au BufRead,BufNewFile psyko.log  set filetype=psykolog
   au BufRead,BufNewFile *.psykolog set filetype=psykolog
   au BufRead,BufNewFile git-ci.tmp set filetype=gitcommit
+  au BufRead,BufNewFile *.tl       set filetype=tl
 augroup END

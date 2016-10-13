@@ -76,3 +76,6 @@
 [submodule "bundle/vimwiki"]
 	path = bundle/vimwiki
 	url = https://github.com/vimwiki/vimwiki.git
+[submodule "bundle/goyo.vim"]
+	path = bundle/goyo.vim
+	url = https://github.com/junegunn/goyo.vim.git

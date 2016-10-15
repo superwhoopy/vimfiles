@@ -84,8 +84,9 @@ nnoremap <F12> :BufExplorer<CR>
 " Ctrl+Space : suivre un lien dans une fenetre splittee
 map <C-Space> :vsp<CR><C-]>
 " Ctrl-S : sauvegarder fichier courant, même si on est en mode d'édition
-imap <C-S> <Esc>:w<CR>a
-nmap <C-S> :w<CR>:echo "File saved."<CR>
+imap <C-s> <Esc>:w<CR>a
+nmap <C-s> :w<CR>:echo "File saved."<CR>
+
 imap <C-Q> <Esc>:w<CR>:mak<CR>
 nmap <C-Q> :w<CR>:mak<CR>
 " Touche F8 : set encoding = UTF8
@@ -107,6 +108,8 @@ nmap     <C-S-Tab>  :ptag  <C-R><C-W><CR>
 nnoremap k         gk
 nnoremap j         gj
 
+" reformat inner paragraph
+nmap <A-q>  vipgq
 
 " Build a Ctags file
 command Mktags     !ctags -R --c++-kinds=+p --fields=+iaS --extra=+q --languages=c++,c .
@@ -138,7 +141,7 @@ let Tlist_Show_One_File = 1
 let NERDTreeIgnore=['\.vim$', '\~$', '\.o$', '\.a$', '\.gcno$', '__pycache__', '\.pyc$']
 
 " CtrlP
-let g:ctrlp_custom_ignore= '\v[\/]\.o$\|\v[\/]\.obj$\|\v[\/]\.sbr$'
+let g:ctrlp_custom_ignore= '\v[\/]\.o$\|\v[\/]\.obj$\|\v[\/]\.pyc$\|\v[\/]\.sbr$'
 
 " Pathogen
 execute pathogen#infect()
@@ -161,6 +164,10 @@ nmap <C-h> <Leader><Leader>b
 
 " Gundo map
 :noremap <F5> :GundoToggle<CR>
+
+" run syntastic check
+:noremap  <F6> :SyntasticCheck<CR>
+:inoremap <F6> <Esc>:SyntasticCheck<CR>a
 
 " Open the notebook
 nmap <F11>  :e ~/notebook.otl<CR>
@@ -193,6 +200,8 @@ let g:syntastic_cpp_compiler='gcc'
 let g:syntastic_python_python_exe = 'python3'
 let g:syntastic_python_pylint_exe = 'pylint3'
 let g:syntastic_python_checkers=['pylint']
+" Uncomment the following line to disable syntastic check upon saving
+" let g:syntastic_mode_map = { "mode": "passive" }
 
 " ExtraWhitespace highlighting
 hi ExtraWhitespace guibg=red ctermbg=red
@@ -215,3 +224,31 @@ vmap s <Plug>VSurround
 " Search for visually selected text
 vnoremap // y/<C-R>"<CR>
 
+" Personal Wiki stuff
+let g:vimwiki_list = [
+  \   {'maxhi'                     : 0,
+  \    'css_name'                  : 'style.css',
+  \    'auto_export'               : 0,
+  \    'diary_index'               : 'diary',
+  \    'template_default'          : 'default',
+  \    'nested_syntaxes'           : {},
+  \    'auto_toc'                  : 1,
+  \    'auto_tags'                 : 1,
+  \    'diary_sort'                : 'desc',
+  \    'path'                      : 'E:/vimwiki/',
+  \    'diary_link_fmt'            : '%Y-%m-%d',
+  \    'template_ext'              : '.tpl',
+  \    'syntax'                    : 'default',
+  \    'custom_wiki2html'          : '',
+  \    'automatic_nested_syntaxes' : 1,
+  \    'index'                     : 'index',
+  \    'diary_header'              : 'Diary',
+  \    'ext'                       : '.wiki',
+  \    'path_html'                 : 'C:/Users/eohayon/vimwiki_html/',
+  \    'temp'                      : 0,
+  \    'template_path'             : 'C:/Users/eohayon/vimwiki/templates/',
+  \    'list_margin'               : -1,
+  \    'diary_rel_path'            : 'diary/'
+  \    }]
+nmap <Leader>ww <Plug>VimwikiIndex:VimwikiGenerateTags<CR>
+nmap <Leader>wi <Plug>VimwikiDiaryIndex:VimwikiDiaryGenerateLinks<CR>

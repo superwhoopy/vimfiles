@@ -5,8 +5,8 @@ if exists ("b:current_syntax")
 endif
 
 syn match   logHeader '^\(\w\+>\)*'
-syn region  logString start='"'   end='"' skip='\\"'
-syn region  logStringSquote start="'"   end="'"
+syn region  logString start='"'   end='"\|\n' skip='\\"'
+syn region  logStringSquote start="'"   end="'\|\n"
 
 hi def link logType   Keyword
 hi def link logHeader Type

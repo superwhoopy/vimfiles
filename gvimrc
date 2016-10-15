@@ -19,13 +19,12 @@
 "   source /etc/vim/gvimrc.local
 " endif
 
-":set bg=light               " background general color tone
-:set bg=dark
+:set bg=light               " background general color tone
+":set bg=dark
 ":set guifont=Neep\ 11
 ":set guifont=Consolas:h8:cANSI
 :set guifont=Monospace\ 8
 " :colors morning
-":colors desert
 colorscheme solarized
 :set go-=T                  " ne pas afficher la toolbar
 :set go-=m                  " ne pas afficher la menubar
@@ -36,3 +35,10 @@ colorscheme solarized
 :set ssl
 
 hi ExtraWhitespace guibg=red ctermbg=red
+
+hi VimwikiHeader1 guifg=#FF0000
+hi VimwikiHeader2 guifg=#00FF00
+hi VimwikiHeader3 guifg=#0000FF
+hi VimwikiHeader4 guifg=#FF00FF
+hi VimwikiHeader5 guifg=#00FFFF
+hi VimwikiHeader6 guifg=#FFFF00

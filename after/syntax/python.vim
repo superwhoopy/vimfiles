@@ -5,3 +5,6 @@ set formatoptions+=cro
 set comments+=sb:##
 set comments+=mb:#
 set comments+=eb:#
+
+set tw=80
+set nospell

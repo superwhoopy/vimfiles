@@ -128,6 +128,9 @@ command Cd              cd\ %:p:h
 
 " Grep the word under the cursor
 nmap    µ   "gyiw:execute "grep " getreg('g')<CR>
+"
+" Leader key is ','
+:let mapleader=","
 
 let g:otl_map_tabs = 1
 let g:otl_initial_foldlevel = 10
@@ -142,6 +145,7 @@ let NERDTreeIgnore=['\.vim$', '\~$', '\.o$', '\.a$', '\.gcno$', '__pycache__', '
 
 " CtrlP
 let g:ctrlp_custom_ignore= '\v[\/]\.o$\|\v[\/]\.obj$\|\v[\/]\.pyc$\|\v[\/]\.sbr$'
+"
 
 " Pathogen
 execute pathogen#infect()
@@ -153,9 +157,6 @@ set completeopt=menu
 
 " visual autocomplete for command menu
 set wildmenu
-
-" Leader key is ','
-:let mapleader=","
 
 " EasyMotion
 nmap <C-k> <Leader><Leader>k
@@ -235,7 +236,7 @@ let g:vimwiki_list = [
   \    'auto_toc'                  : 1,
   \    'auto_tags'                 : 1,
   \    'diary_sort'                : 'desc',
-  \    'path'                      : 'E:/vimwiki/',
+  \    'path'                      : '~/vimwiki/',
   \    'diary_link_fmt'            : '%Y-%m-%d',
   \    'template_ext'              : '.tpl',
   \    'syntax'                    : 'default',
@@ -244,9 +245,9 @@ let g:vimwiki_list = [
   \    'index'                     : 'index',
   \    'diary_header'              : 'Diary',
   \    'ext'                       : '.wiki',
-  \    'path_html'                 : 'C:/Users/eohayon/vimwiki_html/',
+  \    'path_html'                 : '~/vimwiki_html/',
   \    'temp'                      : 0,
-  \    'template_path'             : 'C:/Users/eohayon/vimwiki/templates/',
+  \    'template_path'             : '~/vimwiki/templates/',
   \    'list_margin'               : -1,
   \    'diary_rel_path'            : 'diary/'
   \    }]

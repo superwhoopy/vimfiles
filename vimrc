@@ -129,20 +129,6 @@ command Cd              cd\ %:p:h
 " Grep the word under the cursor
 nmap    µ   "gyiw:execute "grep " getreg('g')<CR>
 
-let g:otl_map_tabs = 1
-let g:otl_initial_foldlevel = 10
-let g:tex_flavor="latex"
-
-" Taglists (:TlistToggle)
-let Tlist_Use_Right_Window = 1
-let Tlist_Show_One_File = 1
-
-" NerdTree
-let NERDTreeIgnore=['\.vim$', '\~$', '\.o$', '\.a$', '\.gcno$', '__pycache__', '\.pyc$']
-
-" CtrlP
-let g:ctrlp_custom_ignore= '\v[\/]\.o$\|\v[\/]\.obj$\|\v[\/]\.pyc$\|\v[\/]\.sbr$'
-
 " Pathogen
 execute pathogen#infect()
 
@@ -163,6 +149,42 @@ set wildmenu
 
 " Leader key is ','
 :let mapleader=","
+"
+" Diffmode switch
+nmap <A-d>  :if &diff<CR>diffoff<CR>set nocrb<CR>else<CR>diffthis<CR>endif<CR><CR>
+
+" Height of the preview window (24=twice default size)
+set previewheight=24
+
+function ToggleAutoFormat()
+    if &fo =~'a'
+      set fo-=a
+      echom "Auto-Format disabled"
+    else
+      set fo+=a
+      echom "Auto-Format enabled"
+    endif
+endfunction
+
+nmap <Leader>fo :call ToggleAutoFormat()<CR>
+
+" Line under cursor highlighting
+augroup BgHighlight
+    autocmd!
+    autocmd WinEnter * set cul
+    autocmd WinLeave * set nocul
+    autocmd FocusGained * set cul
+    autocmd FocusLost   * set nocul
+augroup END
+"
+" Status line configuration
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*%=%f\ %m\ %r\ %{fugitive#statusline()}
+
+"###############################################################################
+" Plugins-related stuff
+"###############################################################################
 
 " EasyMotion
 nmap <C-k> <Leader><Leader>k
@@ -176,28 +198,21 @@ nmap <C-h> <Leader><Leader>b
 :noremap  <F6> :SyntasticCheck<CR>
 :inoremap <F6> <Esc>:SyntasticCheck<CR>a
 
-" Open the notebook
-nmap <F11>  :e ~/notebook.otl<CR>
 
-" Diffmode switch
-nmap <A-d>  :if &diff<CR>diffoff<CR>set nocrb<CR>else<CR>diffthis<CR>endif<CR><CR>
+" old stuff?
+let g:otl_map_tabs = 1
+let g:otl_initial_foldlevel = 10
+let g:tex_flavor="latex"
 
-" Height of the preview window (24=twice default size)
-set previewheight=24
+" Taglists (:TlistToggle)
+let Tlist_Use_Right_Window = 1
+let Tlist_Show_One_File = 1
 
-" Line under cursor highlighting
-augroup BgHighlight
-    autocmd!
-    autocmd WinEnter * set cul
-    autocmd WinLeave * set nocul
-    autocmd FocusGained * set cul
-    autocmd FocusLost   * set nocul
-augroup END
+" NerdTree
+let NERDTreeIgnore=['\.vim$', '\~$', '\.o$', '\.a$', '\.gcno$', '__pycache__', '\.pyc$']
 
-" Status line configuration
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*%=%f\ %m\ %r\ %{fugitive#statusline()}
+" CtrlP
+let g:ctrlp_custom_ignore= '\v[\/]\.o$\|\v[\/]\.obj$\|\v[\/]\.pyc$\|\v[\/]\.sbr$'
 
 " SYNTASTIC OPTIONS
 " Disable indentation error messages
@@ -229,7 +244,7 @@ vmap s <Plug>VSurround
 " Search for visually selected text
 vnoremap // y/<C-R>"<CR>
 
-" Personal Wiki stuff
+" vimwiki stuff
 let g:vimwiki_list = [
   \   {'maxhi'                     : 0,
   \    'css_name'                  : 'style.css',
@@ -258,3 +273,7 @@ let g:vimwiki_list = [
   \    }]
 nmap <Leader>ww <Plug>VimwikiIndex:VimwikiGenerateTags<CR>
 nmap <Leader>wi <Plug>VimwikiDiaryIndex:VimwikiDiaryGenerateLinks<CR>
+
+" goyo stuff
+let g:goyo_linenr = 1 "keep line numbering
+

@@ -19,7 +19,6 @@
 "   source /etc/vim/gvimrc.local
 " endif
 
-":set bg=light               " background general color tone
 :set bg=dark
 ":set guifont=Neep\ 11
 ":set guifont=Consolas:h8:cANSI

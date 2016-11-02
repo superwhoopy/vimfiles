@@ -33,6 +33,8 @@ colorscheme solarized
 " Set shellslash, so that path with '/' instead of '\' can be used
 :set ssl
 
+map <F11> <Esc>:call libcallnr("gvimfullscreen.dll", "ToggleFullScreen", 0)<CR>
+
 hi ExtraWhitespace guibg=red ctermbg=red
 
 hi VimwikiHeader1 guifg=#FF0000

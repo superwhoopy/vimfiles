@@ -186,11 +186,6 @@ set statusline+=%*%=%f\ %m\ %r\ %{fugitive#statusline()}
 " Plugins-related stuff
 "###############################################################################
 
-" EasyMotion
-nmap <C-k> <Leader><Leader>k
-nmap <C-l> <Leader><Leader>w
-nmap <C-h> <Leader><Leader>b
-
 " Gundo map
 :noremap <F5> :GundoToggle<CR>
 
@@ -254,7 +249,7 @@ let g:vimwiki_list = [
   \    'nested_syntaxes'           : {'python': 'python', 'c++': 'cpp',
   \                                   'c': 'c', 'psy': 'psy'},
   \    'auto_toc'                  : 1,
-  \    'auto_tags'                 : 1,
+  \    'auto_tags'                 : 0,
   \    'diary_sort'                : 'desc',
   \    'path'                      : 'E:/vimwiki/',
   \    'diary_link_fmt'            : '%Y-%m-%d',

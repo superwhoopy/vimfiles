@@ -126,8 +126,8 @@ command Mktags     !ctags -R --c++-kinds=+p --fields=+iaS --extra=+q --languages
 " Change to the directory of the current file
 command Cd              cd\ %:p:h
 
-" Grep the word under the cursor
-nmap    µ   "gyiw:execute "grep " getreg('g')<CR>
+" Ack the word under the cursor
+nmap    µ   "gyiw:execute "Ack " getreg('g')<CR>
 
 " Pathogen
 execute pathogen#infect()

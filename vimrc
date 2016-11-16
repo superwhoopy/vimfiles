@@ -60,6 +60,8 @@ Plugin 'vim-scripts/DrawIt'
 Plugin 'vim-scripts/Gundo'
 Plugin 'vimwiki/vimwiki'
 
+Plugin 'ssh://git@dev.ks.int:7999/prot/vim-ks.git'
+
 call vundle#end()
 filetype plugin indent on
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""

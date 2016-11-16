@@ -8,8 +8,8 @@ endif
 
 runtime! syntax/python.vim
 
-syn keyword tlKeyword   source clock timeline tick frame arrow textbox backendopts getdefaults setdefaults
-syn keyword tlSpecial   tickat add_frames add_ticks visible_textboxes add_textboxes visible_ticks dates DEFAULTS visible_frames DEFAULTS add_timemarks add_timelines add_arrows t_mingap t_start t_end ROOT_OBJECTS gap_gcd sorted_dates
+syn keyword tlKeyword   source clock timeline tick frame arrow textbox setdefaults getdefaults backendopts anchor parallelarrow fracclock fractick leftdoublearrow leftarrow rightdoublearrow rightarrow updoublearrow uparrow downdoublearrow downarrow overdoublearrow overarrow underdoublearrow underarrow
+syn keyword tlSpecial   DEFAULTS visible_frames add_ticks tickat dates visible_ticks add_frames visible_textboxes add_textboxes DEFAULTS add_arrows t_mingap t_end t_start add_timelines gap_gcd ROOT_OBJECTS sorted_dates add_timemarks
 syn region  tlParenthesis start="(" end=")" contains=tlParam,pythonString,tlParenthesis, tlComment,tlKeyword,tlSpecial
 syn match   tlParam     "\<\h\w*\>\(\s\|\n\)*="me=e-1 contained
 syn match   tlComment     "#.*$"

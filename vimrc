@@ -15,6 +15,55 @@
 " options, so any other options should be set AFTER setting 'compatible'.
 "set compatible
 
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Vundle setup
+
+"Vundle bootstrap
+if !filereadable($HOME . '/vimfiles/bundle/Vundle.vim/.git/config') && 
+      \ confirm("Clone Vundle?","Y\nn") == 1
+    exec '!git clone https://github.com/gmarik/Vundle.vim $HOME/vimfiles/bundle/Vundle.vim/'
+endif
+
+set nocompatible
+filetype off
+set rtp+=$HOME/vimfiles/bundle/Vundle.vim
+"call vundle#begin('%USERPROFILE%/vimfiles/bundle')
+call vundle#begin()
+
+Plugin 'VundleVim/Vundle.Vim'
+
+Plugin 'altercation/vim-colors-solarized'
+Plugin 'davidhalter/jedi-vim'
+Plugin 'dkprice/vim-easygrep'
+Plugin 'garbas/vim-snipmate'
+Plugin 'godlygeek/tabular'
+Plugin 'jlanzarotta/bufexplorer'
+Plugin 'junegunn/goyo.vim'
+Plugin 'justinmk/vim-syntax-extra'
+Plugin 'kien/ctrlp.vim'
+Plugin 'Lokaltog/vim-easymotion'
+Plugin 'MarcWeber/vim-addon-mw-utils'
+Plugin 'mileszs/ack.vim'
+Plugin 'mitsuhiko/vim-jinja'
+Plugin 'ntpeters/vim-better-whitespace'
+Plugin 'scrooloose/nerdcommenter'
+Plugin 'scrooloose/nerdtree'
+Plugin 'scrooloose/syntastic'
+Plugin 'tmhedberg/SimpylFold'
+Plugin 'tomtom/tlib_vim'
+Plugin 'tpope/vim-fugitive'
+Plugin 'tpope/vim-surround'
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-latex/vim-latex'
+Plugin 'vim-scripts/DoxygenToolkit.vim'
+Plugin 'vim-scripts/DrawIt'
+Plugin 'vim-scripts/Gundo'
+Plugin 'vimwiki/vimwiki'
+
+call vundle#end()
+filetype plugin indent on
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
 " Vim5 and later versions support syntax highlighting. Uncommenting the next
 " line enables syntax highlighting by default.
 syntax on
@@ -30,29 +79,12 @@ set background=light
 "    \| exe "normal g'\"" | endif
 "endif
 
-" The following are commented out as they cause vim to behave a lot
-" differently from regular Vi. They are highly recommended though.
-"set showcmd		" Show (partial) command in status line.
-"set showmatch		" Show matching brackets.
-"set ignorecase		" Do case insensitive matching
-"set smartcase		" Do smart case matching
-"set incsearch		" Incremental search
-"set autowrite		" Automatically save before commands like :next and :make
-"set hidden             " Hide buffers when they are abandoned
-"set mouse=a		" Enable mouse usage (all modes) in terminals
-
-" Source a global configuration file if available
-" XXX Deprecated, please move your changes here in /etc/vim/vimrc
-" if filereadable("/etc/vim/vimrc.local")
-"   source /etc/vim/vimrc.local
-" endif
-
-set hlsearch
 set bg=dark
 
 set grepprg=c:/cygwin/bin/grep.exe\ -IRn\ --exclude-dir=\\.git\ --exclude=tags\ --exclude-dir=\\.env\ $*
 
 " Vim options
+set hlsearch               " highlight search result
 set ic                     " ignore case
 set incsearch              " incremental search
 set number                 " print line numbers
@@ -128,9 +160,6 @@ command Cd              cd\ %:p:h
 
 " Ack the word under the cursor
 nmap    µ   "gyiw:execute "Ack " getreg('g')<CR>
-
-" Pathogen
-execute pathogen#infect()
 
 " Invoke adequate plugins according to the filetype
 filetype on

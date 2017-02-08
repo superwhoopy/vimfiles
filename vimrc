@@ -19,7 +19,7 @@
 " Vundle setup
 
 "Vundle bootstrap
-if !filereadable($HOME . '/vimfiles/bundle/Vundle.vim/.git/config') && 
+if !filereadable($HOME . '/vimfiles/bundle/Vundle.vim/.git/config') &&
       \ confirm("Clone Vundle?","Y\nn") == 1
     exec '!git clone https://github.com/gmarik/Vundle.vim $HOME/vimfiles/bundle/Vundle.vim/'
 endif
@@ -37,6 +37,7 @@ Plugin 'davidhalter/jedi-vim'
 Plugin 'dkprice/vim-easygrep'
 Plugin 'garbas/vim-snipmate'
 Plugin 'godlygeek/tabular'
+Plugin 'itchyny/calendar.vim'
 Plugin 'jlanzarotta/bufexplorer'
 Plugin 'junegunn/goyo.vim'
 Plugin 'justinmk/vim-syntax-extra'
@@ -54,11 +55,14 @@ Plugin 'tomtom/tlib_vim'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-surround'
 Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
 Plugin 'vim-latex/vim-latex'
 Plugin 'vim-scripts/DoxygenToolkit.vim'
 Plugin 'vim-scripts/DrawIt'
 Plugin 'vim-scripts/Gundo'
+Plugin 'Vimjas/vim-python-pep8-indent'
 Plugin 'vimwiki/vimwiki'
+" Plugin 'airblade/vim-gitgutter'
 
 Plugin 'ssh://git@dev.ks.int:7999/prot/vim-ks.git'
 
@@ -111,20 +115,19 @@ set diffopt+=iwhite        " en mode 'diff', ignorer les espaces
 
 " Windows dark magic to make the backspace key work properly...
 set backspace=2
+set noshellslash
 
 " Mappings
 " Ouvrir le Buffer explorer avec la touche F12
 nnoremap <F12> :BufExplorer<CR>
 " Ctrl+Space : suivre un lien dans une fenetre splittee
 map <C-Space> :vsp<CR><C-]>
-" Ctrl-S : sauvegarder fichier courant, mÃªme si on est en mode d'Ã©dition
+" Ctrl-S : sauvegarder fichier courant, meme en mode edition
 imap <C-s> <Esc>:w<CR>a
 nmap <C-s> :w<CR>:echo "File saved."<CR>
 
 imap <C-Q> <Esc>:w<CR>:mak<CR>
 nmap <C-Q> :w<CR>:mak<CR>
-" Touche F8 : set encoding = UTF8
-nmap <F8>  :set encoding=utf8<CR>
 " <C-Space> for omnicompletion
 inoremap <C-Space> <C-X><C-o>
 " Navigation entre fenetres
@@ -138,15 +141,35 @@ nnoremap <A-h> :wincmd h<CR>
 nmap     <C-Tab>    <C-]>
 nmap     <C-S-Tab>  :ptag  <C-R><C-W><CR>
 
-
+" Move across visual lines inside wrapped long lines
 nnoremap k         gk
 nnoremap j         gj
+
+" Move to end of line with ç, so that _/ç go to beginning/end of line
+nmap     ç         $
 
 " reformat inner paragraph
 nmap <A-q>  vipgq
 
+" Run git diff on the current file
+nmap <Leader>d :Gvdiff ^^<CR>
+
 " Build a Ctags file
-command Mktags     !ctags -R --c++-kinds=+p --fields=+iaS --extra=+q --languages=c++,c .
+command! MkTags call MkTags()
+function! MkTags()
+  let scripts = [ './build/mktags.sh', 'env/mktags.sh' ]
+  for scriptfile in scripts
+    if filereadable(scriptfile)
+      let message = "Running file " . scriptfile
+      echo message
+      execute 'silent !bash ' . scriptfile
+      silent !clear
+      return
+    endif
+  endfor
+  echo "No tags building script file, running default"
+  exec '!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q --languages=c++,c .'
+endfunction
 
 " Export to a PDF file
 " command ToPDF      call ExportToPDF()
@@ -158,10 +181,13 @@ command Mktags     !ctags -R --c++-kinds=+p --fields=+iaS --extra=+q --languages
 " endfunction
 
 " Change to the directory of the current file
-command Cd              cd\ %:p:h
+command! Cd              cd\ %:p:h
 
-" Ack the word under the cursor
-nmap    µ   "gyiw:execute "Ack " getreg('g')<CR>
+" Ack the word under the cursor, prompting a path
+nmap    µ   "gyiw:Ack <C-R>g
+"
+" Diffmode switch
+nmap <A-d>  :if &diff<CR>diffoff<CR>set nocrb<CR>else<CR>diffthis<CR>endif<CR><CR>
 
 " Invoke adequate plugins according to the filetype
 filetype on
@@ -180,14 +206,12 @@ set wildmenu
 
 " Leader key is ','
 :let mapleader=","
-"
-" Diffmode switch
-nmap <A-d>  :if &diff<CR>diffoff<CR>set nocrb<CR>else<CR>diffthis<CR>endif<CR><CR>
 
 " Height of the preview window (24=twice default size)
 set previewheight=24
 
-function ToggleAutoFormat()
+" Toggle auto-format option with <Leader>fo
+function! ToggleAutoFormat()
     if &fo =~'a'
       set fo-=a
       echom "Auto-Format disabled"
@@ -196,8 +220,18 @@ function ToggleAutoFormat()
       echom "Auto-Format enabled"
     endif
 endfunction
-
 nmap <Leader>fo :call ToggleAutoFormat()<CR>
+
+" Spell-checking, French / English
+function! Spfr()
+  set spell
+  set spelllang=fr
+endfunction
+function! Spen()
+  set spell
+  set spelllang=en
+endfunction
+
 
 " Line under cursor highlighting
 augroup BgHighlight
@@ -209,21 +243,23 @@ augroup BgHighlight
 augroup END
 "
 " Status line configuration
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*%=%f\ %m\ %r\ %{fugitive#statusline()}
+" set statusline+=%#warningmsg#
+" set statusline+=%{SyntasticStatuslineFlag()}
+" set statusline+=%*%=%f\ %m\ %r\ %{fugitive#statusline()}
+
+" Default copy/paste from system clipboard
+set clipboard=unnamed
+
 
 "###############################################################################
 " Plugins-related stuff
 "###############################################################################
 
-" Gundo map
+" Gundo
 :noremap <F5> :GundoToggle<CR>
-
-" run syntastic check
-:noremap  <F6> :SyntasticCheck<CR>
-:inoremap <F6> <Esc>:SyntasticCheck<CR>a
-
+if has('python3')
+  let g:gundo_prefer_python3 = 1
+endif
 
 " old stuff?
 let g:otl_map_tabs = 1
@@ -241,13 +277,20 @@ let NERDTreeIgnore=['\.vim$', '\~$', '\.o$', '\.a$', '\.gcno$', '__pycache__', '
 let g:ctrlp_custom_ignore= '\v[\/]\.o$\|\v[\/]\.obj$\|\v[\/]\.pyc$\|\v[\/]\.sbr$'
 
 " SYNTASTIC OPTIONS
-" Disable indentation error messages
+" python checker rc file
 let g:syntastic_python_pylint_args='--rcfile=~/.pylintrc'
+" enable C header checking
 let g:syntastic_cpp_check_header=1
+" default c++ compiler
 let g:syntastic_cpp_compiler='gcc'
+" update the errors window upon saving
+let g:syntastic_always_populate_loc_list=1
+" default python checker
 let g:syntastic_python_checkers=['pylint']
 " Uncomment the following line to disable syntastic check upon saving
 " let g:syntastic_mode_map = { "mode": "passive" }
+" Error message displayed in the status line
+let syntastic_stl_format="%W{Wrn: }%w%E{| Err: }%e"
 
 " ExtraWhitespace highlighting
 hi ExtraWhitespace guibg=red ctermbg=red
@@ -303,3 +346,47 @@ nmap <Leader>wi <Plug>VimwikiDiaryIndex:VimwikiDiaryGenerateLinks<CR>
 " goyo stuff
 let g:goyo_linenr = 1 "keep line numbering
 
+" airline stuff
+let g:airline_theme='solarized'
+" short ids for mode
+let g:airline_mode_map = {
+      \ '__' : '-',
+      \ 'n'  : 'N',
+      \ 'i'  : 'I',
+      \ 'R'  : 'R',
+      \ 'c'  : 'C',
+      \ 'v'  : 'V',
+      \ 'V'  : 'V',
+      \ '' : 'V',
+      \ 's'  : 'S',
+      \ 'S'  : 'S',
+      \ '' : 'S',
+      \ }
+" truncate those fields early
+let g:airline#extensions#default#section_truncate_width = {
+    \ 'b': 79,
+    \ 'x': 88,
+    \ 'y': 88,
+    \ 'z': 88,
+    \ 'warning': 80,
+    \ 'error': 80,
+    \ }
+" show git diff hunks count only if nonzero
+let g:airline#extensions#hunks#non_zero_only = 1
+
+" The following is for nice looking powerline symbols, but it does not seem to
+" work in Windows
+
+" set encoding=utf8
+" let g:airline_powerline_fonts=1
+" set guifont=Consolas_for_Powerline_FixedD:h8:cANSI:qDRAFT
+" if !exists('g:airline_symbols')
+"   let g:airline_symbols = {}
+" endif
+" let g:airline_left_sep = 'î‚°'
+" let g:airline_left_alt_sep = 'î‚±'
+" let g:airline_right_sep = 'î‚²'
+" let g:airline_right_alt_sep = 'î‚³'
+" let g:airline_symbols.branch = 'î‚ '
+" let g:airline_symbols.readonly = 'î‚¢'
+" let g:airline_symbols.linenr = 'î‚¡'

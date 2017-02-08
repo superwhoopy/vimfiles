@@ -21,7 +21,8 @@
 
 :set bg=dark
 ":set guifont=Neep\ 11
-:set guifont=Consolas:h8:cANSI
+:set guifont=Consolas_for_Powerline_FixedD:h8:cANSI:qDRAFT
+
 " :colors morning
 " :colors desert
 colorscheme solarized
@@ -29,9 +30,6 @@ colorscheme solarized
 :set go-=m                  " ne pas afficher la menubar
 :set lines=60 columns=85   " taille de la fenêtre au démarrage
 " :set mousefocus             " le curseur de la souris donne le focus
-
-" Set shellslash, so that path with '/' instead of '\' can be used
-:set ssl
 
 map <F11> <Esc>:call libcallnr("gvimfullscreen.dll", "ToggleFullScreen", 0)<CR>
 

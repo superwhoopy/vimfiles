@@ -31,7 +31,7 @@ colorscheme solarized
 :set lines=60 columns=85   " taille de la fenêtre au démarrage
 " :set mousefocus             " le curseur de la souris donne le focus
 
-map <F11> <Esc>:call libcallnr("gvimfullscreen.dll", "ToggleFullScreen", 0)<CR>
+nmap <F11> :WToggleFullscreen<CR>
 
 hi ExtraWhitespace guibg=red ctermbg=red
 

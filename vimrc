@@ -33,15 +33,17 @@ call vundle#begin()
 Plugin 'VundleVim/Vundle.Vim'
 
 Plugin 'altercation/vim-colors-solarized'
-Plugin 'davidhalter/jedi-vim'
+"Plugin 'davidhalter/jedi-vim'
 Plugin 'dkprice/vim-easygrep'
 Plugin 'garbas/vim-snipmate'
-Plugin 'godlygeek/tabular'
 Plugin 'itchyny/calendar.vim'
+Plugin 'jiangmiao/auto-pairs'
 Plugin 'jlanzarotta/bufexplorer'
 Plugin 'junegunn/goyo.vim'
+Plugin 'junegunn/vim-easy-align'
 Plugin 'justinmk/vim-syntax-extra'
 Plugin 'kien/ctrlp.vim'
+Plugin 'kkoenig/wimproved.vim'
 Plugin 'Lokaltog/vim-easymotion'
 Plugin 'MarcWeber/vim-addon-mw-utils'
 Plugin 'mileszs/ack.vim'
@@ -62,8 +64,9 @@ Plugin 'vim-scripts/DrawIt'
 Plugin 'vim-scripts/Gundo'
 Plugin 'Vimjas/vim-python-pep8-indent'
 Plugin 'vimwiki/vimwiki'
+Plugin 'VundleVim/Vundle.vim'
+Plugin 'Valloric/YouCompleteMe'
 " Plugin 'airblade/vim-gitgutter'
-
 Plugin 'ssh://git@dev.ks.int:7999/prot/vim-ks.git'
 
 call vundle#end()
@@ -73,6 +76,7 @@ filetype plugin indent on
 " Vim5 and later versions support syntax highlighting. Uncommenting the next
 " line enables syntax highlighting by default.
 syntax on
+let g:load_doxygen_syntax = 1
 
 " If using a dark background within the editing area and syntax highlighting
 " turn on this option as well
@@ -110,26 +114,27 @@ set scrolloff=3            " toujours afficher au moins 3 lignes au dessus et
                            " en dessous du curseur
 set modeline               " autoriser les modlines
 set foldmethod=indent      " Folding base sur l'indentation
-" :set foldlevel=100       " deplier tous les folds jusqu'au nv. 100
+:set foldlevelstart=100    " deplier tous les folds jusqu'au nv. 100
 set diffopt+=iwhite        " en mode 'diff', ignorer les espaces
 
 " Windows dark magic to make the backspace key work properly...
 set backspace=2
 set noshellslash
 
+" Python DLL to look for on Windows
+set pythonthreedll=python35.dll
+
 " Mappings
 " Ouvrir le Buffer explorer avec la touche F12
 nnoremap <F12> :BufExplorer<CR>
-" Ctrl+Space : suivre un lien dans une fenetre splittee
-map <C-Space> :vsp<CR><C-]>
+
 " Ctrl-S : sauvegarder fichier courant, meme en mode edition
 imap <C-s> <Esc>:w<CR>a
 nmap <C-s> :w<CR>:echo "File saved."<CR>
 
-imap <C-Q> <Esc>:w<CR>:mak<CR>
-nmap <C-Q> :w<CR>:mak<CR>
 " <C-Space> for omnicompletion
 inoremap <C-Space> <C-X><C-o>
+
 " Navigation entre fenetres
 nnoremap <A-l> :wincmd l<CR>
 nnoremap <A-k> :wincmd k<CR>
@@ -145,14 +150,8 @@ nmap     <C-S-Tab>  :ptag  <C-R><C-W><CR>
 nnoremap k         gk
 nnoremap j         gj
 
-" Move to end of line with ç, so that _/ç go to beginning/end of line
-nmap     ç         $
-
 " reformat inner paragraph
 nmap <A-q>  vipgq
-
-" Run git diff on the current file
-nmap <Leader>d :Gvdiff ^^<CR>
 
 " Build a Ctags file
 command! MkTags call MkTags()
@@ -183,9 +182,6 @@ endfunction
 " Change to the directory of the current file
 command! Cd              cd\ %:p:h
 
-" Ack the word under the cursor, prompting a path
-nmap    µ   "gyiw:Ack <C-R>g
-"
 " Diffmode switch
 nmap <A-d>  :if &diff<CR>diffoff<CR>set nocrb<CR>else<CR>diffthis<CR>endif<CR><CR>
 
@@ -199,7 +195,7 @@ let OmniCpp_ShowPrototypeInAbbr = 1
 set completeopt=menu
 
 " Windows TMP directory handling
-set directory+=,~/tmp,$TMP,$TEMP
+set directory+=/tmp,$TMP,$TEMP
 
 " visual autocomplete for command menu
 set wildmenu
@@ -207,8 +203,23 @@ set wildmenu
 " Leader key is ','
 :let mapleader=","
 
+" Ack the word under the cursor, prompting a path
+nmap    <Leader>/   "gyiw:Ack <C-R>g
+
+" Run git diff on the current file
+nmap <Leader>d :Gvdiff<CR>
+
 " Height of the preview window (24=twice default size)
 set previewheight=24
+
+function! ViewInStash()
+  let current_file_path = @%
+  execute "silent !bash --login -c 'cd %:p:h && stash_url'"
+  let url = execute("silent !bash --login -c 'cd %:p:h && stash_url'")
+            \ . '/' . current_file_path
+  echo url
+  "execute 'silent !start ' . url
+endfunction
 
 " Toggle auto-format option with <Leader>fo
 function! ToggleAutoFormat()
@@ -231,7 +242,6 @@ function! Spen()
   set spell
   set spelllang=en
 endfunction
-
 
 " Line under cursor highlighting
 augroup BgHighlight
@@ -262,8 +272,6 @@ if has('python3')
 endif
 
 " old stuff?
-let g:otl_map_tabs = 1
-let g:otl_initial_foldlevel = 10
 let g:tex_flavor="latex"
 
 " Taglists (:TlistToggle)
@@ -272,6 +280,22 @@ let Tlist_Show_One_File = 1
 
 " NerdTree
 let NERDTreeIgnore=['\.vim$', '\~$', '\.o$', '\.a$', '\.gcno$', '__pycache__', '\.pyc$']
+
+" DOXYGENTOOLKIT
+let g:DoxygenToolkit_briefTag_pre         = ""
+let g:DoxygenToolkit_templateParamTag_pre = "\\tparam "
+let g:DoxygenToolkit_paramTag_pre         = "\\param "
+let g:DoxygenToolkit_returnTag            = "\\return "
+let g:DoxygenToolkit_throwTag_pre         = "\\throw "
+let g:DoxygenToolkit_fileTag              = "\\file "
+let g:DoxygenToolkit_authorTag            = "\\author "
+let g:DoxygenToolkit_dateTag              = "\\date "
+let g:DoxygenToolkit_versionTag           = "\\version "
+let g:DoxygenToolkit_blockTag             = "\\name "
+let g:DoxygenToolkit_classTag             = "\\class "
+let g:DoxygenToolkit_startCommentTag      = "/*! "
+let g:DoxygenToolkit_startCommentBlock    = "/* "
+let g:DoxygenToolkit_compactDoc           = "yes"
 
 " CtrlP
 let g:ctrlp_custom_ignore= '\v[\/]\.o$\|\v[\/]\.obj$\|\v[\/]\.pyc$\|\v[\/]\.sbr$'
@@ -289,8 +313,23 @@ let g:syntastic_always_populate_loc_list=1
 let g:syntastic_python_checkers=['pylint']
 " Uncomment the following line to disable syntastic check upon saving
 " let g:syntastic_mode_map = { "mode": "passive" }
+let g:syntastic_rst_checkers=[]
 " Error message displayed in the status line
 let syntastic_stl_format="%W{Wrn: }%w%E{| Err: }%e"
+
+" YOUCOMPLETEME STUFF
+" disable auto-completion, need to hit <C-Space> to enable it
+let g:ycm_auto_trigger = 1
+" enable documentation preview
+let g:ycm_add_preview_to_completeopt = 1
+" let g:ycm_autoclose_preview_window_after_completion = 1
+let g:ycm_autoclose_preview_window_after_insertion = 1
+" stop asking confirmation before loading conf. script
+let g:ycm_confirm_extra_conf = 0
+
+" SNIPMATE STUFF
+imap <C-Tab> <Plug>snipMateNextOrTrigger
+smap <C-Tab> <Plug>snipMateNextOrTrigger
 
 " ExtraWhitespace highlighting
 hi ExtraWhitespace guibg=red ctermbg=red
@@ -346,6 +385,9 @@ nmap <Leader>wi <Plug>VimwikiDiaryIndex:VimwikiDiaryGenerateLinks<CR>
 " goyo stuff
 let g:goyo_linenr = 1 "keep line numbering
 
+" fugitive stuff
+let g:fugitive_git_executable='"C:/Program Files/Git/cmd/git.exe"'
+
 " airline stuff
 let g:airline_theme='solarized'
 " short ids for mode
@@ -374,6 +416,10 @@ let g:airline#extensions#default#section_truncate_width = {
 " show git diff hunks count only if nonzero
 let g:airline#extensions#hunks#non_zero_only = 1
 
+" enable YouCompleteMe status
+let g:airline#extensions#ycm#enabled = 1
+
+
 " The following is for nice looking powerline symbols, but it does not seem to
 " work in Windows
 
@@ -390,3 +436,14 @@ let g:airline#extensions#hunks#non_zero_only = 1
 " let g:airline_symbols.branch = 'î‚ '
 " let g:airline_symbols.readonly = 'î‚¢'
 " let g:airline_symbols.linenr = 'î‚¡'
+
+" Windows full-screen stuff
+autocmd GUIEnter * silent! WToggleClean
+
+" EasyAlign stuff
+" Start interactive EasyAlign in visual mode (e.g. vipga)
+xmap ga <Plug>(EasyAlign)
+
+" Start interactive EasyAlign for a motion/text object (e.g. gaip)
+nmap ga <Plug>(EasyAlign)
+

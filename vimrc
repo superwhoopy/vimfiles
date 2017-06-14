@@ -190,15 +190,16 @@ filetype on
 filetype plugin indent on
 
 " Omnicpp stuff
-au BufNewFile,BufRead,BufEnter *.c,*.h,*.cpp,*.hpp set omnifunc=omni#cpp#complete#Main
-let OmniCpp_ShowPrototypeInAbbr = 1
-set completeopt=menu
+" au BufNewFile,BufRead,BufEnter *.c,*.h,*.cpp,*.hpp set omnifunc=omni#cpp#complete#Main
+" let OmniCpp_ShowPrototypeInAbbr = 1
+" set completeopt=menu
 
 " Windows TMP directory handling
 set directory+=/tmp,$TMP,$TEMP
 
 " visual autocomplete for command menu
 set wildmenu
+set wildignore=*.o,*.obj,*.lib,*.a
 
 " Leader key is ','
 :let mapleader=","
@@ -326,6 +327,8 @@ let g:ycm_add_preview_to_completeopt = 1
 let g:ycm_autoclose_preview_window_after_insertion = 1
 " stop asking confirmation before loading conf. script
 let g:ycm_confirm_extra_conf = 0
+" disable diagnostics display: I prefer to use syntastic instead
+let g:ycm_show_diagnostics_ui = 0
 
 " SNIPMATE STUFF
 imap <C-Tab> <Plug>snipMateNextOrTrigger
@@ -335,6 +338,8 @@ smap <C-Tab> <Plug>snipMateNextOrTrigger
 hi ExtraWhitespace guibg=red ctermbg=red
 " Strip trailing whitespaces
 nmap <F10>  :StripWhitespace<CR>
+" auto-strip trailing whitespaces on save
+let g:strip_whitespace_on_save = 1
 
 " tell NerdTree to display all files
 " let NERDTreeIgnore=[]

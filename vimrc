@@ -320,7 +320,7 @@ let syntastic_stl_format="%W{Wrn: }%w%E{| Err: }%e"
 
 " YOUCOMPLETEME STUFF
 " disable auto-completion, need to hit <C-Space> to enable it
-let g:ycm_auto_trigger = 1
+" let g:ycm_auto_trigger = 0
 " enable documentation preview
 let g:ycm_add_preview_to_completeopt = 1
 " let g:ycm_autoclose_preview_window_after_completion = 1
@@ -329,6 +329,20 @@ let g:ycm_autoclose_preview_window_after_insertion = 1
 let g:ycm_confirm_extra_conf = 0
 " disable diagnostics display: I prefer to use syntastic instead
 let g:ycm_show_diagnostics_ui = 0
+" disale youcompleteme for these file types
+let g:ycm_filetype_blacklist = {
+      \ 'tagbar' : 1,
+      \ 'qf' : 1,
+      \ 'notes' : 1,
+      \ 'markdown' : 1,
+      \ 'unite' : 1,
+      \ 'text' : 1,
+      \ 'vimwiki' : 1,
+      \ 'pandoc' : 1,
+      \ 'infolog' : 1,
+      \ 'tex' : 1,
+      \ 'mail' : 1
+      \}
 
 " SNIPMATE STUFF
 imap <C-Tab> <Plug>snipMateNextOrTrigger

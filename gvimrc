@@ -21,7 +21,7 @@
 
 :set bg=dark
 ":set guifont=Neep\ 11
-set guifont=Consolas:h8:cANSI
+set guifont=Monospace\ 8
 " :colors morning
 colorscheme solarized
 :set go-=T                  " ne pas afficher la toolbar

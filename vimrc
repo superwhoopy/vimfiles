@@ -67,7 +67,7 @@ Plugin 'vimwiki/vimwiki'
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'Valloric/YouCompleteMe'
 " Plugin 'airblade/vim-gitgutter'
-Plugin 'ssh://git@dev.ks.int:7999/prot/vim-ks.git'
+" Plugin 'ssh://git@dev.ks.int:7999/prot/vim-ks.git'
 
 call vundle#end()
 filetype plugin indent on

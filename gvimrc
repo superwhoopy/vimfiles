@@ -21,8 +21,7 @@
 
 :set bg=dark
 ":set guifont=Neep\ 11
-":set guifont=Consolas:h8:cANSI
-:set guifont=Monospace\ 8
+set guifont=Consolas:h8:cANSI
 " :colors morning
 colorscheme solarized
 :set go-=T                  " ne pas afficher la toolbar
@@ -30,8 +29,7 @@ colorscheme solarized
 :set lines=60 columns=85   " taille de la fenêtre au démarrage
 " :set mousefocus             " le curseur de la souris donne le focus
 
-" Set shellslash, so that path with '/' instead of '\' can be used
-:set ssl
+nmap <F11> :WToggleFullscreen<CR>
 
 hi ExtraWhitespace guibg=red ctermbg=red
 

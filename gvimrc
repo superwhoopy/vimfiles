@@ -20,6 +20,7 @@
 " endif
 
 :set bg=dark
+"
 ":set guifont=Neep\ 11
 :set guifont=Consolas_for_Powerline_FixedD:h8:cANSI:qDRAFT
 

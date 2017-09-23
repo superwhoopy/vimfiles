@@ -33,12 +33,14 @@ call vundle#begin()
 Plugin 'VundleVim/Vundle.Vim'
 
 Plugin 'altercation/vim-colors-solarized'
-"Plugin 'davidhalter/jedi-vim'
+Plugin 'davidhalter/jedi-vim'
 Plugin 'dkprice/vim-easygrep'
 Plugin 'garbas/vim-snipmate'
+Plugin 'drmikehenry/vim-fontsize'
 Plugin 'itchyny/calendar.vim'
 Plugin 'jiangmiao/auto-pairs'
 Plugin 'jlanzarotta/bufexplorer'
+Plugin 'jmcantrell/vim-virtualenv'
 Plugin 'junegunn/goyo.vim'
 Plugin 'junegunn/vim-easy-align'
 Plugin 'justinmk/vim-syntax-extra'
@@ -46,12 +48,14 @@ Plugin 'kien/ctrlp.vim'
 Plugin 'kkoenig/wimproved.vim'
 Plugin 'Lokaltog/vim-easymotion'
 Plugin 'MarcWeber/vim-addon-mw-utils'
+Plugin 'martinda/Jenkinsfile-vim-syntax'
 Plugin 'mileszs/ack.vim'
 Plugin 'mitsuhiko/vim-jinja'
 Plugin 'ntpeters/vim-better-whitespace'
-Plugin 'scrooloose/nerdcommenter'
+" Plugin 'scrooloose/nerdcommenter'
 Plugin 'scrooloose/nerdtree'
 Plugin 'scrooloose/syntastic'
+Plugin 'shime/vim-livedown'
 Plugin 'tmhedberg/SimpylFold'
 Plugin 'tomtom/tlib_vim'
 Plugin 'tpope/vim-fugitive'
@@ -64,7 +68,6 @@ Plugin 'vim-scripts/DrawIt'
 Plugin 'vim-scripts/Gundo'
 Plugin 'Vimjas/vim-python-pep8-indent'
 Plugin 'vimwiki/vimwiki'
-Plugin 'VundleVim/Vundle.vim'
 Plugin 'Valloric/YouCompleteMe'
 " Plugin 'airblade/vim-gitgutter'
 Plugin 'ssh://git@dev.ks.int:7999/prot/vim-ks.git'
@@ -76,19 +79,6 @@ filetype plugin indent on
 " Vim5 and later versions support syntax highlighting. Uncommenting the next
 " line enables syntax highlighting by default.
 syntax on
-let g:load_doxygen_syntax = 1
-
-" If using a dark background within the editing area and syntax highlighting
-" turn on this option as well
-set background=light
-
-" Uncomment the following to have Vim jump to the last position when
-" reopening a file
-"if has("autocmd")
-"  au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$")
-"    \| exe "normal g'\"" | endif
-"endif
-
 set bg=dark
 
 set grepprg=c:/cygwin/bin/grep.exe\ -IRn\ --exclude-dir=\\.git\ --exclude=tags\ --exclude-dir=\\.env\ $*
@@ -114,8 +104,9 @@ set scrolloff=3            " toujours afficher au moins 3 lignes au dessus et
                            " en dessous du curseur
 set modeline               " autoriser les modlines
 set foldmethod=indent      " Folding base sur l'indentation
-:set foldlevelstart=100    " deplier tous les folds jusqu'au nv. 100
+set foldlevelstart=100    " deplier tous les folds jusqu'au nv. 100
 set diffopt+=iwhite        " en mode 'diff', ignorer les espaces
+set encoding=utf8
 
 " Windows dark magic to make the backspace key work properly...
 set backspace=2
@@ -135,11 +126,6 @@ nmap <C-s> :w<CR>:echo "File saved."<CR>
 " <C-Space> for omnicompletion
 inoremap <C-Space> <C-X><C-o>
 
-" Navigation entre fenetres
-nnoremap <A-l> :wincmd l<CR>
-nnoremap <A-k> :wincmd k<CR>
-nnoremap <A-j> :wincmd j<CR>
-nnoremap <A-h> :wincmd h<CR>
 "nnoremap <Tab> :exe wincmd
 
 " Tag navigation
@@ -199,7 +185,7 @@ set directory+=/tmp,$TMP,$TEMP
 
 " visual autocomplete for command menu
 set wildmenu
-set wildignore=*.o,*.obj,*.lib,*.a
+set wildignore+=*\\.git\\*,*.o,*.obj,*.lib,*.a,*.pyc,*\\__pycache__\\*
 
 " Leader key is ','
 :let mapleader=","
@@ -212,15 +198,6 @@ nmap <Leader>d :Gvdiff<CR>
 
 " Height of the preview window (24=twice default size)
 set previewheight=24
-
-function! ViewInStash()
-  let current_file_path = @%
-  execute "silent !bash --login -c 'cd %:p:h && stash_url'"
-  let url = execute("silent !bash --login -c 'cd %:p:h && stash_url'")
-            \ . '/' . current_file_path
-  echo url
-  "execute 'silent !start ' . url
-endfunction
 
 " Toggle auto-format option with <Leader>fo
 function! ToggleAutoFormat()
@@ -244,6 +221,17 @@ function! Spen()
   set spelllang=en
 endfunction
 
+function! Date()
+  put =strftime(\"%Y-%m-%d (%a)\")
+endfunction
+
+"
+" Navigation entre fenetres
+nnoremap <A-l> :wincmd l<CR>
+nnoremap <A-k> :wincmd k<CR>
+nnoremap <A-j> :wincmd j<CR>
+nnoremap <A-h> :wincmd h<CR>
+
 " Line under cursor highlighting
 augroup BgHighlight
     autocmd!
@@ -260,6 +248,9 @@ augroup END
 
 " Default copy/paste from system clipboard
 set clipboard=unnamed
+
+" Quickly edit vimrc
+nmap <F8> :e ~/vimfiles/vimrc<CR>
 
 
 "###############################################################################
@@ -280,7 +271,8 @@ let Tlist_Use_Right_Window = 1
 let Tlist_Show_One_File = 1
 
 " NerdTree
-let NERDTreeIgnore=['\.vim$', '\~$', '\.o$', '\.a$', '\.gcno$', '__pycache__', '\.pyc$']
+let NERDTreeIgnore=['\.vim$', '\~$', '\.o$', '\.a$', '\.gcno$', '__pycache__',
+  \ '\.pyc$', '\.egg-info$']
 
 " DOXYGENTOOLKIT
 let g:DoxygenToolkit_briefTag_pre         = ""
@@ -341,7 +333,8 @@ let g:ycm_filetype_blacklist = {
       \ 'pandoc' : 1,
       \ 'infolog' : 1,
       \ 'tex' : 1,
-      \ 'mail' : 1
+      \ 'mail' : 1,
+      \ 'python' : 1
       \}
 
 " SNIPMATE STUFF
@@ -442,7 +435,6 @@ let g:airline#extensions#ycm#enabled = 1
 " The following is for nice looking powerline symbols, but it does not seem to
 " work in Windows
 
-" set encoding=utf8
 " let g:airline_powerline_fonts=1
 " set guifont=Consolas_for_Powerline_FixedD:h8:cANSI:qDRAFT
 " if !exists('g:airline_symbols')
@@ -466,3 +458,20 @@ xmap ga <Plug>(EasyAlign)
 " Start interactive EasyAlign for a motion/text object (e.g. gaip)
 nmap ga <Plug>(EasyAlign)
 
+" Disable an autopair mapping that fucks up french characters
+let g:AutoPairsShortcutBackInsert = ''
+let g:AutoPairsShortcutJump = ''
+
+" Callbacks when entering/leaving goyo
+function! s:goyo_enter()
+  set nonumber
+  set guifont=Consolas_for_Powerline_FixedD:h11:cANSI:qDRAFT
+endfunction
+
+function! s:goyo_leave()
+  set number
+  set guifont=Consolas_for_Powerline_FixedD:h8:cANSI:qDRAFT
+endfunction
+
+autocmd! User GoyoEnter nested call <SID>goyo_enter()
+autocmd! User GoyoLeave nested call <SID>goyo_leave()

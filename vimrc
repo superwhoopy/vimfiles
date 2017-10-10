@@ -36,6 +36,7 @@ Plugin 'altercation/vim-colors-solarized'
 Plugin 'davidhalter/jedi-vim'
 Plugin 'dkprice/vim-easygrep'
 Plugin 'garbas/vim-snipmate'
+Plugin 'greyblake/vim-preview'
 Plugin 'drmikehenry/vim-fontsize'
 Plugin 'itchyny/calendar.vim'
 Plugin 'jiangmiao/auto-pairs'
@@ -54,7 +55,7 @@ Plugin 'mitsuhiko/vim-jinja'
 Plugin 'ntpeters/vim-better-whitespace'
 " Plugin 'scrooloose/nerdcommenter'
 Plugin 'scrooloose/nerdtree'
-Plugin 'scrooloose/syntastic'
+" Plugin 'scrooloose/syntastic'
 Plugin 'shime/vim-livedown'
 Plugin 'tmhedberg/SimpylFold'
 Plugin 'tomtom/tlib_vim'
@@ -69,6 +70,7 @@ Plugin 'vim-scripts/Gundo'
 Plugin 'Vimjas/vim-python-pep8-indent'
 Plugin 'vimwiki/vimwiki'
 Plugin 'Valloric/YouCompleteMe'
+Plugin 'w0rp/ale'
 " Plugin 'airblade/vim-gitgutter'
 Plugin 'ssh://git@dev.ks.int:7999/prot/vim-ks.git'
 
@@ -448,6 +450,9 @@ let g:airline#extensions#ycm#enabled = 1
 " let g:airline_symbols.readonly = ''
 " let g:airline_symbols.linenr = ''
 
+" enable ALE status
+let g:airline#extensions#ale#enabled = 1
+
 " Windows full-screen stuff
 autocmd GUIEnter * silent! WToggleClean
 
@@ -462,16 +467,25 @@ nmap ga <Plug>(EasyAlign)
 let g:AutoPairsShortcutBackInsert = ''
 let g:AutoPairsShortcutJump = ''
 
+" virtualenv stuff: set the current directory as the base directory where to
+" look for a virtualenv. Thus if the virtualenv lies in ".env", enable it with
+" :Virtualenv .env
+let g:virtualenv_directory = '.'
+
 " Callbacks when entering/leaving goyo
 function! s:goyo_enter()
   set nonumber
-  set guifont=Consolas_for_Powerline_FixedD:h11:cANSI:qDRAFT
+  set guifont=Consolas:h11:cANSI:qDRAFT
 endfunction
 
 function! s:goyo_leave()
   set number
-  set guifont=Consolas_for_Powerline_FixedD:h8:cANSI:qDRAFT
+  set guifont=Consolas:h8:cANSI:qDRAFT
 endfunction
 
 autocmd! User GoyoEnter nested call <SID>goyo_enter()
 autocmd! User GoyoLeave nested call <SID>goyo_leave()
+
+" ALE stuff
+let g:ale_set_loclist = 0
+let g:ale_set_quickfix = 1

@@ -19,14 +19,14 @@
 " Vundle setup
 
 "Vundle bootstrap
-if !filereadable($HOME . '/vimfiles/bundle/Vundle.vim/.git/config') &&
+if !filereadable($HOME . '/.vim/bundle/Vundle.vim/.git/config') &&
       \ confirm("Clone Vundle?","Y\nn") == 1
-    exec '!git clone https://github.com/gmarik/Vundle.vim $HOME/vimfiles/bundle/Vundle.vim/'
+    exec '!git clone https://github.com/gmarik/Vundle.vim $HOME/.vim/bundle/Vundle.vim/'
 endif
 
 set nocompatible
 filetype off
-set rtp+=$HOME/vimfiles/bundle/Vundle.vim
+set rtp+=$HOME/.vim/bundle/Vundle.vim
 "call vundle#begin('%USERPROFILE%/vimfiles/bundle')
 call vundle#begin()
 

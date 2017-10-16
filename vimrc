@@ -27,7 +27,6 @@ endif
 set nocompatible
 filetype off
 set rtp+=$HOME/.vim/bundle/Vundle.vim
-"call vundle#begin('%USERPROFILE%/vimfiles/bundle')
 call vundle#begin()
 
 Plugin 'VundleVim/Vundle.Vim'
@@ -76,7 +75,7 @@ Plugin 'w0rp/ale'
 
 call vundle#end()
 filetype plugin indent on
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " Vim5 and later versions support syntax highlighting. Uncommenting the next
 " line enables syntax highlighting by default.
@@ -107,7 +106,7 @@ set modeline               " autoriser les modlines
 set foldmethod=indent      " Folding base sur l'indentation
 set foldlevelstart=100    " deplier tous les folds jusqu'au nv. 100
 set diffopt+=iwhite        " en mode 'diff', ignorer les espaces
-set encoding=utf8
+" set encoding=utf8
 
 " Mappings
 " Ouvrir le Buffer explorer avec la touche F12
@@ -176,7 +175,7 @@ filetype plugin indent on
 
 " visual autocomplete for command menu
 set wildmenu
-set wildignore+=*\\.git\\*,*.o,*.obj,*.lib,*.a,*.pyc,*\\__pycache__\\*
+set wildignore=*/.git/*,*.o,*.obj,*.lib,*.a,*.pyc,*/__pycache__/*
 
 " Leader key is ','
 :let mapleader=","
@@ -390,9 +389,6 @@ nmap <Leader>wi <Plug>VimwikiDiaryIndex:VimwikiDiaryGenerateLinks<CR>
 " goyo stuff
 let g:goyo_linenr = 1 "keep line numbering
 
-" fugitive stuff
-let g:fugitive_git_executable='"C:/Program Files/Git/cmd/git.exe"'
-
 " airline stuff
 let g:airline_theme='solarized'
 " short ids for mode
@@ -418,28 +414,15 @@ let g:airline#extensions#default#section_truncate_width = {
     \ 'warning': 80,
     \ 'error': 80,
     \ }
+
+" use powerline fonts
+let g:airline_powerline_fonts = 1
+
 " show git diff hunks count only if nonzero
 let g:airline#extensions#hunks#non_zero_only = 1
 
 " enable YouCompleteMe status
 let g:airline#extensions#ycm#enabled = 1
-
-
-" The following is for nice looking powerline symbols, but it does not seem to
-" work in Windows
-
-" let g:airline_powerline_fonts=1
-" set guifont=Consolas_for_Powerline_FixedD:h8:cANSI:qDRAFT
-" if !exists('g:airline_symbols')
-"   let g:airline_symbols = {}
-" endif
-" let g:airline_left_sep = ''
-" let g:airline_left_alt_sep = ''
-" let g:airline_right_sep = ''
-" let g:airline_right_alt_sep = ''
-" let g:airline_symbols.branch = ''
-" let g:airline_symbols.readonly = ''
-" let g:airline_symbols.linenr = ''
 
 " enable ALE status
 let g:airline#extensions#ale#enabled = 1

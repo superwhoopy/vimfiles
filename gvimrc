@@ -21,8 +21,9 @@
 
 :set bg=dark
 "
-":set guifont=Neep\ 11
-set guifont=Monospace\ 8
+" set guifont=Neep\ 11
+set guifont=Inconsolata-dz\ for\ Powerline\ Medium\ 8
+
 " :colors morning
 colorscheme solarized
 :set go-=T                  " ne pas afficher la toolbar

@@ -22,13 +22,17 @@
 :set bg=dark
 "
 " set guifont=Neep\ 11
-set guifont=Inconsolata-dz\ for\ Powerline\ Medium\ 8
+set guifont=Inconsolata-dz\ for\ Powerline\ Medium\ 9
 
 " :colors morning
 colorscheme solarized
-:set go-=T                  " ne pas afficher la toolbar
-:set go-=m                  " ne pas afficher la menubar
-:set lines=60 columns=85   " taille de la fenêtre au démarrage
+set go-=T                  " ne pas afficher la toolbar
+set go-=m                  " ne pas afficher la menubar
+set go-=r                  " do not show vertical bars
+set go-=R
+set go-=l
+set go-=L
+set lines=60 columns=85   " taille de la fenêtre au démarrage
 " :set mousefocus             " le curseur de la souris donne le focus
 
 nmap <F11> :WToggleFullscreen<CR>

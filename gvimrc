@@ -22,7 +22,7 @@
 :set bg=dark
 "
 " set guifont=Neep\ 11
-set guifont=Inconsolata-dz\ for\ Powerline\ Medium\ 9
+set guifont=Ubuntu\ Mono\ 10
 
 " :colors morning
 colorscheme solarized

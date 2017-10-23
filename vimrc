@@ -52,24 +52,24 @@ Plugin 'martinda/Jenkinsfile-vim-syntax'
 Plugin 'mileszs/ack.vim'
 Plugin 'mitsuhiko/vim-jinja'
 Plugin 'ntpeters/vim-better-whitespace'
-Plugin 'Rykka/riv.vim'
+" Plugin 'Rykka/riv.vim'
 " Plugin 'scrooloose/nerdcommenter'
 Plugin 'scrooloose/nerdtree'
 " Plugin 'scrooloose/syntastic'
 Plugin 'shime/vim-livedown'
 Plugin 'tmhedberg/SimpylFold'
 Plugin 'tomtom/tlib_vim'
-Plugin 'tpope/vim-fugitive'
+" Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-surround'
-Plugin 'vim-airline/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
+" Plugin 'vim-airline/vim-airline'
+" Plugin 'vim-airline/vim-airline-themes'
 Plugin 'vim-latex/vim-latex'
 Plugin 'vim-scripts/DoxygenToolkit.vim'
 Plugin 'vim-scripts/DrawIt'
 Plugin 'vim-scripts/Gundo'
 Plugin 'Vimjas/vim-python-pep8-indent'
 Plugin 'vimwiki/vimwiki'
-Plugin 'Valloric/YouCompleteMe'
+" Plugin 'Valloric/YouCompleteMe'
 Plugin 'w0rp/ale'
 " Plugin 'airblade/vim-gitgutter'
 " Plugin 'ssh://git@dev.ks.int:7999/prot/vim-ks.git'
@@ -241,7 +241,7 @@ augroup END
 set clipboard=unnamed
 
 " Quickly edit vimrc
-nmap <F8> :e ~/vimfiles/vimrc<CR>
+nmap <F8> :e ~/.vim/vimrc<CR>
 
 
 "###############################################################################
@@ -450,12 +450,10 @@ let g:virtualenv_directory = '.'
 " Callbacks when entering/leaving goyo
 function! s:goyo_enter()
   set nonumber
-  set guifont=Consolas:h11:cANSI:qDRAFT
 endfunction
 
 function! s:goyo_leave()
   set number
-  set guifont=Consolas:h8:cANSI:qDRAFT
 endfunction
 
 autocmd! User GoyoEnter nested call <SID>goyo_enter()

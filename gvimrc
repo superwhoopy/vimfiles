@@ -22,7 +22,7 @@
 set bg=dark
 set guifont=Ubuntu\ Mono\ 10
 
-colorscheme solarized
+colorscheme flattened_dark
 set go-=T                  " ne pas afficher la toolbar
 set go-=m                  " ne pas afficher la menubar
 set go-=r                  " do not show vertical bars

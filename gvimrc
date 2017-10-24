@@ -19,18 +19,15 @@
 "   source /etc/vim/gvimrc.local
 " endif
 
-:set bg=dark
-"
-":set guifont=Neep\ 11
-:set guifont=Consolas:h8:cANSI:qDRAFT
+set guifont=Consolas:h8:cANSI:qDRAFT
 
-" :colors morning
-" :colors desert
-colorscheme solarized
-:set go-=T                  " ne pas afficher la toolbar
-:set go-=m                  " ne pas afficher la menubar
-:set lines=60 columns=85   " taille de la fenêtre au démarrage
-" :set mousefocus             " le curseur de la souris donne le focus
+" colors morning
+" colors desert
+" colorscheme solarized
+colorscheme flattened_dark
+set go-=T                  " ne pas afficher la toolbar
+set go-=m                  " ne pas afficher la menubar
+set lines=60 columns=85   " taille de la fenêtre au démarrage
 
 nmap <F11> :WToggleFullscreen<CR>
 

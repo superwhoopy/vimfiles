@@ -27,18 +27,12 @@ endif
 set nocompatible
 filetype off
 set rtp+=$HOME/vimfiles/bundle/Vundle.vim
-"call vundle#begin('%USERPROFILE%/vimfiles/bundle')
 call vundle#begin()
 
 Plugin 'VundleVim/Vundle.Vim'
 
-Plugin 'altercation/vim-colors-solarized'
 Plugin 'davidhalter/jedi-vim'
-Plugin 'dkprice/vim-easygrep'
 Plugin 'garbas/vim-snipmate'
-Plugin 'greyblake/vim-preview'
-Plugin 'drmikehenry/vim-fontsize'
-Plugin 'itchyny/calendar.vim'
 Plugin 'jiangmiao/auto-pairs'
 Plugin 'jlanzarotta/bufexplorer'
 Plugin 'jmcantrell/vim-virtualenv'
@@ -49,29 +43,28 @@ Plugin 'kien/ctrlp.vim'
 Plugin 'kkoenig/wimproved.vim'
 Plugin 'Lokaltog/vim-easymotion'
 Plugin 'MarcWeber/vim-addon-mw-utils'
-Plugin 'martinda/Jenkinsfile-vim-syntax'
+" Plugin 'martinda/Jenkinsfile-vim-syntax'
 Plugin 'mileszs/ack.vim'
-Plugin 'mitsuhiko/vim-jinja'
 Plugin 'ntpeters/vim-better-whitespace'
+Plugin 'romainl/flattened' " Solarized without bullshit
+" Plugin 'Rykka/riv.vim'     " rST plugin
 " Plugin 'scrooloose/nerdcommenter'
 Plugin 'scrooloose/nerdtree'
 " Plugin 'scrooloose/syntastic'
 Plugin 'shime/vim-livedown'
-Plugin 'tmhedberg/SimpylFold'
+Plugin 'tmhedberg/SimpylFold' " better Python folding
 Plugin 'tomtom/tlib_vim'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-surround'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'vim-latex/vim-latex'
-Plugin 'vim-scripts/DoxygenToolkit.vim'
 Plugin 'vim-scripts/DrawIt'
 Plugin 'vim-scripts/Gundo'
 Plugin 'Vimjas/vim-python-pep8-indent'
 Plugin 'vimwiki/vimwiki'
-Plugin 'Valloric/YouCompleteMe'
+" Plugin 'Valloric/YouCompleteMe'
 Plugin 'w0rp/ale'
-" Plugin 'airblade/vim-gitgutter'
 Plugin 'ssh://git@dev.ks.int:7999/prot/vim-ks.git'
 
 call vundle#end()
@@ -487,5 +480,5 @@ autocmd! User GoyoEnter nested call <SID>goyo_enter()
 autocmd! User GoyoLeave nested call <SID>goyo_leave()
 
 " ALE stuff
-let g:ale_set_loclist = 0
-let g:ale_set_quickfix = 1
+" let g:ale_set_loclist = 0
+" let g:ale_set_quickfix = 1

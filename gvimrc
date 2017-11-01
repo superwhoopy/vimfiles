@@ -20,7 +20,7 @@
 " endif
 
 set bg=dark
-set guifont=Ubuntu\ Mono\ 10
+set guifont=Source\ Code\ Pro\ For\ Powerline\ Medium\ 8
 
 colorscheme flattened_dark
 set go-=T                  " ne pas afficher la toolbar
@@ -30,6 +30,8 @@ set go-=R
 set go-=l
 set go-=L
 set lines=60 columns=85   " taille de la fenêtre au démarrage
+
+set lazyredraw
 
 nmap <F11> :WToggleFullscreen<CR>
 

@@ -31,8 +31,14 @@ call vundle#begin()
 
 Plugin 'VundleVim/Vundle.Vim'
 
-Plugin 'davidhalter/jedi-vim'
+" Plugin 'davidhalter/jedi-vim'
+Plugin 'drmikehenry/vim-fontsize'
 Plugin 'garbas/vim-snipmate'
+"
+Plugin 'google/vim-maktaba'
+Plugin 'google/vim-coverage'
+Plugin 'google/vim-glaive'
+
 Plugin 'jiangmiao/auto-pairs'
 Plugin 'jlanzarotta/bufexplorer'
 Plugin 'jmcantrell/vim-virtualenv'
@@ -44,20 +50,24 @@ Plugin 'kkoenig/wimproved.vim'
 Plugin 'Lokaltog/vim-easymotion'
 Plugin 'MarcWeber/vim-addon-mw-utils'
 " Plugin 'martinda/Jenkinsfile-vim-syntax'
+
+
 Plugin 'mileszs/ack.vim'
 Plugin 'ntpeters/vim-better-whitespace'
+
 Plugin 'romainl/flattened' " Solarized without bullshit
-" Plugin 'Rykka/riv.vim'     " rST plugin
-" Plugin 'scrooloose/nerdcommenter'
+Plugin 'Rykka/riv.vim'     " rST plugin
+
+  Plugin 'scrooloose/nerdcommenter'
 Plugin 'scrooloose/nerdtree'
 " Plugin 'scrooloose/syntastic'
 Plugin 'shime/vim-livedown'
 Plugin 'tmhedberg/SimpylFold' " better Python folding
 Plugin 'tomtom/tlib_vim'
-" Plugin 'tpope/vim-fugitive'
+Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-surround'
-" Plugin 'vim-airline/vim-airline'
-" Plugin 'vim-airline/vim-airline-themes'
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
 Plugin 'vim-latex/vim-latex'
 Plugin 'vim-scripts/DrawIt'
 Plugin 'vim-scripts/Gundo'
@@ -65,9 +75,10 @@ Plugin 'Vimjas/vim-python-pep8-indent'
 Plugin 'vimwiki/vimwiki'
 " Plugin 'Valloric/YouCompleteMe'
 Plugin 'w0rp/ale'
-" Plugin 'ssh://git@dev.ks.int:7999/prot/vim-ks.git'
+Plugin 'ssh://git@dev.ks.int:7999/prot/vim-ks.git'
 
 call vundle#end()
+call glaive#Install()
 filetype plugin indent on
 " """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
@@ -217,14 +228,14 @@ nnoremap <A-j> :wincmd j<CR>
 nnoremap <A-h> :wincmd h<CR>
 
 " Line under cursor highlighting
-augroup BgHighlight
-    autocmd!
-    autocmd WinEnter * set cul
-    autocmd WinLeave * set nocul
-    autocmd FocusGained * set cul
-    autocmd FocusLost   * set nocul
-augroup END
-"
+" augroup BgHighlight
+"     autocmd!
+"     autocmd WinEnter * set cul
+"     autocmd WinLeave * set nocul
+"     autocmd FocusGained * set cul
+"     autocmd FocusLost   * set nocul
+" augroup END
+
 " Status line configuration
 " set statusline+=%#warningmsg#
 " set statusline+=%{SyntasticStatuslineFlag()}
@@ -246,9 +257,6 @@ nmap <F8> :e ~/.vim/vimrc<CR>
 if has('python3')
   let g:gundo_prefer_python3 = 1
 endif
-
-" old stuff?
-let g:tex_flavor="latex"
 
 " Taglists (:TlistToggle)
 let Tlist_Use_Right_Window = 1
@@ -455,3 +463,6 @@ autocmd! User GoyoLeave nested call <SID>goyo_leave()
 " ALE stuff
 " let g:ale_set_loclist = 0
 " let g:ale_set_quickfix = 1
+
+" Ack stuff
+let g:ackprg = "${HOME}/local/bin/ack"

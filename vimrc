@@ -32,8 +32,9 @@ call vundle#begin()
 Plugin 'VundleVim/Vundle.Vim'
 
 Plugin 'davidhalter/jedi-vim'
+Plugin 'fidian/hexmode'
 Plugin 'garbas/vim-snipmate'
-Plugin 'jiangmiao/auto-pairs'
+" Plugin 'jiangmiao/auto-pairs'
 Plugin 'jlanzarotta/bufexplorer'
 Plugin 'jmcantrell/vim-virtualenv'
 Plugin 'junegunn/goyo.vim'
@@ -47,7 +48,7 @@ Plugin 'MarcWeber/vim-addon-mw-utils'
 Plugin 'mileszs/ack.vim'
 Plugin 'ntpeters/vim-better-whitespace'
 Plugin 'romainl/flattened' " Solarized without bullshit
-" Plugin 'Rykka/riv.vim'     " rST plugin
+Plugin 'Rykka/riv.vim'     " rST plugin
 " Plugin 'scrooloose/nerdcommenter'
 Plugin 'scrooloose/nerdtree'
 " Plugin 'scrooloose/syntastic'

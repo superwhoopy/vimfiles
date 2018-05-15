@@ -32,7 +32,7 @@ call vundle#begin()
 Plugin 'VundleVim/Vundle.Vim'
 
 Plugin 'davidhalter/jedi-vim'
-Plugin 'fidian/hexmode'
+" Plugin 'fidian/hexmode'
 Plugin 'garbas/vim-snipmate'
 " Plugin 'jiangmiao/auto-pairs'
 Plugin 'jlanzarotta/bufexplorer'
@@ -456,6 +456,9 @@ xmap ga <Plug>(EasyAlign)
 
 " Start interactive EasyAlign for a motion/text object (e.g. gaip)
 nmap ga <Plug>(EasyAlign)
+let g:easy_align_delimiters = {
+  \   '\': { 'pattern': '\\' }
+  \ }
 
 " Disable an autopair mapping that fucks up french characters
 let g:AutoPairsShortcutBackInsert = ''

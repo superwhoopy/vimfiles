@@ -72,7 +72,6 @@ Plugin 'w0rp/ale'
 Plugin 'ssh://git@dev.ks.int:7999/prot/vim-ks.git'
 
 call vundle#end()
-call glaive#Install()
 filetype plugin indent on
 " """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 

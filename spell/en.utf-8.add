@@ -46,3 +46,6 @@ Psy
 WCET
 are/!
 TCFG
+Redistributable
+PyInstaller
+NSIS

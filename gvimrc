@@ -19,12 +19,22 @@
 "   source /etc/vim/gvimrc.local
 " endif
 
-set guifont=Consolas:h8:cANSI:qDRAFT
+if !has('nvim')
+  set guifont=Consolas:h8:cANSI:qDRAFT
+else
+  Guifont Consolas:h8:cANSI;qDRAFT
+endif
 
 " colors morning
 " colors desert
 " colorscheme solarized
-colorscheme flattened_dark
+
+if strftime("%H") < 12 || strftime("%H") >= 17
+  colorscheme flattened_dark
+else
+  colorscheme flattened_light
+endif
+
 set go-=T                  " ne pas afficher la toolbar
 set go-=m                  " ne pas afficher la menubar
 set lines=60 columns=85   " taille de la fenêtre au démarrage

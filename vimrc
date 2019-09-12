@@ -34,6 +34,7 @@ Plugin 'VundleVim/Vundle.Vim'
 Plugin 'davidhalter/jedi-vim'
 " Plugin 'fidian/hexmode'
 Plugin 'garbas/vim-snipmate'
+Plugin 'hiphish/jinja.vim'
 " Plugin 'jiangmiao/auto-pairs'
 Plugin 'jlanzarotta/bufexplorer'
 Plugin 'jmcantrell/vim-virtualenv'
@@ -42,15 +43,15 @@ Plugin 'junegunn/vim-easy-align'
 Plugin 'justinmk/vim-syntax-extra'
 Plugin 'kien/ctrlp.vim'
 Plugin 'kkoenig/wimproved.vim'
+Plugin 'krono-safe/vim-asterios'
 Plugin 'Lokaltog/vim-easymotion'
 Plugin 'MarcWeber/vim-addon-mw-utils'
-" Plugin 'martinda/Jenkinsfile-vim-syntax'
 Plugin 'mileszs/ack.vim'
 Plugin 'ntpeters/vim-better-whitespace'
 Plugin 'romainl/flattened' " Solarized without bullshit
-Plugin 'Rykka/riv.vim'     " rST plugin
+" Plugin 'Rykka/riv.vim'     " rST plugin
+" Plugin 'Rykka/InstantRst'
 " Plugin 'scrooloose/nerdcommenter'
-Plugin 'scrooloose/nerdtree'
 " Plugin 'scrooloose/syntastic'
 Plugin 'shime/vim-livedown'
 Plugin 'tmhedberg/SimpylFold' " better Python folding
@@ -60,12 +61,14 @@ Plugin 'tpope/vim-surround'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'vim-latex/vim-latex'
+Plugin 'vim-python/python-syntax'
 Plugin 'vim-scripts/DrawIt'
 Plugin 'vim-scripts/Gundo'
 Plugin 'Vimjas/vim-python-pep8-indent'
 Plugin 'vimwiki/vimwiki'
 " Plugin 'Valloric/YouCompleteMe'
 Plugin 'w0rp/ale'
+Plugin 'scrooloose/nerdtree'
 Plugin 'ssh://git@dev.ks.int:7999/prot/vim-ks.git'
 
 call vundle#end()
@@ -102,14 +105,17 @@ set modeline               " autoriser les modlines
 set foldmethod=indent      " Folding base sur l'indentation
 set foldlevelstart=100    " deplier tous les folds jusqu'au nv. 100
 set diffopt+=iwhite        " en mode 'diff', ignorer les espaces
-set encoding=utf8
+set encoding=utf-8
+set nojoinspaces           " prevent double spaces insertion after autowrap
 
 " Windows dark magic to make the backspace key work properly...
 set backspace=2
 set noshellslash
 
-" Python DLL to look for on Windows
-set pythonthreedll=python35.dll
+if !has('nvim')
+  " Python DLL to look for on Windows
+  set pythonthreedll=python36.dll
+endif
 
 " Mappings
 " Ouvrir le Buffer explorer avec la touche F12
@@ -343,9 +349,7 @@ hi ExtraWhitespace guibg=red ctermbg=red
 nmap <F10>  :StripWhitespace<CR>
 " auto-strip trailing whitespaces on save
 let g:strip_whitespace_on_save = 1
-
-" tell NerdTree to display all files
-" let NERDTreeIgnore=[]
+let g:strip_whitespace_confirm = 0
 
 " Tabularize plugin shortcuts
 vmap <Leader>= :Tabularize /=<CR>
@@ -446,6 +450,9 @@ let g:airline#extensions#ycm#enabled = 1
 
 " enable ALE status
 let g:airline#extensions#ale#enabled = 1
+
+" enable Python highlighting plugin
+let g:python_highlight_all = 1
 
 " Windows full-screen stuff
 autocmd GUIEnter * silent! WToggleClean

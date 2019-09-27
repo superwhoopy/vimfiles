@@ -33,8 +33,6 @@ set lines=60 columns=85   " taille de la fenêtre au démarrage
 
 set lazyredraw
 
-nmap <F11> :WToggleFullscreen<CR>
-
 hi ExtraWhitespace guibg=red ctermbg=red
 
 hi VimwikiHeader1 guifg=#FF0000

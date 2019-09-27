@@ -41,7 +41,7 @@ Plugin 'junegunn/goyo.vim'
 Plugin 'junegunn/vim-easy-align'
 Plugin 'justinmk/vim-syntax-extra'
 Plugin 'kien/ctrlp.vim'
-Plugin 'kkoenig/wimproved.vim'
+Plugin 'krono-safe/vim-asterios'
 Plugin 'Lokaltog/vim-easymotion'
 Plugin 'MarcWeber/vim-addon-mw-utils'
 " Plugin 'martinda/Jenkinsfile-vim-syntax'
@@ -69,7 +69,6 @@ Plugin 'Vimjas/vim-python-pep8-indent'
 Plugin 'vimwiki/vimwiki'
 " Plugin 'Valloric/YouCompleteMe'
 Plugin 'w0rp/ale'
-Plugin 'ssh://git@dev.ks.int:7999/prot/vim-ks.git'
 
 call vundle#end()
 filetype plugin indent on
@@ -421,9 +420,6 @@ let g:airline#extensions#ycm#enabled = 1
 
 " enable ALE status
 let g:airline#extensions#ale#enabled = 1
-
-" Windows full-screen stuff
-autocmd GUIEnter * silent! WToggleClean
 
 " EasyAlign stuff
 " Start interactive EasyAlign in visual mode (e.g. vipga)

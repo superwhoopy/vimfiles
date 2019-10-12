@@ -51,7 +51,7 @@ Plugin 'mileszs/ack.vim'
 Plugin 'ntpeters/vim-better-whitespace'
 
 Plugin 'romainl/flattened' " Solarized without bullshit
-Plugin 'Rykka/riv.vim'     " rST plugin
+" Plugin 'Rykka/riv.vim'     " rST plugin
 " Plugin 'scrooloose/nerdcommenter'
 Plugin 'scrooloose/nerdtree'
 " Plugin 'scrooloose/syntastic'
@@ -104,6 +104,7 @@ set foldmethod=indent      " Folding base sur l'indentation
 set foldlevelstart=100    " deplier tous les folds jusqu'au nv. 100
 set diffopt+=iwhite        " en mode 'diff', ignorer les espaces
 " set encoding=utf8
+set nojoinspaces
 
 " Mappings
 " Ouvrir le Buffer explorer avec la touche F12

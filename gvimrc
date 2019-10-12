@@ -20,7 +20,9 @@
 " endif
 
 set bg=dark
-set guifont=Source\ Code\ Pro\ For\ Powerline\ Medium\ 8
+if !has('nvim')
+  set guifont=Source\ Code\ Pro\ For\ Powerline\ Medium\ 8
+endif
 
 colorscheme flattened_dark
 set go-=T                  " ne pas afficher la toolbar

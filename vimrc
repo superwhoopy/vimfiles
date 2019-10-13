@@ -335,6 +335,7 @@ hi ExtraWhitespace guibg=red ctermbg=red
 nmap <F10>  :StripWhitespace<CR>
 " auto-strip trailing whitespaces on save
 let g:strip_whitespace_on_save = 1
+let g:strip_whitespace_confirm = 0
 
 " tell NerdTree to display all files
 " let NERDTreeIgnore=[]

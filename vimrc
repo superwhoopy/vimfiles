@@ -26,6 +26,7 @@ endif
 
 set nocompatible
 filetype off
+set shell=/bin/bash
 set rtp+=$HOME/.vim/bundle/Vundle.vim
 call vundle#begin()
 
@@ -103,8 +104,8 @@ set modeline               " autoriser les modlines
 set foldmethod=indent      " Folding base sur l'indentation
 set foldlevelstart=100    " deplier tous les folds jusqu'au nv. 100
 set diffopt+=iwhite        " en mode 'diff', ignorer les espaces
+set nojoinspaces           " don't add extra whitespace when formatting
 " set encoding=utf8
-set nojoinspaces
 
 " Mappings
 " Ouvrir le Buffer explorer avec la touche F12

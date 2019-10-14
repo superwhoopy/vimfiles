@@ -459,5 +459,3 @@ autocmd! User GoyoLeave nested call <SID>goyo_leave()
 " let g:ale_set_loclist = 0
 " let g:ale_set_quickfix = 1
 
-" Ack stuff
-let g:ackprg = "${HOME}/local/bin/ack"

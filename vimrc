@@ -33,9 +33,9 @@ call vundle#begin()
 Plugin 'VundleVim/Vundle.Vim'
 
 Plugin 'davidhalter/jedi-vim'
-" Plugin 'fidian/hexmode'
+Plugin 'drmikehenry/vim-fontsize'
+Plugin 'editorconfig/editorconfig-vim'
 Plugin 'garbas/vim-snipmate'
-" Plugin 'jiangmiao/auto-pairs'
 Plugin 'jlanzarotta/bufexplorer'
 Plugin 'jmcantrell/vim-virtualenv'
 Plugin 'junegunn/goyo.vim'
@@ -45,15 +45,9 @@ Plugin 'kien/ctrlp.vim'
 Plugin 'krono-safe/vim-asterios'
 Plugin 'Lokaltog/vim-easymotion'
 Plugin 'MarcWeber/vim-addon-mw-utils'
-" Plugin 'martinda/Jenkinsfile-vim-syntax'
-
-
 Plugin 'mileszs/ack.vim'
 Plugin 'ntpeters/vim-better-whitespace'
-
 Plugin 'romainl/flattened' " Solarized without bullshit
-" Plugin 'Rykka/riv.vim'     " rST plugin
-" Plugin 'scrooloose/nerdcommenter'
 Plugin 'scrooloose/nerdtree'
 " Plugin 'scrooloose/syntastic'
 Plugin 'shime/vim-livedown'
@@ -68,7 +62,6 @@ Plugin 'vim-scripts/DrawIt'
 Plugin 'vim-scripts/Gundo'
 Plugin 'Vimjas/vim-python-pep8-indent'
 Plugin 'vimwiki/vimwiki'
-" Plugin 'Valloric/YouCompleteMe'
 Plugin 'w0rp/ale'
 
 call vundle#end()

@@ -84,7 +84,8 @@ set tabstop=2              " ...probably the same thing
 set expandtab              " use spaces, not tabs
 set autoindent             " auto-indentation
 set tw=80                  " default text width: 80 chars
-set colorcolumn=81
+set colorcolumn=81         " light up the 80-th column
+hi ColorColumn ctermbg=lightgrey guibg=lightgrey
 set wrap                   " Wrap if the line extends...
 set shm=A                  " do not prompt warning message if the file is
                            " already opened
@@ -380,7 +381,7 @@ nmap <Leader>wi <Plug>VimwikiDiaryIndex:VimwikiDiaryGenerateLinks<CR>
 let g:goyo_linenr = 1 "keep line numbering
 
 " airline stuff
-let g:airline_theme='solarized'
+let g:airline_theme='simple'
 " short ids for mode
 let g:airline_mode_map = {
       \ '__' : '-',

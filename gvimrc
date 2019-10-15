@@ -25,6 +25,8 @@ if !has('nvim')
 endif
 
 colorscheme flattened_dark
+let g:airline_theme='solarized'
+
 set go-=T                  " ne pas afficher la toolbar
 set go-=m                  " ne pas afficher la menubar
 set go-=r                  " do not show vertical bars

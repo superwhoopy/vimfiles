@@ -16,55 +16,45 @@
 "set compatible
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Vundle setup
-
-"Vundle bootstrap
-if !filereadable($HOME . '/.vim/bundle/Vundle.vim/.git/config') &&
-      \ confirm("Clone Vundle?","Y\nn") == 1
-    exec '!git clone https://github.com/gmarik/Vundle.vim $HOME/.vim/bundle/Vundle.vim/'
-endif
-
 set nocompatible
 filetype off
 set shell=/bin/bash
-set rtp+=$HOME/.vim/bundle/Vundle.vim
-call vundle#begin()
 
-Plugin 'VundleVim/Vundle.Vim'
+call plug#begin()
 
-Plugin 'davidhalter/jedi-vim'
-Plugin 'drmikehenry/vim-fontsize'
-Plugin 'editorconfig/editorconfig-vim'
-Plugin 'garbas/vim-snipmate'
-Plugin 'jlanzarotta/bufexplorer'
-Plugin 'jmcantrell/vim-virtualenv'
-Plugin 'junegunn/goyo.vim'
-Plugin 'junegunn/vim-easy-align'
-Plugin 'justinmk/vim-syntax-extra'
-Plugin 'kien/ctrlp.vim'
-Plugin 'krono-safe/vim-asterios'
-Plugin 'Lokaltog/vim-easymotion'
-Plugin 'MarcWeber/vim-addon-mw-utils'
-Plugin 'mileszs/ack.vim'
-Plugin 'ntpeters/vim-better-whitespace'
-Plugin 'romainl/flattened' " Solarized without bullshit
-Plugin 'scrooloose/nerdtree'
+Plug 'davidhalter/jedi-vim'
+Plug 'drmikehenry/vim-fontsize'
+Plug 'editorconfig/editorconfig-vim'
+Plug 'garbas/vim-snipmate'
+Plug 'jlanzarotta/bufexplorer'
+Plug 'jmcantrell/vim-virtualenv'
+Plug 'junegunn/goyo.vim'
+Plug 'junegunn/vim-easy-align'
+Plug 'justinmk/vim-syntax-extra'
+Plug 'kien/ctrlp.vim'
+Plug 'krono-safe/vim-asterios'
+Plug 'Lokaltog/vim-easymotion'
+Plug 'MarcWeber/vim-addon-mw-utils'
+Plug 'mileszs/ack.vim'
+Plug 'ntpeters/vim-better-whitespace'
+Plug 'romainl/flattened' " Solarized without bullshit
+Plug 'scrooloose/nerdtree'
 " Plugin 'scrooloose/syntastic'
-Plugin 'shime/vim-livedown'
-Plugin 'tmhedberg/SimpylFold' " better Python folding
-Plugin 'tomtom/tlib_vim'
-Plugin 'tpope/vim-fugitive'
-Plugin 'tpope/vim-surround'
-Plugin 'vim-airline/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
-Plugin 'vim-latex/vim-latex'
-Plugin 'vim-scripts/DrawIt'
-Plugin 'vim-scripts/Gundo'
-Plugin 'Vimjas/vim-python-pep8-indent'
-Plugin 'vimwiki/vimwiki'
-Plugin 'w0rp/ale'
+Plug 'shime/vim-livedown'
+Plug 'tmhedberg/SimpylFold' " better Python folding
+Plug 'tomtom/tlib_vim'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-surround'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'vim-latex/vim-latex'
+Plug 'vim-scripts/DrawIt'
+Plug 'vim-scripts/Gundo'
+Plug 'Vimjas/vim-python-pep8-indent'
+Plug 'vimwiki/vimwiki'
+Plug 'w0rp/ale'
 
-call vundle#end()
+call plug#end()
 filetype plugin indent on
 " """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 

@@ -16,72 +16,55 @@
 "set compatible
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Vundle setup
-
-"Vundle bootstrap
-if !filereadable($HOME . '/vimfiles/bundle/Vundle.vim/.git/config') &&
-      \ confirm("Clone Vundle?","Y\nn") == 1
-    exec '!git clone https://github.com/gmarik/Vundle.vim $HOME/vimfiles/bundle/Vundle.vim/'
-endif
-
 set nocompatible
 filetype off
+
 set rtp+=$HOME/vimfiles/bundle/Vundle.vim
-call vundle#begin()
 
-Plugin 'VundleVim/Vundle.Vim'
+call plug#begin()
 
-Plugin 'davidhalter/jedi-vim'
-" Plugin 'fidian/hexmode'
-Plugin 'garbas/vim-snipmate'
-Plugin 'hiphish/jinja.vim'
-" Plugin 'jiangmiao/auto-pairs'
-Plugin 'jlanzarotta/bufexplorer'
-Plugin 'jmcantrell/vim-virtualenv'
-Plugin 'junegunn/goyo.vim'
-Plugin 'junegunn/vim-easy-align'
-Plugin 'justinmk/vim-syntax-extra'
-Plugin 'kien/ctrlp.vim'
-Plugin 'kkoenig/wimproved.vim'
-Plugin 'krono-safe/vim-asterios'
-Plugin 'Lokaltog/vim-easymotion'
-Plugin 'MarcWeber/vim-addon-mw-utils'
-Plugin 'mileszs/ack.vim'
-Plugin 'ntpeters/vim-better-whitespace'
-Plugin 'romainl/flattened' " Solarized without bullshit
-" Plugin 'Rykka/riv.vim'     " rST plugin
-" Plugin 'Rykka/InstantRst'
-" Plugin 'scrooloose/nerdcommenter'
-" Plugin 'scrooloose/syntastic'
-Plugin 'shime/vim-livedown'
-Plugin 'tmhedberg/SimpylFold' " better Python folding
-Plugin 'tomtom/tlib_vim'
-Plugin 'tpope/vim-fugitive'
-Plugin 'tpope/vim-surround'
-Plugin 'vim-airline/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
-Plugin 'vim-latex/vim-latex'
-Plugin 'vim-python/python-syntax'
-Plugin 'vim-scripts/DrawIt'
-Plugin 'vim-scripts/Gundo'
-Plugin 'Vimjas/vim-python-pep8-indent'
-Plugin 'vimwiki/vimwiki'
-" Plugin 'Valloric/YouCompleteMe'
-Plugin 'w0rp/ale'
-Plugin 'scrooloose/nerdtree'
-Plugin 'ssh://git@dev.ks.int:7999/prot/vim-ks.git'
+Plug 'davidhalter/jedi-vim'
+Plug 'garbas/vim-snipmate'
+Plug 'hiphish/jinja.vim'
+Plug 'jlanzarotta/bufexplorer'
+Plug 'jmcantrell/vim-virtualenv'
+Plug 'junegunn/goyo.vim'
+Plug 'junegunn/vim-easy-align'
+Plug 'justinmk/vim-syntax-extra'
+Plug 'kien/ctrlp.vim'
+Plug 'kkoenig/wimproved.vim'
+Plug 'krono-safe/vim-asterios'
+Plug 'Lokaltog/vim-easymotion'
+Plug 'MarcWeber/vim-addon-mw-utils'
+Plug 'mileszs/ack.vim'
+Plug 'ntpeters/vim-better-whitespace'
+Plug 'romainl/flattened' " Solarized without bullshit
+Plug 'shime/vim-livedown'
+Plug 'tmhedberg/SimpylFold' " better Python folding
+Plug 'tomtom/tlib_vim'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-surround'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'vim-latex/vim-latex'
+Plug 'vim-python/python-syntax'
+Plug 'vim-scripts/DrawIt'
+Plug 'vim-scripts/Gundo'
+Plug 'Vimjas/vim-python-pep8-indent'
+Plug 'vimwiki/vimwiki'
+Plug 'w0rp/ale'
+Plug 'scrooloose/nerdtree'
 
-call vundle#end()
+call plug#end()
 filetype plugin indent on
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " Vim5 and later versions support syntax highlighting. Uncommenting the next
 " line enables syntax highlighting by default.
 syntax on
 set bg=dark
 
-set grepprg=c:/cygwin/bin/grep.exe\ -IRn\ --exclude-dir=\\.git\ --exclude=tags\ --exclude-dir=\\.env\ $*
-
+set grepprg=/bin/grep\ -Irn\ --exclude-dir=\\.git\ --exclude=tags\ $*
 " Vim options
 set hlsearch               " highlight search result
 set ic                     " ignore case
@@ -92,7 +75,8 @@ set tabstop=2              " ...probably the same thing
 set expandtab              " use spaces, not tabs
 set autoindent             " auto-indentation
 set tw=80                  " default text width: 80 chars
-set colorcolumn=81
+set colorcolumn=81         " light up the 80-th column
+hi ColorColumn ctermbg=lightgrey guibg=lightgrey
 set wrap                   " Wrap if the line extends...
 set shm=A                  " do not prompt warning message if the file is
                            " already opened
@@ -106,7 +90,7 @@ set foldmethod=indent      " Folding base sur l'indentation
 set foldlevelstart=100    " deplier tous les folds jusqu'au nv. 100
 set diffopt+=iwhite        " en mode 'diff', ignorer les espaces
 set encoding=utf-8
-set nojoinspaces           " prevent double spaces insertion after autowrap
+set nojoinspaces           " don't add extra whitespace when formatting
 
 " Windows dark magic to make the backspace key work properly...
 set backspace=2
@@ -174,7 +158,7 @@ command! Cd              cd\ %:p:h
 nmap <A-d>  :if &diff<CR>diffoff<CR>set nocrb<CR>else<CR>diffthis<CR>endif<CR><CR>
 
 " Invoke adequate plugins according to the filetype
-filetype on
+filetype off
 filetype plugin indent on
 
 " Omnicpp stuff
@@ -182,12 +166,9 @@ filetype plugin indent on
 " let OmniCpp_ShowPrototypeInAbbr = 1
 " set completeopt=menu
 
-" Windows TMP directory handling
-set directory+=/tmp,$TMP,$TEMP
-
 " visual autocomplete for command menu
 set wildmenu
-set wildignore+=*\\.git\\*,*.o,*.obj,*.lib,*.a,*.pyc,*\\__pycache__\\*
+set wildignore=*/.git/*,*.o,*.obj,*.lib,*.a,*.pyc,*/__pycache__/*
 
 " Leader key is ','
 :let mapleader=","
@@ -235,14 +216,14 @@ nnoremap <A-j> :wincmd j<CR>
 nnoremap <A-h> :wincmd h<CR>
 
 " Line under cursor highlighting
-augroup BgHighlight
-    autocmd!
-    autocmd WinEnter * set cul
-    autocmd WinLeave * set nocul
-    autocmd FocusGained * set cul
-    autocmd FocusLost   * set nocul
-augroup END
-"
+" augroup BgHighlight
+"     autocmd!
+"     autocmd WinEnter * set cul
+"     autocmd WinLeave * set nocul
+"     autocmd FocusGained * set cul
+"     autocmd FocusLost   * set nocul
+" augroup END
+
 " Status line configuration
 " set statusline+=%#warningmsg#
 " set statusline+=%{SyntasticStatuslineFlag()}
@@ -252,7 +233,7 @@ augroup END
 set clipboard=unnamed
 
 " Quickly edit vimrc
-nmap <F8> :e ~/vimfiles/vimrc<CR>
+nmap <F8> :e ~/.vim/vimrc<CR>
 
 
 "###############################################################################
@@ -264,9 +245,6 @@ nmap <F8> :e ~/vimfiles/vimrc<CR>
 if has('python3')
   let g:gundo_prefer_python3 = 1
 endif
-
-" old stuff?
-let g:tex_flavor="latex"
 
 " Taglists (:TlistToggle)
 let Tlist_Use_Right_Window = 1
@@ -302,6 +280,8 @@ let g:syntastic_python_pylint_args='--rcfile=~/.pylintrc'
 let g:syntastic_cpp_check_header=1
 " default c++ compiler
 let g:syntastic_cpp_compiler='gcc'
+let g:syntastic_python_python_exe = 'python3'
+let g:syntastic_python_pylint_exe = 'pylint3'
 " update the errors window upon saving
 let g:syntastic_always_populate_loc_list=1
 " default python checker
@@ -376,7 +356,7 @@ let g:vimwiki_list = [
   \    'auto_toc'                  : 1,
   \    'auto_tags'                 : 0,
   \    'diary_sort'                : 'desc',
-  \    'path'                      : 'E:/vimwiki/',
+  \    'path'                      : '~/vimwiki/',
   \    'diary_link_fmt'            : '%Y-%m-%d',
   \    'template_ext'              : '.tpl',
   \    'syntax'                    : 'default',
@@ -385,9 +365,9 @@ let g:vimwiki_list = [
   \    'index'                     : 'index',
   \    'diary_header'              : 'Diary',
   \    'ext'                       : '.wiki',
-  \    'path_html'                 : 'C:/Users/eohayon/vimwiki_html/',
+  \    'path_html'                 : '~/vimwiki_html/',
   \    'temp'                      : 0,
-  \    'template_path'             : 'C:/Users/eohayon/vimwiki/templates/',
+  \    'template_path'             : '~/vimwiki/templates/',
   \    'list_margin'               : -1,
   \    'diary_rel_path'            : 'diary/'
   \    }]
@@ -397,11 +377,8 @@ nmap <Leader>wi <Plug>VimwikiDiaryIndex:VimwikiDiaryGenerateLinks<CR>
 " goyo stuff
 let g:goyo_linenr = 1 "keep line numbering
 
-" fugitive stuff
-let g:fugitive_git_executable='"C:/Program Files/Git/cmd/git.exe"'
-
 " airline stuff
-let g:airline_theme='solarized'
+let g:airline_theme='simple'
 " short ids for mode
 let g:airline_mode_map = {
       \ '__' : '-',
@@ -425,28 +402,15 @@ let g:airline#extensions#default#section_truncate_width = {
     \ 'warning': 80,
     \ 'error': 80,
     \ }
+
+" use powerline fonts
+let g:airline_powerline_fonts = 1
+
 " show git diff hunks count only if nonzero
 let g:airline#extensions#hunks#non_zero_only = 1
 
 " enable YouCompleteMe status
 let g:airline#extensions#ycm#enabled = 1
-
-
-" The following is for nice looking powerline symbols, but it does not seem to
-" work in Windows
-
-" let g:airline_powerline_fonts=1
-" set guifont=Consolas_for_Powerline_FixedD:h8:cANSI:qDRAFT
-" if !exists('g:airline_symbols')
-"   let g:airline_symbols = {}
-" endif
-" let g:airline_left_sep = ''
-" let g:airline_left_alt_sep = ''
-" let g:airline_right_sep = ''
-" let g:airline_right_alt_sep = ''
-" let g:airline_symbols.branch = ''
-" let g:airline_symbols.readonly = ''
-" let g:airline_symbols.linenr = ''
 
 " enable ALE status
 let g:airline#extensions#ale#enabled = 1
@@ -479,12 +443,10 @@ let g:virtualenv_directory = '.'
 " Callbacks when entering/leaving goyo
 function! s:goyo_enter()
   set nonumber
-  set guifont=Consolas:h11:cANSI:qDRAFT
 endfunction
 
 function! s:goyo_leave()
   set number
-  set guifont=Consolas:h8:cANSI:qDRAFT
 endfunction
 
 autocmd! User GoyoEnter nested call <SID>goyo_enter()
@@ -493,3 +455,4 @@ autocmd! User GoyoLeave nested call <SID>goyo_leave()
 " ALE stuff
 " let g:ale_set_loclist = 0
 " let g:ale_set_quickfix = 1
+

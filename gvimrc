@@ -25,10 +25,6 @@ else
   Guifont Consolas:h8:cANSI;qDRAFT
 endif
 
-" colors morning
-" colors desert
-" colorscheme solarized
-
 if strftime("%H") < 12 || strftime("%H") >= 17
   colorscheme flattened_dark
 else
@@ -37,9 +33,13 @@ endif
 
 set go-=T                  " ne pas afficher la toolbar
 set go-=m                  " ne pas afficher la menubar
+set go-=r                  " do not show vertical bars
+set go-=R
+set go-=l
+set go-=L
 set lines=60 columns=85   " taille de la fenêtre au démarrage
 
-nmap <F11> :WToggleFullscreen<CR>
+set lazyredraw
 
 hi ExtraWhitespace guibg=red ctermbg=red
 

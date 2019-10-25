@@ -20,7 +20,7 @@
 " endif
 
 if !has('nvim')
-  set guifont=Consolas:h8:cANSI:qDRAFT
+  set guifont=Consolas_NF:h8:cANSI:qDRAFT
 else
   Guifont Consolas:h8:cANSI;qDRAFT
 endif
@@ -30,6 +30,9 @@ if strftime("%H") < 12 || strftime("%H") >= 17
 else
   colorscheme flattened_light
 endif
+
+:AirlineTheme solarized
+let g:airline_solarized_bg='dark'
 
 set go-=T                  " ne pas afficher la toolbar
 set go-=m                  " ne pas afficher la menubar

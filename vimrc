@@ -19,8 +19,6 @@
 set nocompatible
 filetype off
 
-set rtp+=$HOME/vimfiles/bundle/Vundle.vim
-
 call plug#begin()
 
 Plug 'davidhalter/jedi-vim'
@@ -78,7 +76,7 @@ set tw=80                  " default text width: 80 chars
 set colorcolumn=81         " light up the 80-th column
 hi ColorColumn ctermbg=lightgrey guibg=lightgrey
 set wrap                   " Wrap if the line extends...
-set shm=A                  " do not prompt warning message if the file is
+set shm=Aa                 " do not prompt warning message if the file is
                            " already opened
 set autoread               " re-read the file if it is modified externally
 " set foldcolumn=1           " colonne de gauche pour indiquer les zones
@@ -99,6 +97,7 @@ set noshellslash
 if !has('nvim')
   " Python DLL to look for on Windows
   set pythonthreedll=python36.dll
+  set pythonthreehome="C:\Program Files\Python36"
 endif
 
 " Mappings

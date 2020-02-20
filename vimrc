@@ -19,9 +19,12 @@
 set nocompatible
 filetype off
 
+
 call plug#begin()
 
 Plug 'davidhalter/jedi-vim'
+Plug 'drmikehenry/vim-fontsize'
+Plug 'editorconfig/editorconfig-vim'
 Plug 'garbas/vim-snipmate'
 Plug 'hiphish/jinja.vim'
 Plug 'jlanzarotta/bufexplorer'
@@ -30,13 +33,13 @@ Plug 'junegunn/goyo.vim'
 Plug 'junegunn/vim-easy-align'
 Plug 'justinmk/vim-syntax-extra'
 Plug 'kien/ctrlp.vim'
-Plug 'kkoenig/wimproved.vim'
 Plug 'krono-safe/vim-asterios'
 Plug 'Lokaltog/vim-easymotion'
 Plug 'MarcWeber/vim-addon-mw-utils'
 Plug 'mileszs/ack.vim'
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'romainl/flattened' " Solarized without bullshit
+Plug 'scrooloose/nerdtree'
 Plug 'shime/vim-livedown'
 Plug 'tmhedberg/SimpylFold' " better Python folding
 Plug 'tomtom/tlib_vim'
@@ -51,7 +54,10 @@ Plug 'vim-scripts/Gundo'
 Plug 'Vimjas/vim-python-pep8-indent'
 Plug 'vimwiki/vimwiki'
 Plug 'w0rp/ale'
-Plug 'scrooloose/nerdtree'
+
+if has('win32')
+  Plug 'kkoenig/wimproved.vim'
+endif
 
 call plug#end()
 filetype plugin indent on
@@ -90,14 +96,19 @@ set diffopt+=iwhite        " en mode 'diff', ignorer les espaces
 set encoding=utf-8
 set nojoinspaces           " don't add extra whitespace when formatting
 
-" Windows dark magic to make the backspace key work properly...
-set backspace=2
-set noshellslash
 
-if !has('nvim')
-  " Python DLL to look for on Windows
-  set pythonthreedll=python36.dll
-  set pythonthreehome="C:\Program Files\Python36"
+if has('win32')
+  " Windows dark magic to make the backspace key work properly...
+  set backspace=2
+  set noshellslash
+
+  if !has('nvim')
+    " Python DLL to look for on Windows
+    set pythonthreedll=python36.dll
+    set pythonthreehome="C:\Program Files\Python36"
+  endif
+else
+  set shell=/bin/bash
 endif
 
 " Mappings
@@ -417,8 +428,10 @@ let g:airline#extensions#ale#enabled = 1
 " enable Python highlighting plugin
 let g:python_highlight_all = 1
 
-" Windows full-screen stuff
-autocmd GUIEnter * silent! WToggleClean
+if has('win32')
+  " Windows full-screen stuff
+  autocmd GUIEnter * silent! WToggleClean
+endif
 
 " EasyAlign stuff
 " Start interactive EasyAlign in visual mode (e.g. vipga)

@@ -13,24 +13,22 @@
 " http://www.cs.cmu.edu/~maverick/VimColorSchemeTest/ has examples and
 " downloads for the colorschemes on vim.org
 
-" Source a global configuration file if available
-" XXX Deprecated, please move your changes here in /etc/vim/gvimrc
-" if filereadable("/etc/vim/gvimrc.local")
-"   source /etc/vim/gvimrc.local
-" endif
 
-if !has('nvim')
-  set guifont=Consolas_NF:h8:cANSI:qDRAFT
-else
-  Guifont Consolas:h8:cANSI;qDRAFT
+if has('win32')
+  if has('nvim')
+    Guifont Inconsolata For Powerline:h12
+  else
+    set guifont=Consolas_NF:h8:cANSI:qDRAFT
+  endif
+else " Unix
+  if has('nvim')
+    Guifont Inconsolata For Powerline:h12
+  else
+    set guifont=Source\ Code\ Pro\ For\ Powerline\ Medium\ 8
+  endif
 endif
 
-if strftime("%H") < 12 || strftime("%H") >= 17
-  colorscheme flattened_dark
-else
-  colorscheme flattened_light
-endif
-
+colorscheme flattened_dark
 :AirlineTheme solarized
 let g:airline_solarized_bg='dark'
 

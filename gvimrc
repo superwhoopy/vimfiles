@@ -16,13 +16,13 @@
 
 if has('win32')
   if has('nvim')
-    Guifont Inconsolata For Powerline:h12
+    Guifont Inconsolata For Powerline:h10
   else
     set guifont=Consolas_NF:h8:cANSI:qDRAFT
   endif
 else " Unix
   if has('nvim')
-    Guifont Inconsolata For Powerline:h12
+    Guifont Inconsolata For Powerline:h10
   else
     set guifont=Source\ Code\ Pro\ For\ Powerline\ Medium\ 8
   endif

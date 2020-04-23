@@ -49,3 +49,6 @@ TCFG
 Redistributable
 PyInstaller
 NSIS
+GPIO
+EEPROM
+linting

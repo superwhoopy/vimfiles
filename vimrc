@@ -27,6 +27,7 @@ Plug 'drmikehenry/vim-fontsize'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'garbas/vim-snipmate'
 Plug 'hiphish/jinja.vim'
+Plug 'hjson/vim-hjson'
 Plug 'jlanzarotta/bufexplorer'
 Plug 'jmcantrell/vim-virtualenv'
 Plug 'junegunn/goyo.vim'
@@ -68,7 +69,6 @@ filetype plugin indent on
 syntax on
 set bg=dark
 
-set grepprg=/bin/grep\ -Irn\ --exclude-dir=\\.git\ --exclude=tags\ $*
 " Vim options
 set hlsearch               " highlight search result
 set ic                     " ignore case

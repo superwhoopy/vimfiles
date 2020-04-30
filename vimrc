@@ -38,6 +38,7 @@ Plug 'krono-safe/vim-asterios'
 Plug 'Lokaltog/vim-easymotion'
 Plug 'MarcWeber/vim-addon-mw-utils'
 Plug 'mileszs/ack.vim'
+Plug 'ngg/vim-gn'
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'romainl/flattened' " Solarized without bullshit
 Plug 'scrooloose/nerdtree'

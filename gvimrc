@@ -16,7 +16,7 @@
 
 if has('win32')
   if has('nvim')
-    Guifont Inconsolata For Powerline:h9
+    Guifont Consolas NF:h10
   else
     set guifont=Consolas_NF:h8:cANSI:qDRAFT
   endif

@@ -27,6 +27,7 @@ Plug 'drmikehenry/vim-fontsize'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'garbas/vim-snipmate'
 Plug 'hiphish/jinja.vim'
+Plug 'hjson/vim-hjson'
 Plug 'jlanzarotta/bufexplorer'
 Plug 'jmcantrell/vim-virtualenv'
 Plug 'junegunn/goyo.vim'
@@ -37,6 +38,7 @@ Plug 'krono-safe/vim-asterios'
 Plug 'Lokaltog/vim-easymotion'
 Plug 'MarcWeber/vim-addon-mw-utils'
 Plug 'mileszs/ack.vim'
+Plug 'ngg/vim-gn'
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'romainl/flattened' " Solarized without bullshit
 Plug 'scrooloose/nerdtree'
@@ -68,7 +70,6 @@ filetype plugin indent on
 syntax on
 set bg=dark
 
-set grepprg=/bin/grep\ -Irn\ --exclude-dir=\\.git\ --exclude=tags\ $*
 " Vim options
 set hlsearch               " highlight search result
 set ic                     " ignore case

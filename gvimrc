@@ -22,7 +22,7 @@ if has('win32')
   endif
 else " Unix
   if has('nvim')
-    Guifont Inconsolata For Powerline:h10
+    Guifont Inconsolata For Powerline:h9
   else
     set guifont=Source\ Code\ Pro\ For\ Powerline\ Medium\ 8
   endif

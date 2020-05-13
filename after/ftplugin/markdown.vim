@@ -1,3 +1,3 @@
+set spell
 set tw=80
-set linebreak
-set makeprg=markdown\ %\ >\ %.html
+let g:markdown_fenced_languages = ['cpp', 'python', 'json', 'sh']

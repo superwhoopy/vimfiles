@@ -22,7 +22,9 @@ filetype off
 
 call plug#begin()
 
+Plug 'cespare/vim-toml'
 Plug 'davidhalter/jedi-vim'
+Plug 'dhruvasagar/vim-table-mode'
 Plug 'drmikehenry/vim-fontsize'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'garbas/vim-snipmate'
@@ -30,14 +32,15 @@ Plug 'hiphish/jinja.vim'
 Plug 'hjson/vim-hjson'
 Plug 'jlanzarotta/bufexplorer'
 Plug 'jmcantrell/vim-virtualenv'
+Plug 'jremmen/vim-ripgrep'
 Plug 'junegunn/goyo.vim'
 Plug 'junegunn/vim-easy-align'
 Plug 'justinmk/vim-syntax-extra'
 Plug 'kien/ctrlp.vim'
 Plug 'krono-safe/vim-asterios'
 Plug 'Lokaltog/vim-easymotion'
+Plug 'm42e/trace32-practice.vim'
 Plug 'MarcWeber/vim-addon-mw-utils'
-Plug 'mileszs/ack.vim'
 Plug 'ngg/vim-gn'
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'romainl/flattened' " Solarized without bullshit
@@ -56,6 +59,7 @@ Plug 'vim-scripts/Gundo'
 Plug 'Vimjas/vim-python-pep8-indent'
 Plug 'vimwiki/vimwiki'
 Plug 'w0rp/ale'
+Plug 'zchee/vim-flatbuffers'
 
 if has('win32')
   Plug 'kkoenig/wimproved.vim'
@@ -83,8 +87,9 @@ set tw=80                  " default text width: 80 chars
 set colorcolumn=81         " light up the 80-th column
 hi ColorColumn ctermbg=lightgrey guibg=lightgrey
 set wrap                   " Wrap if the line extends...
-set shm=Aa                 " do not prompt warning message if the file is
-                           " already opened
+set shm=Aat                " short messages: do not prompt warning message if
+                           " the file is already opened, and truncate "open
+                           " file" messages
 set autoread               " re-read the file if it is modified externally
 " set foldcolumn=1           " colonne de gauche pour indiquer les zones
                            " \"foldables\"
@@ -226,15 +231,6 @@ nnoremap <A-k> :wincmd k<CR>
 nnoremap <A-j> :wincmd j<CR>
 nnoremap <A-h> :wincmd h<CR>
 
-" Line under cursor highlighting
-" augroup BgHighlight
-"     autocmd!
-"     autocmd WinEnter * set cul
-"     autocmd WinLeave * set nocul
-"     autocmd FocusGained * set cul
-"     autocmd FocusLost   * set nocul
-" augroup END
-
 " Status line configuration
 " set statusline+=%#warningmsg#
 " set statusline+=%{SyntasticStatuslineFlag()}
@@ -246,6 +242,12 @@ set clipboard=unnamed
 " Quickly edit vimrc
 nmap <F8> :e ~/.vim/vimrc<CR>
 
+"###############################################################################
+" Auto-commands and filetype-specific stuff
+"###############################################################################
+
+autocmd FileType markdown setlocal spell
+autocmd FileType rst setlocal spell
 
 "###############################################################################
 " Plugins-related stuff
@@ -265,43 +267,10 @@ let Tlist_Show_One_File = 1
 let NERDTreeIgnore=['\.vim$', '\~$', '\.o$', '\.a$', '\.gcno$', '__pycache__',
   \ '\.pyc$', '\.egg-info$']
 
-" DOXYGENTOOLKIT
-let g:DoxygenToolkit_briefTag_pre         = ""
-let g:DoxygenToolkit_templateParamTag_pre = "\\tparam "
-let g:DoxygenToolkit_paramTag_pre         = "\\param "
-let g:DoxygenToolkit_returnTag            = "\\return "
-let g:DoxygenToolkit_throwTag_pre         = "\\throw "
-let g:DoxygenToolkit_fileTag              = "\\file "
-let g:DoxygenToolkit_authorTag            = "\\author "
-let g:DoxygenToolkit_dateTag              = "\\date "
-let g:DoxygenToolkit_versionTag           = "\\version "
-let g:DoxygenToolkit_blockTag             = "\\name "
-let g:DoxygenToolkit_classTag             = "\\class "
-let g:DoxygenToolkit_startCommentTag      = "/*! "
-let g:DoxygenToolkit_startCommentBlock    = "/* "
-let g:DoxygenToolkit_compactDoc           = "yes"
-
 " CtrlP
+" default is 'ra', which causes madness when using git submodules
+let g:ctrlp_working_path_mode = 'a'
 let g:ctrlp_custom_ignore= '\v[\/]\.o$\|\v[\/]\.obj$\|\v[\/]\.pyc$\|\v[\/]\.sbr$'
-
-" SYNTASTIC OPTIONS
-" python checker rc file
-let g:syntastic_python_pylint_args='--rcfile=~/.pylintrc'
-" enable C header checking
-let g:syntastic_cpp_check_header=1
-" default c++ compiler
-let g:syntastic_cpp_compiler='gcc'
-let g:syntastic_python_python_exe = 'python3'
-let g:syntastic_python_pylint_exe = 'pylint3'
-" update the errors window upon saving
-let g:syntastic_always_populate_loc_list=1
-" default python checker
-let g:syntastic_python_checkers=['pylint']
-" Uncomment the following line to disable syntastic check upon saving
-" let g:syntastic_mode_map = { "mode": "passive" }
-let g:syntastic_rst_checkers=[]
-" Error message displayed in the status line
-let syntastic_stl_format="%W{Wrn: }%w%E{| Err: }%e"
 
 " YOUCOMPLETEME STUFF
 " disable auto-completion, need to hit <C-Space> to enable it
@@ -342,13 +311,6 @@ nmap <F10>  :StripWhitespace<CR>
 let g:strip_whitespace_on_save = 1
 let g:strip_whitespace_confirm = 0
 
-" Tabularize plugin shortcuts
-vmap <Leader>= :Tabularize /=<CR>
-vmap <Leader>\ :Tabularize /\<CR>
-vmap <Leader>, :Tabularize /,<CR>
-vmap <Leader>; :Tabularize /;<CR>
-vmap <Leader>: :Tabularize /:<CR>
-
 " Surround plugin shortcuts: use 's' (lower-case) rather than 'S' in visual mode
 vmap s <Plug>VSurround
 
@@ -384,9 +346,6 @@ let g:vimwiki_list = [
   \    }]
 nmap <Leader>ww <Plug>VimwikiIndex:VimwikiGenerateTags<CR>
 nmap <Leader>wi <Plug>VimwikiDiaryIndex:VimwikiDiaryGenerateLinks<CR>
-
-" goyo stuff
-let g:goyo_linenr = 1 "keep line numbering
 
 " airline stuff
 let g:airline_theme='simple'
@@ -454,6 +413,8 @@ let g:AutoPairsShortcutJump = ''
 let g:virtualenv_directory = '.'
 
 " Callbacks when entering/leaving goyo
+let g:goyo_linenr = 1 "keep line numbering
+
 function! s:goyo_enter()
   set nonumber
 endfunction

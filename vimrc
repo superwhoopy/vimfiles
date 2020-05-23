@@ -246,8 +246,12 @@ nmap <F8> :e ~/.vim/vimrc<CR>
 " Auto-commands and filetype-specific stuff
 "###############################################################################
 
-autocmd FileType markdown setlocal spell
-autocmd FileType rst setlocal spell
+augroup vimrc_filetypes
+  autocmd!
+  autocmd FileType markdown setlocal spell
+  autocmd FileType rst setlocal spell
+  autocmd FileType vim setlocal tabstop=4 shiftwidth=4
+augroup END
 
 "###############################################################################
 " Plugins-related stuff

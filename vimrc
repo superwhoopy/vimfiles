@@ -16,7 +16,6 @@
 "set compatible
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-set nocompatible
 filetype off
 
 
@@ -72,22 +71,22 @@ filetype plugin indent on
 " Vim5 and later versions support syntax highlighting. Uncommenting the next
 " line enables syntax highlighting by default.
 syntax on
-set bg=dark
+set background=dark
 
 " Vim options
 set hlsearch               " highlight search result
-set ic                     " ignore case
+set ignorecase             " ignore case
 set incsearch              " incremental search
 set number                 " print line numbers
 set shiftwidth=2           " TAB equals 2 spaces
 set tabstop=2              " ...probably the same thing
 set expandtab              " use spaces, not tabs
 set autoindent             " auto-indentation
-set tw=80                  " default text width: 80 chars
+set textwidth=80           " default text width: 80 chars
 set colorcolumn=81         " light up the 80-th column
 hi ColorColumn ctermbg=lightgrey guibg=lightgrey
 set wrap                   " Wrap if the line extends...
-set shm=Aat                " short messages: do not prompt warning message if
+set shortmess=Aat          " short messages: do not prompt warning message if
                            " the file is already opened, and truncate "open
                            " file" messages
 set autoread               " re-read the file if it is modified externally
@@ -147,14 +146,14 @@ function! MkTags()
   let scripts = [ './build/mktags.sh', 'env/mktags.sh' ]
   for scriptfile in scripts
     if filereadable(scriptfile)
-      let message = "Running file " . scriptfile
+      let message = 'Running file ' . scriptfile
       echo message
       execute 'silent !bash ' . scriptfile
       silent !clear
       return
     endif
   endfor
-  echo "No tags building script file, running default"
+  echo 'No tags building script file, running default'
   exec '!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q --languages=c++,c .'
 endfunction
 
@@ -187,7 +186,7 @@ set wildmenu
 set wildignore=*/.git/*,*.o,*.obj,*.lib,*.a,*.pyc,*/__pycache__/*
 
 " Leader key is ','
-:let mapleader=","
+:let mapleader=','
 
 " Ack the word under the cursor, prompting a path
 nmap    <Leader>/   "gyiw:Ack <C-R>g
@@ -200,12 +199,12 @@ set previewheight=24
 
 " Toggle auto-format option with <Leader>fo
 function! ToggleAutoFormat()
-    if &fo =~'a'
-      set fo-=a
-      echom "Auto-Format disabled"
+    if &formatoptions =~ 'a'
+      set formatoptions-=a
+      echom 'Auto-Format disabled'
     else
-      set fo+=a
-      echom "Auto-Format enabled"
+      set formatoptions+=a
+      echom 'Auto-Format enabled'
     endif
 endfunction
 nmap <Leader>fo :call ToggleAutoFormat()<CR>

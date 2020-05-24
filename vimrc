@@ -36,7 +36,7 @@ Plug 'junegunn/goyo.vim'
 Plug 'junegunn/vim-easy-align'
 Plug 'justinmk/vim-syntax-extra'
 Plug 'kien/ctrlp.vim'
-Plug 'krono-safe/vim-asterios'
+Plug 'krono-safe/vim-asterios', {'branch': 'eoh/ale'}
 Plug 'Lokaltog/vim-easymotion'
 Plug 'm42e/trace32-practice.vim'
 Plug 'MarcWeber/vim-addon-mw-utils'
@@ -429,7 +429,12 @@ endfunction
 autocmd! User GoyoEnter nested call <SID>goyo_enter()
 autocmd! User GoyoLeave nested call <SID>goyo_leave()
 
-" ALE stuff
-" let g:ale_set_loclist = 0
-" let g:ale_set_quickfix = 1
+" vim-asterios stuff
+if has('unix')
+    let s:core_sdk = expand('~/workspace/core/out/Debug/sdk')
+    let g:ale_psy_psyko_executable = s:core_sdk . '/bin/psyko'
+    let g:ale_psy_psyko_kernel_dir = s:core_sdk . '/k2'
+else
+    " TODO
+endif
 

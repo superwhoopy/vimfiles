@@ -35,7 +35,7 @@ Plug 'jremmen/vim-ripgrep'
 Plug 'junegunn/goyo.vim'
 Plug 'junegunn/vim-easy-align'
 Plug 'justinmk/vim-syntax-extra'
-Plug 'kien/ctrlp.vim'
+Plug 'ctrlpvim/ctrlp.vim'
 Plug 'krono-safe/vim-asterios', {'branch': 'eoh/ale'}
 Plug 'Lokaltog/vim-easymotion'
 Plug 'm42e/trace32-practice.vim'
@@ -43,7 +43,7 @@ Plug 'MarcWeber/vim-addon-mw-utils'
 Plug 'ngg/vim-gn'
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'romainl/flattened' " Solarized without bullshit
-Plug 'scrooloose/nerdtree'
+Plug 'preservim/nerdtree'
 Plug 'shime/vim-livedown'
 Plug 'tmhedberg/SimpylFold' " better Python folding
 Plug 'tomtom/tlib_vim'
@@ -59,6 +59,9 @@ Plug 'Vimjas/vim-python-pep8-indent'
 Plug 'vimwiki/vimwiki'
 Plug 'w0rp/ale'
 Plug 'zchee/vim-flatbuffers'
+
+Plug 'ryanoasis/vim-devicons'
+Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 
 if has('win32')
   Plug 'kkoenig/wimproved.vim'
@@ -434,7 +437,43 @@ if has('unix')
     let s:core_sdk = expand('~/workspace/core/out/Debug/sdk')
     let g:ale_psy_psyko_executable = s:core_sdk . '/bin/psyko'
     let g:ale_psy_psyko_kernel_dir = s:core_sdk . '/k2'
-else
-    " TODO
+elseif has('win32')
+    let s:ks_root = expand('F:\Programs\Krono-Safe')
+    let g:ale_psy_psyko_executable = s:ks_root . '\psyko-8.10.2\bin\psyko.exe'
+    let g:ale_psy_psyko_kernel_dir = s:ks_root . '\ksim-8.10.2'
 endif
 
+" NERDTree stuff
+let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols = {} " needed
+let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['psy'] = 'Ψ'
+
+let g:NERDTreeFileExtensionHighlightFullName = 1
+let g:NERDTreeExactMatchHighlightFullName = 1
+let g:NERDTreePatternMatchHighlightFullName = 1
+let g:NERDTreeHighlightFolders = 1 " enables folder icon highlighting using exact match
+let g:NERDTreeHighlightFoldersFullName = 1 " highlights the folder name
+"
+" NERDTrees File highlighting
+" function! NERDTreeHighlightFile(extension, fg, bg, guifg, guibg)
+"  exec 'autocmd FileType nerdtree highlight ' . a:extension .' ctermbg='. a:bg .' ctermfg='. a:fg .' guibg='. a:guibg .' guifg='. a:guifg
+"  exec 'autocmd FileType nerdtree syn match ' . a:extension .' #^\s\+.*'. a:extension .'$#'
+" endfunction
+"
+" call NERDTreeHighlightFile('jade', 'green', 'none', 'green', '#151515')
+" call NERDTreeHighlightFile('ini', 'yellow', 'none', 'yellow', '#151515')
+" call NERDTreeHighlightFile('md', 'blue', 'none', '#3366FF', '#151515')
+" call NERDTreeHighlightFile('yml', 'yellow', 'none', 'yellow', '#151515')
+" call NERDTreeHighlightFile('config', 'yellow', 'none', 'yellow', '#151515')
+" call NERDTreeHighlightFile('conf', 'yellow', 'none', 'yellow', '#151515')
+" call NERDTreeHighlightFile('json', 'yellow', 'none', 'yellow', '#151515')
+" call NERDTreeHighlightFile('html', 'yellow', 'none', 'yellow', '#151515')
+" call NERDTreeHighlightFile('styl', 'cyan', 'none', 'cyan', '#151515')
+" call NERDTreeHighlightFile('css', 'cyan', 'none', 'cyan', '#151515')
+" call NERDTreeHighlightFile('coffee', 'Red', 'none', 'red', '#151515')
+" call NERDTreeHighlightFile('js', 'Red', 'none', '#ffa500', '#151515')
+" call NERDTreeHighlightFile('php', 'Magenta', 'none', '#ff00ff', '#151515')
+" call NERDTreeHighlightFile('ds_store', 'Gray', 'none', '#686868', '#151515')
+" call NERDTreeHighlightFile('gitconfig', 'Gray', 'none', '#686868', '#151515')
+" call NERDTreeHighlightFile('gitignore', 'Gray', 'none', '#686868', '#151515')
+" call NERDTreeHighlightFile('bashrc', 'Gray', 'none', '#686868', '#151515')
+" call NERDTreeHighlightFile('bashprofile', 'Gray', 'none', '#686868', '#151515')

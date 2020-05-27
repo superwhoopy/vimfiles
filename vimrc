@@ -437,10 +437,14 @@ if has('unix')
     let s:core_sdk = expand('~/workspace/core/out/Debug/sdk')
     let g:ale_psy_psyko_executable = s:core_sdk . '/bin/psyko'
     let g:ale_psy_psyko_kernel_dir = s:core_sdk . '/k2'
+    let g:ale_psy_psyko_jsonconf =
+        \ [expand('~/.vim/plugged/vim-asterios/tests/psy/flags.psymodule.json')]
 elseif has('win32')
     let s:ks_root = expand('F:\Programs\Krono-Safe')
     let g:ale_psy_psyko_executable = s:ks_root . '\psyko-8.10.2\bin\psyko.exe'
     let g:ale_psy_psyko_kernel_dir = s:ks_root . '\ksim-8.10.2'
+    let g:ale_psy_psyko_jsonconf =
+        \ [expand('~/.vim/plugged/vim-asterios/tests/psy/flags.psymodule.json')]
 endif
 
 " NERDTree stuff

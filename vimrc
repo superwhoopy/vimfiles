@@ -1,6 +1,5 @@
 set encoding=utf-8
 scriptencoding utf8
-filetype off
 
 let g:ale_completion_enabled = 1
 
@@ -57,13 +56,10 @@ endif
 
 call plug#end()
 
-filetype plugin indent on
-
 " """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " Vim5 and later versions support syntax highlighting. Uncommenting the next
 " line enables syntax highlighting by default.
-syntax on
 set background=dark
 
 " Vim options
@@ -149,7 +145,7 @@ nnoremap j gj
 
 " map 'jk' to escape insert mode - and disable Esc, just to learn
 inoremap jk    <Esc>
-inoremap <Esc> <Nop>
+inoremap <Esc> <Esc>:echoerr 'Use jk!'<CR>aa
 
 " Build a Ctags file
 command! MkTags call utils#MkTags()
@@ -268,6 +264,7 @@ let g:vimwiki_list = [
   \    'list_margin'               : -1,
   \    'diary_rel_path'            : 'diary/'
   \    }]
+let g:vimwiki_global_ext = 0
 nmap <Leader>ww <Plug>VimwikiIndex:VimwikiGenerateTags<CR>
 nmap <Leader>wi <Plug>VimwikiDiaryIndex:VimwikiDiaryGenerateLinks<CR>
 

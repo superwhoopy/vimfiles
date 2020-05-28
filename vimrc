@@ -18,6 +18,7 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 filetype off
 
+let g:ale_completion_enabled = 1
 
 call plug#begin()
 
@@ -54,14 +55,16 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'vim-latex/vim-latex'
 Plug 'vim-python/python-syntax'
 Plug 'vim-scripts/DrawIt'
-Plug 'vim-scripts/Gundo'
 Plug 'Vimjas/vim-python-pep8-indent'
 Plug 'vimwiki/vimwiki'
 Plug 'w0rp/ale'
 Plug 'zchee/vim-flatbuffers'
 
-Plug 'ryanoasis/vim-devicons'
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
+Plug 'ryanoasis/vim-devicons'
+
+Plug 'hrsh7th/vim-vsnip'
+Plug 'hrsh7th/vim-vsnip-integ'
 
 if has('win32')
   Plug 'kkoenig/wimproved.vim'
@@ -189,7 +192,7 @@ set wildmenu
 set wildignore=*/.git/*,*.o,*.obj,*.lib,*.a,*.pyc,*/__pycache__/*
 
 " Leader key is ','
-:let mapleader=','
+let mapleader=','
 
 " Ack the word under the cursor, prompting a path
 nmap    <Leader>/   "gyiw:Ack <C-R>g
@@ -202,7 +205,7 @@ set previewheight=24
 
 " Toggle auto-format option with <Leader>fo
 function! ToggleAutoFormat()
-    if &formatoptions =~ 'a'
+    if &formatoptions =~# 'a'
       set formatoptions-=a
       echom 'Auto-Format disabled'
     else
@@ -258,12 +261,6 @@ augroup END
 "###############################################################################
 " Plugins-related stuff
 "###############################################################################
-
-" Gundo
-:noremap <F5> :GundoToggle<CR>
-if has('python3')
-  let g:gundo_prefer_python3 = 1
-endif
 
 " Taglists (:TlistToggle)
 let Tlist_Use_Right_Window = 1
@@ -432,48 +429,32 @@ endfunction
 autocmd! User GoyoEnter nested call <SID>goyo_enter()
 autocmd! User GoyoLeave nested call <SID>goyo_leave()
 
+" ALE stuff
+set omnifunc=ale#completion#OmniFunc
+
 " vim-asterios stuff
 if has('unix')
     let s:core_sdk = expand('~/workspace/core/out/Debug/sdk')
     let g:ale_psy_psyko_executable = s:core_sdk . '/bin/psyko'
     let g:ale_psy_psyko_kernel_dir = s:core_sdk . '/k2'
+
+    let g:ale_json_vscode_ls = expand('~/.local/lib/node_modules/'
+                \ . 'vscode-json-languageserver/bin/vscode-json-languageserver')
 elseif has('win32')
     let s:ks_root = expand('F:\Programs\Krono-Safe')
     let g:ale_psy_psyko_executable = s:ks_root . '\psyko-8.10.2\bin\psyko.exe'
     let g:ale_psy_psyko_kernel_dir = s:ks_root . '\ksim-8.10.2'
 endif
 
-" NERDTree stuff
-" let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols = {} " needed
-" let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['psy'] = 'Ψ'
-"
-" let g:NERDTreeFileExtensionHighlightFullName = 1
-" let g:NERDTreeExactMatchHighlightFullName = 1
-" let g:NERDTreePatternMatchHighlightFullName = 1
-" let g:NERDTreeHighlightFolders = 1 " enables folder icon highlighting using exact match
-" let g:NERDTreeHighlightFoldersFullName = 1 " highlights the folder name
-"
-" NERDTrees File highlighting
-" function! NERDTreeHighlightFile(extension, fg, bg, guifg, guibg)
-"  exec 'autocmd FileType nerdtree highlight ' . a:extension .' ctermbg='. a:bg .' ctermfg='. a:fg .' guibg='. a:guibg .' guifg='. a:guifg
-"  exec 'autocmd FileType nerdtree syn match ' . a:extension .' #^\s\+.*'. a:extension .'$#'
-" endfunction
-"
-" call NERDTreeHighlightFile('jade', 'green', 'none', 'green', '#151515')
-" call NERDTreeHighlightFile('ini', 'yellow', 'none', 'yellow', '#151515')
-" call NERDTreeHighlightFile('md', 'blue', 'none', '#3366FF', '#151515')
-" call NERDTreeHighlightFile('yml', 'yellow', 'none', 'yellow', '#151515')
-" call NERDTreeHighlightFile('config', 'yellow', 'none', 'yellow', '#151515')
-" call NERDTreeHighlightFile('conf', 'yellow', 'none', 'yellow', '#151515')
-" call NERDTreeHighlightFile('json', 'yellow', 'none', 'yellow', '#151515')
-" call NERDTreeHighlightFile('html', 'yellow', 'none', 'yellow', '#151515')
-" call NERDTreeHighlightFile('styl', 'cyan', 'none', 'cyan', '#151515')
-" call NERDTreeHighlightFile('css', 'cyan', 'none', 'cyan', '#151515')
-" call NERDTreeHighlightFile('coffee', 'Red', 'none', 'red', '#151515')
-" call NERDTreeHighlightFile('js', 'Red', 'none', '#ffa500', '#151515')
-" call NERDTreeHighlightFile('php', 'Magenta', 'none', '#ff00ff', '#151515')
-" call NERDTreeHighlightFile('ds_store', 'Gray', 'none', '#686868', '#151515')
-" call NERDTreeHighlightFile('gitconfig', 'Gray', 'none', '#686868', '#151515')
-" call NERDTreeHighlightFile('gitignore', 'Gray', 'none', '#686868', '#151515')
-" call NERDTreeHighlightFile('bashrc', 'Gray', 'none', '#686868', '#151515')
-" call NERDTreeHighlightFile('bashprofile', 'Gray', 'none', '#686868', '#151515')
+" WebDevIcons and NERDTree coloring stuff
+let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols = {} " needed
+let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['psy'] = 'Ψ'
+
+let g:NERDTreeFileExtensionHighlightFullName = 1
+let g:NERDTreeExactMatchHighlightFullName = 1
+let g:NERDTreePatternMatchHighlightFullName = 1
+let g:NERDTreeHighlightFolders = 1 " enables folder icon highlighting using exact match
+let g:NERDTreeHighlightFoldersFullName = 1 " highlights the folder name
+
+let g:vsnip_integ_config = {}
+let g:vsnip_integ_config.ale = v:false

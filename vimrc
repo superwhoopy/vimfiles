@@ -440,10 +440,14 @@ if has('unix')
 
     let g:ale_json_vscode_ls = expand('~/.local/lib/node_modules/'
                 \ . 'vscode-json-languageserver/bin/vscode-json-languageserver')
+    let g:ale_psy_psyko_jsonconf =
+        \ [expand('~/.vim/plugged/vim-asterios/tests/psy/flags.psymodule.json')]
 elseif has('win32')
     let s:ks_root = expand('F:\Programs\Krono-Safe')
     let g:ale_psy_psyko_executable = s:ks_root . '\psyko-8.10.2\bin\psyko.exe'
     let g:ale_psy_psyko_kernel_dir = s:ks_root . '\ksim-8.10.2'
+    let g:ale_psy_psyko_jsonconf =
+        \ [expand('~/.vim/plugged/vim-asterios/tests/psy/flags.psymodule.json')]
 endif
 
 " WebDevIcons and NERDTree coloring stuff
@@ -456,5 +460,5 @@ let g:NERDTreePatternMatchHighlightFullName = 1
 let g:NERDTreeHighlightFolders = 1 " enables folder icon highlighting using exact match
 let g:NERDTreeHighlightFoldersFullName = 1 " highlights the folder name
 
-let g:vsnip_integ_config = {}
-let g:vsnip_integ_config.ale = v:false
+" let g:vsnip_integ_config = {}
+" let g:vsnip_integ_config.ale = v:false

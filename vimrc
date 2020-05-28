@@ -148,7 +148,6 @@ inoremap jj    <Esc>
 inoremap <Esc> <Esc>:call utils#WarnAndSleep("Use jj!")<CR>a
 
 
-
 " Build a Ctags file
 command! MkTags call utils#MkTags()
 
@@ -163,11 +162,19 @@ noremap <Leader>d :Gvdiff<CR>
 " Toggle auto-format option with <Leader>fo
 noremap <Leader>fo :call utils#ToggleAutoFormat()<CR>
 
-" Window navigation
-nnoremap <A-l> :wincmd l<CR>
-nnoremap <A-k> :wincmd k<CR>
-nnoremap <A-j> :wincmd j<CR>
-nnoremap <A-h> :wincmd h<CR>
+" Window navigation: map <Alt-[hjkl]> to 'move around' instructions, in normal
+" and insertion mode. Also handle the case of terminal emulators that convert
+" keystroke <A-l> into l for some reason...
+function s:MapMove()
+    for l:key in ['h', 'j', 'k', 'l']
+        for l:keycomb in ['<A-' . l:key . '>', '' . l:key]
+            execute('nnoremap ' . l:keycomb . ' :wincmd ' . l:key . '<CR>')
+            execute('inoremap ' . l:keycomb
+                  \ . ' <Esc>:wincmd ' . l:key . '<CR>a')
+        endfor
+    endfor
+endfunction
+call s:MapMove()
 
 " Quickly edit vimrc
 nmap <F8> :e ~/.vim/vimrc<CR>
@@ -222,8 +229,8 @@ let g:ctrlp_custom_ignore= '\v[\/]\.o$\|\v[\/]\.obj$\|\v[\/]\.pyc$\|\v[\/]\.sbr$
 
 " SnipMate #####################################################################
 
-imap <C-Tab> <Plug>snipMateNextOrTrigger
-smap <C-Tab> <Plug>snipMateNextOrTrigger
+inoremap <C-Tab> <Plug>snipMateNextOrTrigger
+snoremap <C-Tab> <Plug>snipMateNextOrTrigger
 
 
 " Better Wihtespaces ###########################################################
@@ -369,6 +376,13 @@ augroup GoyoGroup
     autocmd! User GoyoEnter nested call <SID>goyo_enter()
     autocmd! User GoyoLeave nested call <SID>goyo_leave()
 augroup END
+
+
+" surround #####################################################################
+
+" use 's' instead of 'S' for surrounding in visual mode (undocumented <Plug>
+" stuff: just read the source code)
+xmap   s <Plug>VSurround
 
 
 " ALE ##########################################################################

@@ -135,8 +135,9 @@ nnoremap <F12> :BufExplorer<CR>
 inoremap <C-s> <Esc>:w<CR>a
 noremap  <C-s> :w<CR>:echo "File saved."<CR>
 
-" <C-Space> for omnicompletion
-inoremap <C-Space> <C-X><C-o>
+" <C-Space> for ~omnicompletion~ coc.nvim
+" inoremap <C-Space> <C-X><C-o>
+inoremap <silent><expr> <C-Space> coc#refresh()
 
 " Tag navigation
 noremap <C-Tab>   <C-]>

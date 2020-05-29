@@ -143,10 +143,8 @@ noremap <C-S-Tab> :ptag <C-R><C-W><CR>
 nnoremap k gk
 nnoremap j gj
 
-" map 'jj' to escape insert mode - and disable Esc, just to learn
+" map 'jj' to escape insert mode
 inoremap jj    <Esc>
-inoremap <Esc> <Esc>:call utils#WarnAndSleep("Use jj!")<CR>a
-
 
 " Build a Ctags file
 command! MkTags call utils#MkTags()

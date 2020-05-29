@@ -102,6 +102,7 @@ set clipboard=unnamed
 " Enable French and English spelling languages by default
 set spelllang=en_us,fr
 
+" Show tabs, trailing and non-breakable spaces
 set list
 set listchars=tab:>\ ,trail:-,nbsp:·
 
@@ -137,6 +138,9 @@ noremap  <C-s> :w<CR>:echo "File saved."<CR>
 " <C-Space> for ~omnicompletion~ coc.nvim
 " inoremap <C-Space> <C-X><C-o>
 inoremap <silent><expr> <C-Space> coc#refresh()
+
+" Insert non-breaking space
+inoremap <C-S-Space>  
 
 " Tag navigation
 noremap <C-Tab>   <C-]>
@@ -189,10 +193,10 @@ vnoremap // y/<C-R>"<CR>
 "###############################################################################
 
 augroup vimrc_filetypes
-  autocmd!
-  autocmd FileType markdown setlocal spell
-  autocmd FileType rst      setlocal spell
-  autocmd FileType vim      setlocal tabstop=4 shiftwidth=4
+    autocmd!
+    autocmd FileType markdown setlocal spell
+    autocmd FileType rst      setlocal spell
+    autocmd FileType vim      setlocal tabstop=4 shiftwidth=4
 augroup END
 
 
@@ -242,7 +246,7 @@ hi ExtraWhitespace guibg=red ctermbg=red
 nmap <F10>  :StripWhitespace<CR>
 
 " auto-strip trailing whitespaces on save
-let g:strip_whitespace_on_save = 1
+let g:strip_whitespace_on_save = 0
 let g:strip_whitespace_confirm = 0
 
 

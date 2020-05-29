@@ -102,6 +102,9 @@ set clipboard=unnamed
 " Enable French and English spelling languages by default
 set spelllang=en_us,fr
 
+set list
+set listchars=tab:>\ ,trail:-,nbsp:·
+
 " Leader key is ','
 let mapleader=','
 

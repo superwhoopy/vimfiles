@@ -318,11 +318,9 @@ let g:airline_powerline_fonts = 1
 " show git diff hunks count only if nonzero
 let g:airline#extensions#hunks#non_zero_only = 1
 
-" enable YouCompleteMe status
-let g:airline#extensions#ycm#enabled = 1
-
 " enable ALE status
 let g:airline#extensions#ale#enabled = 1
+let g:airline#extensions#coc#enabled = 1
 
 
 " python-syntax ################################################################
@@ -393,17 +391,19 @@ xmap   s <Plug>VSurround
 " ALE ##########################################################################
 
 set omnifunc=ale#completion#OmniFunc
-
+let g:ale_c_parse_compile_commands = 1
+let g:ale_c_build_dir_names = ['out/Debug']
+let g:ale_linters = { 'cpp' : ['clang'] }
 
 " vim-asterios #################################################################
 
 if has('unix')
     let s:core_sdk = expand('~/workspace/core/out/Debug/sdk')
-    let g:ale_psy_psyko_executable = s:core_sdk . '/bin/psyko'
-    let g:ale_psy_psyko_kernel_dir = s:core_sdk . '/k2'
+    let g:ast_psyko_path = s:core_sdk . '/bin/psyko'
+    let g:ast_kernel_dir = s:core_sdk . '/k2'
 
-    let g:ale_json_vscode_ls = expand('~/.local/lib/node_modules/'
-                \ . 'vscode-json-languageserver/bin/vscode-json-languageserver')
+    let g:ale_json_vscode_ls = expand('~/.local/node_modules/'
+                \ . 'bin/vscode-json-languageserver')
     let g:ale_psy_psyko_jsonconf =
         \ [expand('~/.vim/plugged/vim-asterios/tests/psy/flags.psymodule.json')]
 

@@ -47,9 +47,6 @@ Plug 'zchee/vim-flatbuffers'
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plug 'ryanoasis/vim-devicons'
 
-Plug 'hrsh7th/vim-vsnip'
-Plug 'hrsh7th/vim-vsnip-integ'
-
 if has('win32')
   Plug 'kkoenig/wimproved.vim'
 endif
@@ -136,8 +133,10 @@ inoremap <C-s> <Esc>:w<CR>a
 noremap  <C-s> :w<CR>:echo "File saved."<CR>
 
 " <C-Space> for ~omnicompletion~ coc.nvim
+" Caution: in some terminals, <C-Space> actually maps to <C-@>...
 " inoremap <C-Space> <C-X><C-o>
 inoremap <silent><expr> <C-Space> coc#refresh()
+inoremap <silent><expr> <C-@>     coc#refresh()
 
 " Insert non-breaking space
 inoremap <C-S-Space>  
@@ -393,7 +392,8 @@ xmap   s <Plug>VSurround
 set omnifunc=ale#completion#OmniFunc
 let g:ale_c_parse_compile_commands = 1
 let g:ale_c_build_dir_names = ['out/Debug']
-let g:ale_linters = { 'cpp' : ['clang'] }
+let g:ale_linters = { 'cpp' : ['gcc'] }
+let g:ale_cpp_gcc_options = ''
 
 " vim-asterios #################################################################
 

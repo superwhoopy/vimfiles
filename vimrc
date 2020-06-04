@@ -186,6 +186,25 @@ nmap <F8> :e ~/.vim/vimrc<CR>
 " Search for visually selected text
 vnoremap // y/<C-R>"<CR>
 
+" Align what remains of the line to the right, according to textwidth. Mapped to
+" command :AlignRight, and to <A-Right>
+function! AlignRightFrom(line, pos, textwidth) abort
+    if a:textwidth == 0
+        return
+    endif
+    let l:spaces_to_insert = a:textwidth - len(a:line)
+    if l:spaces_to_insert >= 0
+        execute 'normal! i' . repeat(' ', l:spaces_to_insert)
+    else
+        " TODO: see if we can remove spaces under the cursor?
+    endif
+endfunction
+
+command! AlignRight call AlignRightFrom(getline('.'), getpos('.')[2] - 1,
+            \                           &textwidth)
+
+inoremap <A-Right> <Esc>:call AlignRightFrom(getline('.'), getpos('.')[2] - 1,
+            \ &textwidth)<CR>i
 
 "###############################################################################
 " AUTO-COMMANDS AND FILETYPE-SPECIFIC STUFF

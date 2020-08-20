@@ -47,9 +47,6 @@ Plug 'zchee/vim-flatbuffers'
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plug 'ryanoasis/vim-devicons'
 
-Plug 'hrsh7th/vim-vsnip'
-Plug 'hrsh7th/vim-vsnip-integ'
-
 if has('win32')
   Plug 'kkoenig/wimproved.vim'
 endif
@@ -136,8 +133,10 @@ inoremap <C-s> <Esc>:w<CR>a
 noremap  <C-s> :w<CR>:echo "File saved."<CR>
 
 " <C-Space> for ~omnicompletion~ coc.nvim
+" Caution: in some terminals, <C-Space> actually maps to <C-@>...
 " inoremap <C-Space> <C-X><C-o>
 inoremap <silent><expr> <C-Space> coc#refresh()
+inoremap <silent><expr> <C-@>     coc#refresh()
 
 " Insert non-breaking space
 inoremap <C-S-Space>  
@@ -187,6 +186,25 @@ nmap <F8> :e ~/.vim/vimrc<CR>
 " Search for visually selected text
 vnoremap // y/<C-R>"<CR>
 
+" Align what remains of the line to the right, according to textwidth. Mapped to
+" command :AlignRight, and to <A-Right>
+function! AlignRightFrom(line, pos, textwidth) abort
+    if a:textwidth == 0
+        return
+    endif
+    let l:spaces_to_insert = a:textwidth - len(a:line)
+    if l:spaces_to_insert >= 0
+        execute 'normal! i' . repeat(' ', l:spaces_to_insert)
+    else
+        " TODO: see if we can remove spaces under the cursor?
+    endif
+endfunction
+
+command! AlignRight call AlignRightFrom(getline('.'), getpos('.')[2] - 1,
+            \                           &textwidth)
+
+inoremap <A-Right> <Esc>:call AlignRightFrom(getline('.'), getpos('.')[2] - 1,
+            \ &textwidth)<CR>i
 
 "###############################################################################
 " AUTO-COMMANDS AND FILETYPE-SPECIFIC STUFF

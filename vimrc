@@ -393,7 +393,7 @@ xmap   s <Plug>VSurround
 set omnifunc=ale#completion#OmniFunc
 let g:ale_c_parse_compile_commands = 1
 let g:ale_c_build_dir_names = ['out/Debug']
-let g:ale_linters = { 'cpp' : ['clang'] }
+let g:ale_linters = { 'cpp' : ['g++'] }
 
 " vim-asterios #################################################################
 
@@ -409,9 +409,10 @@ if has('unix')
 
 elseif has('win32')
 
+    let s:sdk = expand('C:\Users\Manu\workspace\core\out\Debug\sdk')
     let s:ks_root = expand('F:\Programs\Krono-Safe')
-    let g:ale_psy_psyko_executable = s:ks_root . '\psyko-8.10.2\bin\psyko.exe'
-    let g:ale_psy_psyko_kernel_dir = s:ks_root . '\ksim-8.10.2'
+    let g:ast_psyko_path = s:ks_root . '\psyko-8.10.2\bin\psyko.exe'
+    let g:ast_kernel_dir = s:sdk . '\k2'
     let g:ale_psy_psyko_jsonconf =
         \ [expand('~/.vim/plugged/vim-asterios/tests/psy/flags.psymodule.json')]
 

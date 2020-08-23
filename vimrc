@@ -22,7 +22,6 @@ Plug 'justinmk/vim-syntax-extra'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'krono-safe/vim-asterios'
 Plug 'Lokaltog/vim-easymotion'
-Plug 'm42e/trace32-practice.vim'
 Plug 'MarcWeber/vim-addon-mw-utils'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'ngg/vim-gn'

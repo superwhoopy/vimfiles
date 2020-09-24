@@ -24,10 +24,12 @@ Plug 'krono-safe/vim-asterios'
 Plug 'Lokaltog/vim-easymotion'
 Plug 'MarcWeber/vim-addon-mw-utils'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'neoclide/jsonc.vim'
 Plug 'ngg/vim-gn'
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'romainl/flattened' " Solarized without bullshit
 Plug 'preservim/nerdtree'
+Plug 'raimon49/requirements.txt.vim'
 Plug 'shime/vim-livedown'
 Plug 'tmhedberg/SimpylFold' " better Python folding
 Plug 'tomtom/tlib_vim'
@@ -229,8 +231,8 @@ let Tlist_Show_One_File = 1
 
 " NERDTree #####################################################################
 
-let NERDTreeIgnore=['\.vim$', '\~$', '\.o$', '\.a$', '\.gcno$', '__pycache__',
-  \ '\.pyc$', '\.egg-info$']
+let NERDTreeIgnore=['\.vim$', '\~$', '\.o$', '\.a$', '\.gcno$', '__pycache__$',
+  \ '\.pyc$', '\.egg-info$', '\.pytest_cache$', '\.git$']
 
 
 " NERDTree Syntax Highlighting #################################################
@@ -426,12 +428,10 @@ if has('unix')
 
 elseif has('win32')
 
-    let s:sdk = expand('C:\Users\Manu\workspace\core\out\Debug\sdk')
     let s:ks_root = expand('F:\Programs\Krono-Safe')
-    let g:ast_psyko_path = s:ks_root . '\psyko-8.10.2\bin\psyko.exe'
-    let g:ast_kernel_dir = s:sdk . '\k2'
-    let g:ale_psy_psyko_jsonconf =
-        \ [expand('~/.vim/plugged/vim-asterios/tests/psy/flags.psymodule.json')]
+    let g:ast_psyko_path = s:ks_root . '\psyko-8.13.1\bin\psyko.exe'
+    let g:ast_kernel_dir = s:ks_root . '\rtk-power-mpc5777m-module-4.4.3'
+    let g:ast_product_name = 'power-mpc5777m-module'
 
 endif
 

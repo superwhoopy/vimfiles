@@ -30,7 +30,9 @@ Plug 'ntpeters/vim-better-whitespace'
 Plug 'romainl/flattened' " Solarized without bullshit
 Plug 'preservim/nerdtree'
 Plug 'raimon49/requirements.txt.vim'
+Plug 'ryanoasis/vim-devicons'
 Plug 'shime/vim-livedown'
+Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plug 'tmhedberg/SimpylFold' " better Python folding
 Plug 'tomtom/tlib_vim'
 Plug 'tpope/vim-fugitive'
@@ -45,12 +47,11 @@ Plug 'vimwiki/vimwiki'
 Plug 'w0rp/ale'
 Plug 'zchee/vim-flatbuffers'
 
-Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
-Plug 'ryanoasis/vim-devicons'
-
 if has('win32')
   Plug 'kkoenig/wimproved.vim'
 endif
+
+Plug 'ssh://git@dev.ks.int:7999/prot/vim-ks.git'
 
 call plug#end()
 

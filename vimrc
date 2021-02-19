@@ -13,7 +13,6 @@ Plug 'drmikehenry/vim-fontsize'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'garbas/vim-snipmate'
 Plug 'hiphish/jinja.vim'
-Plug 'hjson/vim-hjson'
 Plug 'jlanzarotta/bufexplorer'
 Plug 'jmcantrell/vim-virtualenv'
 Plug 'jremmen/vim-ripgrep'
@@ -58,8 +57,6 @@ call plug#end()
 
 " """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" Vim5 and later versions support syntax highlighting. Uncommenting the next
-" line enables syntax highlighting by default.
 set background=dark
 
 " Vim options
@@ -95,12 +92,16 @@ set wildignore=*/.git/*,*.o,*.obj,*.lib,*.a,*.pyc,*/__pycache__/*
 "
 " Height of the preview window (24=twice default size)
 set previewheight=24
-"
+
 " Default copy/paste from system clipboard
 set clipboard=unnamed
 
 " Enable French and English spelling languages by default
 set spelllang=en_us,fr
+
+" Have a gui-like rendering even in terminal
+set termguicolors
+colorscheme flattened_dark
 
 " Show tabs, trailing and non-breakable spaces
 set list
@@ -309,7 +310,7 @@ nmap <Leader>wi <Plug>VimwikiDiaryIndex:VimwikiDiaryGenerateLinks<CR>
 " Airline ######################################################################
 
 " airline stuff
-let g:airline_theme='simple'
+let g:airline_theme='solarized'
 " short ids for mode
 let g:airline_mode_map = {
       \ '__' : '-',

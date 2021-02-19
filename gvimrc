@@ -8,11 +8,6 @@
 "  set guifont=-misc-fixed-medium-r-normal--14-130-75-75-c-70-iso8859-1
 "endif
 
-" If you want to run gvim with a dark background, try using a different
-" colorscheme or running 'gvim -reverse'.
-" http://www.cs.cmu.edu/~maverick/VimColorSchemeTest/ has examples and
-" downloads for the colorschemes on vim.org
-
 
 if has('win32')
   if has('nvim')
@@ -28,21 +23,16 @@ else " Unix
   endif
 endif
 
-colorscheme flattened_dark
-:AirlineTheme solarized
-let g:airline_solarized_bg='dark'
-
-set go-=T                  " ne pas afficher la toolbar
-set go-=m                  " ne pas afficher la menubar
-set go-=r                  " do not show vertical bars
-set go-=R
-set go-=l
-set go-=L
+set guioptions-=T                  " ne pas afficher la toolbar
+set guioptions-=m                  " ne pas afficher la menubar
+set guioptions-=r                  " do not show vertical bars
+set guioptions-=R
+set guioptions-=l
+set guioptions-=L
 set lines=60 columns=85   " taille de la fenêtre au démarrage
 
 set lazyredraw
 
-hi ExtraWhitespace guibg=red ctermbg=red
 
 hi VimwikiHeader1 guifg=#FF0000
 hi VimwikiHeader2 guifg=#00FF00

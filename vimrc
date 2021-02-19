@@ -5,9 +5,10 @@ let g:ale_completion_enabled = 1
 
 call plug#begin()
 
+Plug 'aklt/plantuml-syntax'
 Plug 'cespare/vim-toml'
-Plug 'davidhalter/jedi-vim'
 Plug 'dhruvasagar/vim-table-mode'
+Plug 'direnv/direnv.vim'
 Plug 'drmikehenry/vim-fontsize'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'garbas/vim-snipmate'
@@ -256,6 +257,7 @@ let g:ctrlp_custom_ignore= '\v[\/]\.o$\|\v[\/]\.obj$\|\v[\/]\.pyc$\|\v[\/]\.sbr$
 
 inoremap <C-Tab> <Plug>snipMateNextOrTrigger
 snoremap <C-Tab> <Plug>snipMateNextOrTrigger
+let g:snipMate = { 'snippet_version' : 1 }
 
 
 " Better Wihtespaces ###########################################################

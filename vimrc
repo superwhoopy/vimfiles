@@ -8,7 +8,6 @@ call plug#begin()
 Plug 'aklt/plantuml-syntax'
 Plug 'cespare/vim-toml'
 Plug 'dhruvasagar/vim-table-mode'
-Plug 'direnv/direnv.vim'
 Plug 'drmikehenry/vim-fontsize'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'garbas/vim-snipmate'
@@ -23,6 +22,7 @@ Plug 'ctrlpvim/ctrlp.vim'
 Plug 'krono-safe/vim-asterios'
 Plug 'Lokaltog/vim-easymotion'
 Plug 'MarcWeber/vim-addon-mw-utils'
+Plug 'majutsushi/tagbar'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'neoclide/jsonc.vim'
 Plug 'ngg/vim-gn'
@@ -49,6 +49,8 @@ Plug 'zchee/vim-flatbuffers'
 
 if has('win32')
   Plug 'kkoenig/wimproved.vim'
+else
+  Plug 'direnv/direnv.vim'
 endif
 
 Plug 'ssh://git@dev.ks.int:7999/prot/vim-ks.git'

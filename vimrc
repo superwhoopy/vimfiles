@@ -12,6 +12,7 @@ Plug 'drmikehenry/vim-fontsize'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'garbas/vim-snipmate'
 Plug 'hiphish/jinja.vim'
+Plug 'jeffkreeftmeijer/vim-numbertoggle'
 Plug 'jlanzarotta/bufexplorer'
 Plug 'jmcantrell/vim-virtualenv'
 Plug 'jremmen/vim-ripgrep'
@@ -22,7 +23,9 @@ Plug 'ctrlpvim/ctrlp.vim'
 Plug 'krono-safe/vim-asterios'
 Plug 'Lokaltog/vim-easymotion'
 Plug 'MarcWeber/vim-addon-mw-utils'
+Plug 'martinda/Jenkinsfile-vim-syntax'
 Plug 'majutsushi/tagbar'
+Plug 'morhetz/gruvbox'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'neoclide/jsonc.vim'
 Plug 'ngg/vim-gn'
@@ -103,7 +106,7 @@ set spelllang=en_us,fr
 
 " Have a gui-like rendering even in terminal
 set termguicolors
-colorscheme flattened_dark
+colorscheme gruvbox
 
 " Show tabs, trailing and non-breakable spaces
 set list
@@ -253,8 +256,8 @@ let g:ctrlp_custom_ignore= '\v[\/]\.o$\|\v[\/]\.obj$\|\v[\/]\.pyc$\|\v[\/]\.sbr$
 
 " SnipMate #####################################################################
 
-inoremap <C-Tab> <Plug>snipMateNextOrTrigger
-snoremap <C-Tab> <Plug>snipMateNextOrTrigger
+imap <C-Tab> <Plug>snipMateNextOrTrigger
+smap <C-Tab> <Plug>snipMateNextOrTrigger
 let g:snipMate = { 'snippet_version' : 1 }
 
 
@@ -307,7 +310,7 @@ nmap <Leader>wi <Plug>VimwikiDiaryIndex:VimwikiDiaryGenerateLinks<CR>
 " Airline ######################################################################
 
 " airline stuff
-let g:airline_theme='solarized'
+let g:airline_theme='gruvbox'
 " short ids for mode
 let g:airline_mode_map = {
       \ '__' : '-',

@@ -11,7 +11,7 @@
 
 if has('win32')
   if has('nvim')
-    Guifont UbuntuMono NF:h10
+    Guifont FiraCode\ NF:h8
   else
     set guifont=UbuntuMono\ NF:h8:cANSI:qDRAFT
   endif

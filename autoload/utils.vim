@@ -68,11 +68,3 @@ function! utils#FillLine(str) abort
         execute('s/$/\=(" ".repeat(a:str, l:reps))/')
     endif
 endfunction
-
-"" TODO
-function! utils#WarnAndSleep(msg) abort
-    echohl WarningMsg
-    echo a:msg
-    echohl Normal
-    sleep 2
-endfunction

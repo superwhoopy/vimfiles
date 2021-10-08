@@ -21,6 +21,7 @@ Plug 'junegunn/vim-easy-align'
 Plug 'justinmk/vim-syntax-extra'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'krono-safe/vim-asterios'
+Plug 'kyazdani42/nvim-web-devicons'
 Plug 'Lokaltog/vim-easymotion'
 Plug 'MarcWeber/vim-addon-mw-utils'
 Plug 'martinda/Jenkinsfile-vim-syntax'
@@ -30,10 +31,14 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'neoclide/jsonc.vim'
 Plug 'ngg/vim-gn'
 Plug 'ntpeters/vim-better-whitespace'
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-telescope/telescope.nvim'
+Plug 'nvim-telescope/telescope-symbols.nvim'
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update
 Plug 'romainl/flattened' " Solarized without bullshit
+Plug 'ryanoasis/vim-devicons'
 Plug 'preservim/nerdtree'
 Plug 'raimon49/requirements.txt.vim'
-Plug 'ryanoasis/vim-devicons'
 Plug 'shime/vim-livedown'
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plug 'tmhedberg/SimpylFold' " better Python folding
@@ -45,6 +50,7 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'vim-latex/vim-latex'
 Plug 'vim-python/python-syntax'
 Plug 'vim-scripts/DrawIt'
+Plug 'vim-scripts/cflow-output-colorful'
 Plug 'Vimjas/vim-python-pep8-indent'
 Plug 'vimwiki/vimwiki'
 Plug 'w0rp/ale'
@@ -90,6 +96,7 @@ set foldmethod=indent      " Folding base sur l'indentation
 set foldlevelstart=100    " deplier tous les folds jusqu'au nv. 100
 set diffopt+=iwhite        " en mode 'diff', ignorer les espaces
 set nojoinspaces           " don't add extra whitespace when formatting
+set switchbuf=uselast      " when opening quickfix item, use the last buffer
 
 " visual autocomplete for command menu
 set wildmenu
@@ -416,7 +423,10 @@ xmap   s <Plug>VSurround
 set omnifunc=ale#completion#OmniFunc
 let g:ale_c_parse_compile_commands = 1
 let g:ale_c_build_dir_names = ['out/Debug']
-let g:ale_linters = { 'cpp' : ['g++'] }
+let g:ale_linters = { 
+            \ 'cpp' : ['g++'],
+            \ 'sh': ['shellcheck']
+            \ }
 
 " vim-asterios #################################################################
 

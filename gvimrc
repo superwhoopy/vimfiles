@@ -8,20 +8,31 @@
 "  set guifont=-misc-fixed-medium-r-normal--14-130-75-75-c-70-iso8859-1
 "endif
 
-
 if has('win32')
-  if has('nvim')
-    Guifont UbuntuMono\ NF:h10
-  else
-    set guifont=UbuntuMono\ NF:h8:cANSI:qDRAFT
-  endif
+    let s:fontname = "UbuntuMono NF"
+    let s:fontsize = 10
 else " Unix
-  if has('nvim')
-    Guifont UbuntuMono Nerd Font:h14
-  else
-    set guifont=UbuntuMono\ Nerd\ Font\ 14
-  endif
+    let s:fontname = "UbuntuMono Nerd Font"
+    let s:fontsize = 14
 endif
+
+function! SetFont()
+    if has('nvim')
+        " Neovim
+        execute("GuiFont! " . s:fontname . ":h" . s:fontsize)
+    else
+        " Regular vim
+        execute("set guifont=" . s:fontname . ":h" . s:fontsize)
+    endif
+endfunction
+
+function! AdjustFontSize(amount)
+    let s:fontsize = s:fontsize + a:amount
+    call SetFont()
+endfunction
+
+
+call SetFont()
 
 set guioptions-=T                  " ne pas afficher la toolbar
 set guioptions-=m                  " ne pas afficher la menubar
@@ -33,10 +44,5 @@ set lines=60 columns=85   " taille de la fenêtre au démarrage
 
 set lazyredraw
 
-
-hi VimwikiHeader1 guifg=#FF0000
-hi VimwikiHeader2 guifg=#00FF00
-hi VimwikiHeader3 guifg=#0000FF
-hi VimwikiHeader4 guifg=#FF00FF
-hi VimwikiHeader5 guifg=#00FFFF
-hi VimwikiHeader6 guifg=#FFFF00
+nnoremap <C-=> :call AdjustFontSize(1)<CR><C-W>=
+nnoremap <C--> :call AdjustFontSize(-1)<CR><C-W>=

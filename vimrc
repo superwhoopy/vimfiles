@@ -19,7 +19,7 @@ Plug 'jremmen/vim-ripgrep'
 Plug 'junegunn/goyo.vim'
 Plug 'junegunn/vim-easy-align'
 Plug 'justinmk/vim-syntax-extra'
-Plug 'ctrlpvim/ctrlp.vim'
+" Plug 'ctrlpvim/ctrlp.vim'
 Plug 'krono-safe/vim-asterios'
 Plug 'kyazdani42/nvim-web-devicons'
 Plug 'Lokaltog/vim-easymotion'
@@ -174,7 +174,7 @@ command! MkTags call utils#MkTags()
 " Change to the directory of the current file
 command! Cd     cd\ %:p:h
 
-" Diffmode switch
+" Diff mode switch
 noremap <A-d>  :call utils#DiffSwitch()<CR>
 " Run git diff on the current file
 noremap <Leader>d :Gvdiff<CR>
@@ -221,6 +221,19 @@ command! AlignRight call AlignRightFrom(getline('.'), getpos('.')[2] - 1,
 
 inoremap <A-Right> <Esc>:call AlignRightFrom(getline('.'), getpos('.')[2] - 1,
             \ &textwidth)<CR>i
+
+
+" telescope mappings -----------------------------------------------------------
+
+" Ctrl+P to find files
+nnoremap <C-p> :lua require('telescope.builtin').find_files()<CR>
+" Ctrl+Shift+P to find tags
+nnoremap <C-S-p> :lua require('telescope.builtin').tags()<CR>
+
+" Ctrl+Shift+G to grep into directory
+nnoremap <C-S-g> :lua require('telescope.builtin').live_grep()<CR>
+" <Leader>g to grep the word under the cursor
+nnoremap <Leader>g :lua require('telescope.builtin').grep_string()<CR>
 
 "###############################################################################
 " AUTO-COMMANDS AND FILETYPE-SPECIFIC STUFF
@@ -460,3 +473,15 @@ let g:NERDTreeExtensionHighlightColor = {
             \ 'bgt': s:ks_blue,
             \ }
 
+" telescope ####################################################################
+
+lua << EOF
+require('telescope').setup{
+    defaults = {
+    },
+    pickers = {
+        tags = {
+            only_sort_tags = true
+        }
+    },
+}

@@ -27,10 +27,9 @@ Plug 'MarcWeber/vim-addon-mw-utils'
 Plug 'martinda/Jenkinsfile-vim-syntax'
 Plug 'majutsushi/tagbar'
 Plug 'morhetz/gruvbox'
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'neoclide/jsonc.vim'
 Plug 'ngg/vim-gn'
 Plug 'ntpeters/vim-better-whitespace'
+Plug 'neovim/nvim-lspconfig'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-telescope/telescope-symbols.nvim'
@@ -485,3 +484,20 @@ require('telescope').setup{
         }
     },
 }
+EOF
+
+" LSP servers ##################################################################
+
+lua require'lspconfig'.pyright.setup{}
+lua require'lspconfig'.rust_analyzer.setup{}
+
+lua << EOF
+--Enable (broadcasting) snippet capability for completion
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities.textDocument.completion.completionItem.snippetSupport = true
+
+require'lspconfig'.jsonls.setup {
+  capabilities = capabilities,
+}
+EOF
+

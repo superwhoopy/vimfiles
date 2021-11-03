@@ -16,16 +16,17 @@ Plug 'jeffkreeftmeijer/vim-numbertoggle'
 Plug 'jlanzarotta/bufexplorer'
 Plug 'jmcantrell/vim-virtualenv'
 Plug 'jremmen/vim-ripgrep'
-Plug 'junegunn/goyo.vim'
 Plug 'junegunn/vim-easy-align'
 Plug 'justinmk/vim-syntax-extra'
 " Plug 'ctrlpvim/ctrlp.vim'
 Plug 'krono-safe/vim-asterios'
 Plug 'kyazdani42/nvim-web-devicons'
+Plug 'kyazdani42/nvim-tree.lua'
 Plug 'Lokaltog/vim-easymotion'
 Plug 'MarcWeber/vim-addon-mw-utils'
 Plug 'martinda/Jenkinsfile-vim-syntax'
 Plug 'majutsushi/tagbar'
+Plug 'mhinz/vim-startify'
 Plug 'morhetz/gruvbox'
 Plug 'ngg/vim-gn'
 Plug 'ntpeters/vim-better-whitespace'
@@ -403,26 +404,6 @@ let g:easy_align_delimiters = {
 let g:virtualenv_directory = '.'
 
 
-" Goyo #########################################################################
-
-" Callbacks when entering/leaving goyo
-let g:goyo_linenr = 1 "keep line numbering
-
-function! s:goyo_enter()
-  set nonumber
-endfunction
-
-function! s:goyo_leave()
-  set number
-endfunction
-
-augroup GoyoGroup
-    autocmd!
-    autocmd! User GoyoEnter nested call <SID>goyo_enter()
-    autocmd! User GoyoLeave nested call <SID>goyo_leave()
-augroup END
-
-
 " surround #####################################################################
 
 " use 's' instead of 'S' for surrounding in visual mode (undocumented <Plug>
@@ -485,6 +466,31 @@ require('telescope').setup{
     },
 }
 EOF
+
+" nvim-tree ####################################################################
+
+let g:nvim_tree_gitignore = 1
+let g:nvim_tree_highlight_opened_files = 1
+let g:nvim_tree_add_trailing = 1
+
+lua << EOF
+require'nvim-tree'.setup{
+    update_cwd = true,
+    update_focused_file = {
+        enable = true,
+    },
+    filters = {
+        custom = { '.git', '__pycache__', '.venv', '*.egg-info' }
+    },
+}
+EOF
+
+nmap <C-n> :NvimTreeToggle<CR>
+highlight NvimTreeFolderIcon guibg=blue
+
+" Startify #####################################################################
+
+let g:startify_change_to_vcs_root = 1
 
 " LSP servers ##################################################################
 

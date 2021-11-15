@@ -148,12 +148,6 @@ nnoremap <F12> :BufExplorer<CR>
 inoremap <C-s> <Esc>:w<CR>a
 noremap  <C-s> :w<CR>:echo "File saved."<CR>
 
-" <C-Space> for ~omnicompletion~ coc.nvim
-" Caution: in some terminals, <C-Space> actually maps to <C-@>...
-" inoremap <C-Space> <C-X><C-o>
-inoremap <silent><expr> <C-Space> coc#refresh()
-inoremap <silent><expr> <C-@>     coc#refresh()
-
 " Insert non-breaking space
 inoremap <C-S-Space>  
 

@@ -8,20 +8,22 @@ call plug#begin()
 Plug 'aklt/plantuml-syntax'
 Plug 'cespare/vim-toml'
 Plug 'dhruvasagar/vim-table-mode'
-Plug 'drmikehenry/vim-fontsize'
+Plug 'dstein64/vim-startuptime'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'garbas/vim-snipmate'
+Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
 Plug 'hiphish/jinja.vim'
+Plug 'honza/vim-snippets'
 Plug 'jeffkreeftmeijer/vim-numbertoggle'
+Plug 'jiangmiao/auto-pairs'
 Plug 'jlanzarotta/bufexplorer'
-Plug 'jmcantrell/vim-virtualenv'
 Plug 'jremmen/vim-ripgrep'
 Plug 'junegunn/vim-easy-align'
 Plug 'justinmk/vim-syntax-extra'
-" Plug 'ctrlpvim/ctrlp.vim'
 Plug 'krono-safe/vim-asterios'
 Plug 'kyazdani42/nvim-web-devicons'
 Plug 'kyazdani42/nvim-tree.lua'
+Plug 'lepture/vim-velocity'
 Plug 'Lokaltog/vim-easymotion'
 Plug 'MarcWeber/vim-addon-mw-utils'
 Plug 'martinda/Jenkinsfile-vim-syntax'
@@ -37,10 +39,8 @@ Plug 'nvim-telescope/telescope-symbols.nvim'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update
 Plug 'romainl/flattened' " Solarized without bullshit
 Plug 'ryanoasis/vim-devicons'
-Plug 'preservim/nerdtree'
 Plug 'raimon49/requirements.txt.vim'
 Plug 'shime/vim-livedown'
-Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plug 'tmhedberg/SimpylFold' " better Python folding
 Plug 'tomtom/tlib_vim'
 Plug 'tpope/vim-fugitive'
@@ -52,7 +52,6 @@ Plug 'vim-python/python-syntax'
 Plug 'vim-scripts/DrawIt'
 Plug 'vim-scripts/cflow-output-colorful'
 Plug 'Vimjas/vim-python-pep8-indent'
-Plug 'vimwiki/vimwiki'
 Plug 'w0rp/ale'
 Plug 'zchee/vim-flatbuffers'
 
@@ -149,7 +148,11 @@ inoremap <C-s> <Esc>:w<CR>a
 noremap  <C-s> :w<CR>:echo "File saved."<CR>
 
 " Insert non-breaking space
-inoremap <C-S-Space>  
+inoremap <C-S-Space>
+
+" Open help in a vertical window
+nnoremap <C-H> :vertical botright help
+inoremap <C-H> <Esc>:vertical botright help
 
 " Tag navigation
 noremap <C-Tab>   <C-]>
@@ -220,14 +223,18 @@ inoremap <A-Right> <Esc>:call AlignRightFrom(getline('.'), getpos('.')[2] - 1,
 " telescope mappings -----------------------------------------------------------
 
 " Ctrl+P to find files
+" nnoremap <C-p> :lua require('telescope.builtin').find_files()<CR>
 nnoremap <C-p> :lua require('telescope.builtin').find_files()<CR>
 " Ctrl+Shift+P to find tags
 nnoremap <C-S-p> :lua require('telescope.builtin').tags()<CR>
-
-" Ctrl+Shift+G to grep into directory
+" Ctrl+Shift+G to grep into directory (Ctrl+G displays file name)
 nnoremap <C-S-g> :lua require('telescope.builtin').live_grep()<CR>
+" Ctrl + B to browse openned buffers
+nnoremap <C-b> :lua require('telescope.builtin').buffers()<CR>
+
 " <Leader>g to grep the word under the cursor
 nnoremap <Leader>g :lua require('telescope.builtin').grep_string()<CR>
+
 
 "###############################################################################
 " AUTO-COMMANDS AND FILETYPE-SPECIFIC STUFF
@@ -245,33 +252,10 @@ augroup END
 " PLUGINS CONFIGURATION
 "###############################################################################
 
-
-" NERDTree #####################################################################
-
-let NERDTreeIgnore=['\.vim$', '\~$', '\.o$', '\.a$', '\.gcno$', '__pycache__$',
-  \ '\.pyc$', '\.egg-info$', '\.pytest_cache$', '\.git$']
-
-
-" NERDTree Syntax Highlighting #################################################
-
-let g:NERDTreeFileExtensionHighlightFullName = 1
-let g:NERDTreeExactMatchHighlightFullName = 1
-let g:NERDTreePatternMatchHighlightFullName = 1
-let g:NERDTreeHighlightFolders = 1 " enables folder icon highlighting using exact match
-let g:NERDTreeHighlightFoldersFullName = 1 " highlights the folder name
-
-
-" CtrlP ########################################################################
-
-" default is 'ra', which causes madness when using git submodules
-let g:ctrlp_working_path_mode = 'a'
-let g:ctrlp_custom_ignore= '\v[\/]\.o$\|\v[\/]\.obj$\|\v[\/]\.pyc$\|\v[\/]\.sbr$'
-
-
 " SnipMate #####################################################################
 
-imap <C-Tab> <Plug>snipMateNextOrTrigger
-smap <C-Tab> <Plug>snipMateNextOrTrigger
+imap <Tab> <Plug>snipMateNextOrTrigger
+smap <Tab> <Plug>snipMateNextOrTrigger
 let g:snipMate = { 'snippet_version' : 1 }
 
 
@@ -285,40 +269,6 @@ nmap <F10>  :StripWhitespace<CR>
 " auto-strip trailing whitespaces on save
 let g:strip_whitespace_on_save = 0
 let g:strip_whitespace_confirm = 0
-
-
-" vimwiki ######################################################################
-
-let g:vimwiki_list = [
-  \   {'maxhi'                     : 0,
-  \    'css_name'                  : 'style.css',
-  \    'auto_export'               : 0,
-  \    'diary_index'               : 'diary',
-  \    'template_default'          : 'default',
-  \    'nested_syntaxes'           : {'python': 'python', 'c++': 'cpp',
-  \                                   'c': 'c', 'psy': 'psy'},
-  \    'auto_toc'                  : 1,
-  \    'auto_tags'                 : 0,
-  \    'diary_sort'                : 'desc',
-  \    'path'                      : '~/vimwiki/',
-  \    'diary_link_fmt'            : '%Y-%m-%d',
-  \    'template_ext'              : '.tpl',
-  \    'syntax'                    : 'default',
-  \    'custom_wiki2html'          : '',
-  \    'automatic_nested_syntaxes' : 1,
-  \    'index'                     : 'index',
-  \    'diary_header'              : 'Diary',
-  \    'ext'                       : '.wiki',
-  \    'path_html'                 : '~/vimwiki_html/',
-  \    'temp'                      : 0,
-  \    'template_path'             : '~/vimwiki/templates/',
-  \    'list_margin'               : -1,
-  \    'diary_rel_path'            : 'diary/'
-  \    }]
-let g:vimwiki_global_ext = 0
-nmap <Leader>ww <Plug>VimwikiIndex:VimwikiGenerateTags<CR>
-nmap <Leader>wi <Plug>VimwikiDiaryIndex:VimwikiDiaryGenerateLinks<CR>
-
 
 
 " Airline ######################################################################
@@ -390,14 +340,6 @@ let g:easy_align_delimiters = {
   \ }
 
 
-" vim-virtualenv ###############################################################
-
-" virtualenv stuff: set the current directory as the base directory where to
-" look for a virtualenv. Thus if the virtualenv lies in ".env", enable it with
-" :Virtualenv .env
-let g:virtualenv_directory = '.'
-
-
 " surround #####################################################################
 
 " use 's' instead of 'S' for surrounding in visual mode (undocumented <Plug>
@@ -410,7 +352,7 @@ xmap   s <Plug>VSurround
 set omnifunc=ale#completion#OmniFunc
 let g:ale_c_parse_compile_commands = 1
 let g:ale_c_build_dir_names = ['out/Debug']
-let g:ale_linters = { 
+let g:ale_linters = {
             \ 'cpp' : ['g++'],
             \ 'sh': ['shellcheck']
             \ }
@@ -452,6 +394,16 @@ let g:NERDTreeExtensionHighlightColor = {
 lua << EOF
 require('telescope').setup{
     defaults = {
+        mappings = {
+            i = {
+                ["<C-j>"] = 'move_selection_next',
+                ["<C-k>"] = 'move_selection_previous',
+            },
+            n = {
+                ["<C-j>"] = 'move_selection_next',
+                ["<C-k>"] = 'move_selection_previous',
+            },
+        }
     },
     pickers = {
         tags = {
@@ -469,6 +421,8 @@ let g:nvim_tree_add_trailing = 1
 
 lua << EOF
 require'nvim-tree'.setup{
+    disable_netrw = false,
+    hijack_netrw = false,
     update_cwd = true,
     update_focused_file = {
         enable = true,
@@ -485,6 +439,7 @@ highlight NvimTreeFolderIcon guibg=blue
 " Startify #####################################################################
 
 let g:startify_change_to_vcs_root = 1
+let g:startify_bookmarks = readfile(expand('<sfile>:p:h') . '/startify.bookmarks')
 
 " LSP servers ##################################################################
 
@@ -501,3 +456,10 @@ require'lspconfig'.jsonls.setup {
 }
 EOF
 
+" Firenvim #####################################################################
+
+if exists('g:started_by_firenvim')
+    set guifont=UbuntuMono\ Nerd\ Font:h14
+    set tw=0
+    set linebreak
+endif

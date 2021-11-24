@@ -148,7 +148,7 @@ inoremap <C-s> <Esc>:w<CR>a
 noremap  <C-s> :w<CR>:echo "File saved."<CR>
 
 " Insert non-breaking space
-inoremap <C-S-Space>
+inoremap <C-S-Space>  
 
 " Open help in a vertical window
 nnoremap <C-H> :vertical botright help

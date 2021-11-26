@@ -445,6 +445,7 @@ let g:startify_bookmarks = readfile(expand('<sfile>:p:h') . '/startify.bookmarks
 
 lua require'lspconfig'.pyright.setup{}
 lua require'lspconfig'.rust_analyzer.setup{}
+lua require'lspconfig'.bashls.setup{}
 
 lua << EOF
 --Enable (broadcasting) snippet capability for completion

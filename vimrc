@@ -415,7 +415,6 @@ EOF
 
 " nvim-tree ####################################################################
 
-let g:nvim_tree_gitignore = 1
 let g:nvim_tree_highlight_opened_files = 1
 let g:nvim_tree_add_trailing = 1
 
@@ -429,6 +428,9 @@ require'nvim-tree'.setup{
     },
     filters = {
         custom = { '.git', '__pycache__', '.venv', '*.egg-info' }
+    },
+    git = {
+        ignore = true,
     },
 }
 EOF

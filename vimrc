@@ -456,6 +456,9 @@ execute('lua require("lspconfig").bashls.setup('
             \     : '{}' )
             \ . ')')
 
+" Vimscript
+lua require'lspconfig'.vimls.setup{}
+
 " JSON
 lua << EOF
     --Enable (broadcasting) snippet capability for completion

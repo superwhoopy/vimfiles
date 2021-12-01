@@ -445,18 +445,25 @@ let g:startify_bookmarks = readfile(expand('<sfile>:p:h') . '/startify.bookmarks
 
 " LSP servers ##################################################################
 
+" Python
 lua require'lspconfig'.pyright.setup{}
+" Rust
 lua require'lspconfig'.rust_analyzer.setup{}
-lua require'lspconfig'.bashls.setup{}
+" Bash (requires to tweak the starting command on windows)
+execute('lua require("lspconfig").bashls.setup('
+            \ . ( has('win32')
+            \     ? '{ cmd = { "bash-language-server.cmd", "start" } }'
+            \     : '{}' )
+            \ . ')')
 
+" JSON
 lua << EOF
---Enable (broadcasting) snippet capability for completion
-local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities.textDocument.completion.completionItem.snippetSupport = true
-
-require'lspconfig'.jsonls.setup {
-  capabilities = capabilities,
-}
+    --Enable (broadcasting) snippet capability for completion
+    local capabilities = vim.lsp.protocol.make_client_capabilities()
+    capabilities.textDocument.completion.completionItem.snippetSupport = true
+    require'lspconfig'.jsonls.setup {
+      capabilities = capabilities,
+    }
 EOF
 
 " Firenvim #####################################################################

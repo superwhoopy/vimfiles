@@ -168,6 +168,9 @@ inoremap jj    <Esc>
 " Build a Ctags file
 command! MkTags call utils#MkTags()
 
+" Switch to markdown mode: no 80 chars, linebreak
+command! Markdown set tw=0 | set linebreak
+
 " Change to the directory of the current file
 command! Cd     cd\ %:p:h
 
@@ -476,3 +479,4 @@ if exists('g:started_by_firenvim')
     set tw=0
     set linebreak
 endif
+

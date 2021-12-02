@@ -9,21 +9,15 @@
 "endif
 
 if has('win32')
-    let s:fontname = "UbuntuMono NF"
+    let s:fontname = "UbuntuMono\\ NF"
     let s:fontsize = 10
 else " Unix
-    let s:fontname = "UbuntuMono Nerd Font"
+    let s:fontname = "UbuntuMono\\ Nerd\\ Font"
     let s:fontsize = 14
 endif
 
 function! SetFont()
-    if has('nvim')
-        " Neovim
-        execute("GuiFont! " . s:fontname . ":h" . s:fontsize)
-    else
-        " Regular vim
-        execute("set guifont=" . s:fontname . ":h" . s:fontsize)
-    endif
+    execute("set guifont=" . s:fontname . ":h" . s:fontsize)
 endfunction
 
 function! AdjustFontSize(amount)
@@ -41,8 +35,6 @@ set guioptions-=R
 set guioptions-=l
 set guioptions-=L
 set lines=60 columns=85   " taille de la fenêtre au démarrage
-
-set lazyredraw
 
 nnoremap <C-=> :call AdjustFontSize(1)<CR><C-W>=
 nnoremap <C--> :call AdjustFontSize(-1)<CR><C-W>=

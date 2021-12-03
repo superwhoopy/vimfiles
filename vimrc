@@ -169,7 +169,7 @@ inoremap jj    <Esc>
 command! MkTags call utils#MkTags()
 
 " Switch to markdown mode: no 80 chars, linebreak
-command! Markdown set tw=0 | set linebreak
+command! Markdown set ft=markdown tw=0 linebreak
 
 " Change to the directory of the current file
 command! Cd     cd\ %:p:h

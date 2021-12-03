@@ -34,7 +34,9 @@ set guioptions-=r                  " do not show vertical bars
 set guioptions-=R
 set guioptions-=l
 set guioptions-=L
-set lines=60 columns=85   " taille de la fenêtre au démarrage
+set lines=60 columns=90   " taille de la fenêtre au démarrage
+
+set mouse=a " enable mouse support
 
 nnoremap <C-=> :call AdjustFontSize(1)<CR><C-W>=
 nnoremap <C--> :call AdjustFontSize(-1)<CR><C-W>=

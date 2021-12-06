@@ -148,12 +148,12 @@ nnoremap <F12> :BufExplorer<CR>
 inoremap <C-s> <Esc>:w<CR>a
 noremap  <C-s> :w<CR>:echo "File saved."<CR>
 
-" Insert non-breaking space
+" Insert non-breaking space (do not remove trailing whitespace!)
 inoremap <C-S-Space>  
 
-" Open help in a vertical window
-nnoremap <C-H> :vertical botright help
-inoremap <C-H> <Esc>:vertical botright help
+" Open help in a vertical window (do not remove trailing whitespaces!)
+nnoremap <C-H> :vertical botright help 
+inoremap <C-H> <Esc>:vertical botright help 
 
 " Tag navigation
 noremap <C-Tab>   <C-]>
@@ -445,6 +445,13 @@ highlight NvimTreeFolderIcon guibg=blue
 " Startify #####################################################################
 
 let g:startify_change_to_vcs_root = 1
+
+" Load Startify bookmarks from file; create an empty bookmarks file if it does
+" not exist
+let s:startify_bookmarks_file = expand('<sfile>:p:h') . '/startify.bookmarks'
+if !filereadable(s:startify_bookmarks_file)
+    call writefile([], s:startify_bookmarks_file)
+endif
 let g:startify_bookmarks = readfile(expand('<sfile>:p:h') . '/startify.bookmarks')
 
 " LSP servers ##################################################################

@@ -53,6 +53,7 @@ Plug 'vim-scripts/DrawIt'
 Plug 'vim-scripts/cflow-output-colorful'
 Plug 'Vimjas/vim-python-pep8-indent'
 Plug 'w0rp/ale'
+Plug 'wfxr/minimap.vim'
 Plug 'zchee/vim-flatbuffers'
 
 if has('win32')

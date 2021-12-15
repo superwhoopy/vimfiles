@@ -11,7 +11,6 @@ Plug 'dhruvasagar/vim-table-mode'
 Plug 'dstein64/vim-startuptime'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'garbas/vim-snipmate'
-Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
 Plug 'hiphish/jinja.vim'
 Plug 'honza/vim-snippets'
 Plug 'jeffkreeftmeijer/vim-numbertoggle'

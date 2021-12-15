@@ -187,11 +187,9 @@ noremap <Leader>fo :call utils#ToggleAutoFormat()<CR>
 " keystroke <A-l> into l for some reason...
 function s:MapMove()
     for l:key in ['h', 'j', 'k', 'l']
-        for l:keycomb in ['<A-' . l:key . '>', '' . l:key]
-            execute('nnoremap ' . l:keycomb . ' :wincmd ' . l:key . '<CR>')
-            execute('inoremap ' . l:keycomb
-                  \ . ' <Esc>:wincmd ' . l:key . '<CR>a')
-        endfor
+        execute('nnoremap <A-' . l:key . '> :wincmd ' . l:key . '<CR>')
+        execute('inoremap <A-' . l:key . '> '
+                    \ . '<Esc>:wincmd ' . l:key . '<CR>a')
     endfor
 endfunction
 call s:MapMove()
@@ -406,6 +404,16 @@ require('telescope').setup{
                 ["<C-j>"] = 'move_selection_next',
                 ["<C-k>"] = 'move_selection_previous',
             },
+        },
+        vimgrep_arguments = {
+          "rg",
+          "--color=never",
+          "--no-heading",
+          "--with-filename",
+          "--line-number",
+          "--column",
+          "--smart-case",
+          "--glob=!tags"
         }
     },
     pickers = {

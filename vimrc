@@ -1,7 +1,7 @@
 set encoding=utf-8
 scriptencoding utf8
 
-let g:ale_completion_enabled = 1
+let g:plug_threads = 16
 
 call plug#begin()
 
@@ -355,6 +355,7 @@ xmap   s <Plug>VSurround
 
 set omnifunc=ale#completion#OmniFunc
 let g:ale_c_parse_compile_commands = 1
+let g:ale_completion_enabled = 1
 let g:ale_c_build_dir_names = ['out/Debug']
 let g:ale_linters = {
             \ 'cpp' : ['g++'],

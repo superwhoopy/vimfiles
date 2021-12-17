@@ -157,6 +157,11 @@ inoremap <C-H> <Esc>:vertical botright help
 " Tag navigation
 noremap <C-Tab>   <C-]>
 noremap <C-S-Tab> :ptag <C-R><C-W><CR>
+" Open tag under cursor in buffer to the left/right/top/bottom
+noremap <Leader>th yiw<C-W>h:tag <C-R>"<CR>
+noremap <Leader>tl yiw<C-W>l:tag <C-R>"<CR>
+noremap <Leader>tj yiw<C-W>j:tag <C-R>"<CR>
+noremap <Leader>tk yiw<C-W>k:tag <C-R>"<CR>
 
 " Move across visual lines inside wrapped long lines
 nnoremap k gk

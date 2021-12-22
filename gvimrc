@@ -17,7 +17,11 @@ else " Unix
 endif
 
 function! SetFont()
-    execute("set guifont=" . s:fontname . ":h" . s:fontsize)
+    if has('nvim')
+        execute("GuiFont! " . s:fontname . ":h" . s:fontsize)
+    else
+        execute("set guifont=" . s:fontname . ":h" . s:fontsize)
+    endif
 endfunction
 
 function! AdjustFontSize(amount)

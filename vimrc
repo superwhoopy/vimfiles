@@ -127,13 +127,7 @@ if has('win32')
   set backspace=2
   set noshellslash
 
-  if !has('nvim')
-    " Python DLL to look for on Windows
-    set pythonthreedll=python36.dll
-    set pythonthreehome="C:\Program Files\Python36"
-  endif
-else
-  set shell=/bin/bash
+  set shell=cmd.exe
 endif
 
 "###############################################################################

@@ -42,5 +42,6 @@ set lines=60 columns=90   " taille de la fenêtre au démarrage
 
 set mouse=a " enable mouse support
 
+" adjust font size
 nnoremap <C-=> :call AdjustFontSize(1)<CR><C-W>=
 nnoremap <C--> :call AdjustFontSize(-1)<CR><C-W>=

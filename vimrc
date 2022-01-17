@@ -460,7 +460,7 @@ let s:startify_bookmarks_file = expand('<sfile>:p:h') . '/startify.bookmarks'
 if !filereadable(s:startify_bookmarks_file)
     call writefile([], s:startify_bookmarks_file)
 endif
-let g:startify_bookmarks = readfile(expand('<sfile>:p:h') . '/startify.bookmarks')
+let g:startify_bookmarks = readfile(s:startify_bookmarks_file)
 
 " LSP servers ##################################################################
 

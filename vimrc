@@ -465,7 +465,7 @@ let g:startify_bookmarks = readfile(s:startify_bookmarks_file)
 " LSP servers ##################################################################
 
 " Python
-lua require'lspconfig'.pyright.setup{}
+" lua require'lspconfig'.pyright.setup{}
 " Rust
 lua require'lspconfig'.rust_analyzer.setup{}
 " Bash (requires to tweak the starting command on windows)

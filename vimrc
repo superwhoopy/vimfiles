@@ -367,8 +367,7 @@ if has('unix')
     let g:ast_psyko_path = s:core_sdk . '/bin/psyko'
     let g:ast_kernel_dir = s:core_sdk . '/k2'
 
-    let g:ale_json_vscode_ls = expand('~/.local/node_modules/'
-                \ . 'bin/vscode-json-languageserver')
+    let g:ale_json_vscode_ls = expand('/usr/bin/vscode-json-languageserver')
     let g:ale_psy_psyko_jsonconf =
         \ [expand('~/.vim/plugged/vim-asterios/tests/psy/flags.psymodule.json')]
 
@@ -484,7 +483,8 @@ lua << EOF
     local capabilities = vim.lsp.protocol.make_client_capabilities()
     capabilities.textDocument.completion.completionItem.snippetSupport = true
     require'lspconfig'.jsonls.setup {
-      capabilities = capabilities,
+        cmd = { "vscode-json-languageserver", "--stdio" },
+        capabilities = capabilities,
     }
 EOF
 

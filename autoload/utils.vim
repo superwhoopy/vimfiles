@@ -68,3 +68,4 @@ function! utils#FillLine(str) abort
         execute('s/$/\=(" ".repeat(a:str, l:reps))/')
     endif
 endfunction
+

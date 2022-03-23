@@ -172,6 +172,7 @@ command! MkTags call utils#MkTags()
 " Switch to markdown mode: no 80 chars, linebreak
 command! Markdown set ft=markdown tw=0 linebreak
 
+
 " Change to the directory of the current file
 command! Cd     cd\ %:p:h
 
@@ -253,6 +254,9 @@ augroup END
 "###############################################################################
 " PLUGINS CONFIGURATION
 "###############################################################################
+
+" PlantUML #####################################################################
+let g:plantuml_executable_script='plantuml -o out/'
 
 " SnipMate #####################################################################
 
@@ -460,6 +464,8 @@ if !filereadable(s:startify_bookmarks_file)
     call writefile([], s:startify_bookmarks_file)
 endif
 let g:startify_bookmarks = readfile(s:startify_bookmarks_file)
+" edit the file that stores startify bookmarks
+command! StartifyEditBookmarks execute('edit ' . s:startify_bookmarks_file)
 
 " LSP servers ##################################################################
 

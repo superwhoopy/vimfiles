@@ -451,7 +451,6 @@ require'nvim-tree'.setup{
 EOF
 
 nmap <C-n> :NvimTreeToggle<CR>
-highlight NvimTreeFolderIcon guibg=blue
 
 " Startify #####################################################################
 

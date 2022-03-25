@@ -455,6 +455,19 @@ nmap <C-n> :NvimTreeToggle<CR>
 " Startify #####################################################################
 
 let g:startify_change_to_vcs_root = 1
+let g:startify_fortune_use_unicode = 1
+
+let g:startify_lists = [
+      \ { 'type': 'files',     'header': ['   MRU']            },
+      \ { 'type': 'bookmarks', 'header': ['   Bookmarks']      },
+      \ { 'type': 'sessions',  'header': ['   Sessions']       },
+      \ { 'type': 'commands',  'header': ['   Commands']       },
+      \ ]
+
+let g:startify_commands = [
+    \ ['New Mail', 'enew | set ft=mail'],
+    \ ['New Markdown', 'enew | Markdown'],
+    \ ]
 
 " Load Startify bookmarks from file; create an empty bookmarks file if it does
 " not exist
@@ -463,7 +476,7 @@ if !filereadable(s:startify_bookmarks_file)
     call writefile([], s:startify_bookmarks_file)
 endif
 let g:startify_bookmarks = readfile(s:startify_bookmarks_file)
-" edit the file that stores startify bookmarks
+" quickly edit the file that stores startify bookmarks
 command! StartifyEditBookmarks execute('edit ' . s:startify_bookmarks_file)
 
 " LSP servers ##################################################################

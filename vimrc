@@ -438,6 +438,9 @@ lua << EOF
 require'nvim-tree'.setup{
     hijack_netrw = true,
     update_cwd = true,
+    window_picker = {
+        enable = false, -- open in buffer where NvimTree was invoked
+    },
     update_focused_file = {
         enable = true,
     },

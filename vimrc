@@ -361,7 +361,8 @@ let g:ale_completion_enabled = 1
 let g:ale_c_build_dir_names = ['out/Debug']
 let g:ale_linters = {
             \ 'cpp' : ['g++'],
-            \ 'sh': ['shellcheck']
+            \ 'sh': ['shellcheck'],
+            \ 'haskell': ['hls'],
             \ }
 
 " vim-asterios #################################################################

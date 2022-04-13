@@ -32,6 +32,7 @@ Plug 'morhetz/gruvbox'
 Plug 'ngg/vim-gn'
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'neovim/nvim-lspconfig'
+Plug 'neovimhaskell/haskell-vim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-telescope/telescope-symbols.nvim'
@@ -132,6 +133,15 @@ if has('win32')
 endif
 
 "###############################################################################
+" SOURCE LOCAL VIMRC FILE COMPLEMENT
+"###############################################################################
+" this file is not versioned, and is local to the machine
+let s:local_vimrc = expand('<sfile>:p:h') . '/localrc.vim'
+if filereadable(s:local_vimrc)
+    execute("source " . s:local_vimrc)
+endif
+
+"###############################################################################
 " MAPPINGS AND COMMANDS
 "###############################################################################
 
@@ -154,10 +164,13 @@ inoremap <C-H> <Esc>:vertical botright help
 noremap <C-Tab>   <C-]>
 noremap <C-S-Tab> :ptag <C-R><C-W><CR>
 " Open tag under cursor in buffer to the left/right/top/bottom
-noremap <Leader>th yiw<C-W>h:tag <C-R>"<CR>
-noremap <Leader>tl yiw<C-W>l:tag <C-R>"<CR>
-noremap <Leader>tj yiw<C-W>j:tag <C-R>"<CR>
-noremap <Leader>tk yiw<C-W>k:tag <C-R>"<CR>
+function s:OpenTagInDirection()
+    for l:direction in ["h","j","k","l"]
+        execute("noremap <Leader>t" . l:direction . " yiw<C-W>"
+                    \ . l:direction . ":tag <C-R>\"<CR>")
+    endfor
+endfunction
+call s:OpenTagInDirection()
 
 " Move across visual lines inside wrapped long lines
 nnoremap k gk
@@ -509,12 +522,4 @@ lua << EOF
         capabilities = capabilities,
     }
 EOF
-
-" Firenvim #####################################################################
-
-if exists('g:started_by_firenvim')
-    set guifont=UbuntuMono\ Nerd\ Font:h14
-    set tw=0
-    set linebreak
-endif
 

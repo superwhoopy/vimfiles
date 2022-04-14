@@ -108,7 +108,7 @@ set wildignore=*/.git/*,*.o,*.obj,*.lib,*.a,*.pyc,*/__pycache__/*
 set previewheight=24
 
 " Default copy/paste from system clipboard
-set clipboard=unnamed
+set clipboard=unnamed,unnamedplus
 
 " Enable French and English spelling languages by default
 set spelllang=en_us,fr

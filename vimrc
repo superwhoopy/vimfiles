@@ -14,6 +14,7 @@ Plug 'garbas/vim-snipmate'
 Plug 'hiphish/jinja.vim'
 Plug 'honza/vim-snippets'
 Plug 'jeffkreeftmeijer/vim-numbertoggle'
+Plug 'jenterkin/vim-autosource'
 Plug 'jiangmiao/auto-pairs'
 Plug 'jlanzarotta/bufexplorer'
 Plug 'jremmen/vim-ripgrep'
@@ -44,6 +45,7 @@ Plug 'shime/vim-livedown'
 Plug 'tmhedberg/SimpylFold' " better Python folding
 Plug 'tomtom/tlib_vim'
 Plug 'tpope/vim-dispatch'
+Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
 Plug 'vim-airline/vim-airline'
@@ -235,6 +237,10 @@ command! AlignRight call AlignRightFrom(getline('.'), getpos('.')[2] - 1,
 inoremap <A-Right> <Esc>:call AlignRightFrom(getline('.'), getpos('.')[2] - 1,
             \ &textwidth)<CR>i
 
+" Use <C-L> to clear the highlighting of :set hlsearch.
+if maparg('<C-L>', 'n') ==# ''
+  nnoremap <silent> <C-L> :nohlsearch<C-R>=has('diff')?'<Bar>diffupdate':''<CR><CR><C-L>
+endif
 
 " telescope mappings -----------------------------------------------------------
 
@@ -375,7 +381,7 @@ let g:ale_c_build_dir_names = ['out/Debug']
 let g:ale_linters = {
             \ 'cpp' : ['g++'],
             \ 'sh': ['shellcheck'],
-            \ 'haskell': ['hls'],
+            \ 'haskell': ['hls', 'ghc'],
             \ }
 
 " vim-asterios #################################################################

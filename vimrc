@@ -18,6 +18,7 @@ Plug 'jenterkin/vim-autosource'
 Plug 'jiangmiao/auto-pairs'
 Plug 'jlanzarotta/bufexplorer'
 Plug 'jremmen/vim-ripgrep'
+Plug 'junegunn/goyo.vim'
 Plug 'junegunn/vim-easy-align'
 Plug 'justinmk/vim-syntax-extra'
 Plug 'krono-safe/vim-asterios'
@@ -42,6 +43,7 @@ Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend upda
 Plug 'romainl/flattened' " Solarized without bullshit
 Plug 'ryanoasis/vim-devicons'
 Plug 'raimon49/requirements.txt.vim'
+Plug 'sainnhe/everforest'
 Plug 'shime/vim-livedown'
 Plug 'tmhedberg/SimpylFold' " better Python folding
 Plug 'tomtom/tlib_vim'
@@ -58,7 +60,6 @@ Plug 'vim-scripts/cflow-output-colorful'
 Plug 'vim-scripts/confluencewiki.vim'
 Plug 'Vimjas/vim-python-pep8-indent'
 Plug 'w0rp/ale'
-Plug 'wfxr/minimap.vim'
 Plug 'zchee/vim-flatbuffers'
 
 if has('win32')
@@ -118,7 +119,13 @@ set spelllang=en_us,fr
 
 " Have a gui-like rendering even in terminal
 set termguicolors
-colorscheme gruvbox
+
+" set colorscheme once in this variable, and use it for all plugins that require
+" it
+
+let s:colorscheme = 'everforest'
+" let s:colorscheme = 'gruvbox'
+execute("colorscheme " . s:colorscheme)
 
 " Show tabs, trailing and non-breakable spaces
 set list
@@ -300,7 +307,7 @@ let g:strip_whitespace_confirm = 0
 " Airline ######################################################################
 
 " airline stuff
-let g:airline_theme='gruvbox'
+let g:airline_theme = s:colorscheme
 " short ids for mode
 let g:airline_mode_map = {
       \ '__' : '-',

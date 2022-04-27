@@ -120,9 +120,11 @@ set spelllang=en_us,fr
 " Have a gui-like rendering even in terminal
 set termguicolors
 
+" Have only one status line for everyone (easier to read)
+set laststatus=3
+
 " set colorscheme once in this variable, and use it for all plugins that require
 " it
-
 let s:colorscheme = 'everforest'
 " let s:colorscheme = 'gruvbox'
 execute("colorscheme " . s:colorscheme)

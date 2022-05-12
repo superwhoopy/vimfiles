@@ -512,6 +512,12 @@ let g:startify_bookmarks = readfile(s:startify_bookmarks_file)
 " quickly edit the file that stores startify bookmarks
 command! StartifyEditBookmarks execute('edit ' . s:startify_bookmarks_file)
 
+" Goyo #########################################################################
+
+let g:goyo_width = 120
+let g:goyo_linenr = 1
+let g:goyo_height = 100
+
 " LSP servers ##################################################################
 
 " Python

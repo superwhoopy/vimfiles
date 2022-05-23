@@ -15,11 +15,12 @@ Plug 'hiphish/jinja.vim'
 Plug 'honza/vim-snippets'
 Plug 'jeffkreeftmeijer/vim-numbertoggle'
 Plug 'jenterkin/vim-autosource'
-Plug 'jiangmiao/auto-pairs'
+" Plug 'jiangmiao/auto-pairs'
 Plug 'jlanzarotta/bufexplorer'
 Plug 'jremmen/vim-ripgrep'
 Plug 'junegunn/goyo.vim'
 Plug 'junegunn/vim-easy-align'
+Plug 'junegunn/vim-peekaboo'
 Plug 'justinmk/vim-syntax-extra'
 Plug 'krono-safe/vim-asterios'
 Plug 'kyazdani42/nvim-web-devicons'
@@ -43,7 +44,8 @@ Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend upda
 Plug 'romainl/flattened' " Solarized without bullshit
 Plug 'ryanoasis/vim-devicons'
 Plug 'raimon49/requirements.txt.vim'
-Plug 'sainnhe/everforest'
+Plug 'sainnhe/everforest' " Theme
+Plug 'sunjon/Shade.nvim'
 Plug 'shime/vim-livedown'
 Plug 'tmhedberg/SimpylFold' " better Python folding
 Plug 'tomtom/tlib_vim'
@@ -54,10 +56,10 @@ Plug 'tpope/vim-surround'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'vim-latex/vim-latex'
-Plug 'vim-python/python-syntax'
+" Plug 'vim-python/python-syntax'
 Plug 'vim-scripts/DrawIt'
 Plug 'vim-scripts/cflow-output-colorful'
-Plug 'vim-scripts/confluencewiki.vim'
+" Plug 'vim-scripts/confluencewiki.vim'
 Plug 'Vimjas/vim-python-pep8-indent'
 Plug 'w0rp/ale'
 Plug 'zchee/vim-flatbuffers'
@@ -518,6 +520,20 @@ let g:goyo_width = 120
 let g:goyo_linenr = 1
 let g:goyo_height = 100
 
+" Shade ########################################################################
+
+lua << EOF
+require('shade').setup{
+  overlay_opacity = 50,
+  opacity_step = 1,
+  keys = {
+      brightness_up    = '<C-Up>',
+      brightness_down  = '<C-Down>',
+      toggle           = '<Leader>s',
+  }
+}
+EOF
+
 " LSP servers ##################################################################
 
 " Python
@@ -544,4 +560,6 @@ lua << EOF
         capabilities = capabilities,
     }
 EOF
+
+
 

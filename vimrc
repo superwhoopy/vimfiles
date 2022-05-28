@@ -463,16 +463,10 @@ EOF
 
 " nvim-tree ####################################################################
 
-let g:nvim_tree_highlight_opened_files = 1
-let g:nvim_tree_add_trailing = 1
-
 lua << EOF
 require'nvim-tree'.setup{
     hijack_netrw = true,
     update_cwd = true,
-    window_picker = {
-        enable = false, -- open in buffer where NvimTree was invoked
-    },
     update_focused_file = {
         enable = true,
     },
@@ -481,6 +475,17 @@ require'nvim-tree'.setup{
     },
     git = {
         ignore = true,
+    },
+    renderer = {
+        add_trailing = true,
+        highlight_opened_files = 'all',
+    },
+    actions = {
+        open_file = {
+            window_picker = {
+                enable = false
+            }
+        },
     },
 }
 EOF

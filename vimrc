@@ -40,7 +40,7 @@ Plug 'neovimhaskell/haskell-vim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-telescope/telescope-symbols.nvim'
-Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update
+Plug 'nvim-nreesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update
 Plug 'romainl/flattened' " Solarized without bullshit
 Plug 'ryanoasis/vim-devicons'
 Plug 'raimon49/requirements.txt.vim'

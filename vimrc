@@ -122,8 +122,8 @@ set spelllang=en_us,fr
 " Have a gui-like rendering even in terminal
 set termguicolors
 
-" Have only one status line for everyone (easier to read)
-set laststatus=3
+" always have a status line for each window
+set laststatus=2
 
 " set colorscheme once in this variable, and use it for all plugins that require
 " it
@@ -392,6 +392,7 @@ let g:ale_completion_enabled = 1
 let g:ale_c_build_dir_names = ['out/Debug']
 let g:ale_linters = {
             \ 'cpp' : ['g++'],
+            \ 'c' : ['gcc'],
             \ 'sh': ['shellcheck'],
             \ 'haskell': ['hls', 'ghc'],
             \ }

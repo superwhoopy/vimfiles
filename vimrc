@@ -530,8 +530,8 @@ let g:goyo_height = 100
 
 lua << EOF
 require('shade').setup{
-  overlay_opacity = 50,
-  opacity_step = 1,
+  overlay_opacity = 70,
+  opacity_step = 5,
   keys = {
       brightness_up    = '<C-Up>',
       brightness_down  = '<C-Down>',

@@ -24,7 +24,7 @@ Plug 'junegunn/vim-peekaboo'
 Plug 'justinmk/vim-syntax-extra'
 Plug 'krono-safe/vim-asterios'
 Plug 'kyazdani42/nvim-web-devicons'
-Plug 'kyazdani42/nvim-tree.lua'
+" Plug 'kyazdani42/nvim-tree.lua'
 Plug 'lepture/vim-velocity'
 Plug 'LnL7/vim-nix'
 Plug 'Lokaltog/vim-easymotion'
@@ -171,8 +171,8 @@ noremap  <C-s> :w<CR>:echo "File saved."<CR>
 inoremap <C-S-Space>  
 
 " Open help in a vertical window (do not remove trailing whitespaces!)
-nnoremap <C-H> :vertical botright help 
-inoremap <C-H> <Esc>:vertical botright help 
+nnoremap <C-H> :vertical botright help
+inoremap <C-H> <Esc>:vertical botright help
 
 " Tag navigation
 noremap <C-Tab>   <C-]>
@@ -257,7 +257,6 @@ endif
 " telescope mappings -----------------------------------------------------------
 
 " Ctrl+P to find files
-" nnoremap <C-p> :lua require('telescope.builtin').find_files()<CR>
 nnoremap <C-p> :lua require('telescope.builtin').find_files()<CR>
 " Ctrl+Shift+P to find tags
 nnoremap <C-S-p> :lua require('telescope.builtin').tags()<CR>
@@ -464,32 +463,32 @@ EOF
 
 " nvim-tree ####################################################################
 
-lua << EOF
-require'nvim-tree'.setup{
-    hijack_netrw = true,
-    update_cwd = true,
-    update_focused_file = {
-        enable = true,
-    },
-    filters = {
-        custom = { '.git', '__pycache__', '.venv', '*.egg-info' }
-    },
-    git = {
-        ignore = true,
-    },
-    renderer = {
-        add_trailing = true,
-        highlight_opened_files = 'all',
-    },
-    actions = {
-        open_file = {
-            window_picker = {
-                enable = false
-            }
-        },
-    },
-}
-EOF
+" lua << EOF
+" require'nvim-tree'.setup{
+"     hijack_netrw = true,
+"     update_cwd = true,
+"     update_focused_file = {
+"         enable = true,
+"     },
+"     filters = {
+"         custom = { '.git', '__pycache__', '.venv', '*.egg-info' }
+"     },
+"     git = {
+"         ignore = true,
+"     },
+"     renderer = {
+"         add_trailing = true,
+"         highlight_opened_files = 'all',
+"     },
+"     actions = {
+"         open_file = {
+"             window_picker = {
+"                 enable = false
+"             }
+"         },
+"     },
+" }
+" EOF
 
 nmap <C-n> :NvimTreeToggle<CR>
 

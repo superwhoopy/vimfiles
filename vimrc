@@ -40,6 +40,7 @@ Plug 'neovimhaskell/haskell-vim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-telescope/telescope-symbols.nvim'
+Plug 'nvim-telescope/telescope-file-browser.nvim'
 Plug 'nvim-treesitter/nvim-treesitter' , {'do': ':TSUpdate'} " We recommend updating the parsers on update
 Plug 'romainl/flattened' " Solarized without bullshit
 Plug 'ryanoasis/vim-devicons'
@@ -59,9 +60,9 @@ Plug 'vim-latex/vim-latex'
 Plug 'vim-python/python-syntax'
 Plug 'vim-scripts/DrawIt'
 Plug 'vim-scripts/cflow-output-colorful'
-" Plug 'vim-scripts/confluencewiki.vim'
 Plug 'Vimjas/vim-python-pep8-indent'
 Plug 'w0rp/ale'
+Plug 'yamatsum/nvim-cursorline'
 Plug 'zchee/vim-flatbuffers'
 
 if has('win32')
@@ -171,8 +172,8 @@ noremap  <C-s> :w<CR>:echo "File saved."<CR>
 inoremap <C-S-Space>  
 
 " Open help in a vertical window (do not remove trailing whitespaces!)
-nnoremap <C-H> :vertical botright help
-inoremap <C-H> <Esc>:vertical botright help
+nnoremap <C-H> :vertical botright help 
+inoremap <C-H> <Esc>:vertical botright help 
 
 " Tag navigation
 noremap <C-Tab>   <C-]>
@@ -257,13 +258,21 @@ endif
 " telescope mappings -----------------------------------------------------------
 
 " Ctrl+P to find files
-nnoremap <C-p> :lua require('telescope.builtin').find_files()<CR>
+nnoremap <C-p> :lua require('telescope.builtin').fd()<CR>
 " Ctrl+Shift+P to find tags
 nnoremap <C-S-p> :lua require('telescope.builtin').tags()<CR>
 " Ctrl+Shift+G to grep into directory (Ctrl+G displays file name)
 nnoremap <C-S-g> :lua require('telescope.builtin').live_grep()<CR>
 " Ctrl + B to browse openned buffers
 nnoremap <C-b> :lua require('telescope.builtin').buffers()<CR>
+" Ctrl + N to browse files from CWD
+nnoremap <C-n>
+        \ :lua require('telescope').extensions.file_browser.file_browser()<CR>
+" Ctrl + Shift + N to browse files from the current buffer
+nnoremap <C-S-n>
+            \ :lua require('telescope').extensions.file_browser.
+            \ file_browser({path='%:p:h', select_buffer=true})<CR>
+
 
 " <Leader>g to grep the word under the cursor
 nnoremap <Leader>g :lua require('telescope.builtin').grep_string()<CR>
@@ -430,6 +439,7 @@ let g:NERDTreeExtensionHighlightColor = {
 " telescope ####################################################################
 
 lua << EOF
+local fb_actions = require('telescope').extensions.file_browser.actions
 require('telescope').setup{
     defaults = {
         mappings = {
@@ -458,7 +468,25 @@ require('telescope').setup{
             only_sort_tags = true
         }
     },
+    extensions = {
+        file_browser = {
+            theme = "ivy",
+            -- disables netrw and use telescope-file-browser in its place
+            hijack_netrw = true,
+            mappings = {
+                ["i"] = {
+                    -- your custom insert mode mappings
+                    ["<Left>"] = fb_actions.goto_parent_dir
+                },
+                ["n"] = {
+                    -- your custom normal mode mappings
+                },
+            },
+            grouped = true,
+        },
+    },
 }
+require("telescope").load_extension "file_browser"
 EOF
 
 " nvim-tree ####################################################################
@@ -489,8 +517,8 @@ EOF
 "     },
 " }
 " EOF
-
-nmap <C-n> :NvimTreeToggle<CR>
+"
+" nmap <C-n> :NvimTreeToggle<CR>
 
 " Startify #####################################################################
 
@@ -599,5 +627,19 @@ lua << EOF
     }
 EOF
 
+" nvim-cursorline ##############################################################
 
-
+lua << EOF
+    require('nvim-cursorline').setup {
+        cursorline = {
+            enable = true,
+            timeout = 500,
+            number = false,
+        },
+        cursorword = {
+            enable = true,
+            min_length = 3,
+            hl = { underline = true },
+        }
+    }
+EOF

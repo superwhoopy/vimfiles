@@ -16,7 +16,6 @@ Plug 'hiphish/jinja.vim'
 Plug 'honza/vim-snippets'
 Plug 'jeffkreeftmeijer/vim-numbertoggle'
 Plug 'jenterkin/vim-autosource'
-" Plug 'jiangmiao/auto-pairs'
 Plug 'jlanzarotta/bufexplorer'
 Plug 'jremmen/vim-ripgrep'
 Plug 'junegunn/goyo.vim'
@@ -24,8 +23,6 @@ Plug 'junegunn/vim-easy-align'
 Plug 'junegunn/vim-peekaboo'
 Plug 'justinmk/vim-syntax-extra'
 Plug 'krono-safe/vim-asterios'
-Plug 'kyazdani42/nvim-web-devicons'
-" Plug 'kyazdani42/nvim-tree.lua'
 Plug 'lepture/vim-velocity'
 Plug 'LnL7/vim-nix'
 Plug 'Lokaltog/vim-easymotion'
@@ -33,7 +30,7 @@ Plug 'MarcWeber/vim-addon-mw-utils'
 Plug 'martinda/Jenkinsfile-vim-syntax'
 Plug 'majutsushi/tagbar'
 Plug 'mhinz/vim-startify'
-Plug 'morhetz/gruvbox'
+Plug 'morhetz/gruvbox' " colorscheme
 Plug 'ngg/vim-gn'
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'neovim/nvim-lspconfig'
@@ -43,7 +40,6 @@ Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-telescope/telescope-symbols.nvim'
 Plug 'nvim-telescope/telescope-file-browser.nvim'
 Plug 'nvim-treesitter/nvim-treesitter' , {'do': ':TSUpdate'} " We recommend updating the parsers on update
-Plug 'romainl/flattened' " Solarized without bullshit
 Plug 'ryanoasis/vim-devicons'
 Plug 'raimon49/requirements.txt.vim'
 Plug 'sainnhe/everforest' " Theme
@@ -60,7 +56,6 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'vim-latex/vim-latex'
 Plug 'vim-python/python-syntax'
 Plug 'vim-scripts/DrawIt'
-Plug 'vim-scripts/cflow-output-colorful'
 Plug 'Vimjas/vim-python-pep8-indent'
 Plug 'w0rp/ale'
 Plug 'yamatsum/nvim-cursorline'
@@ -431,11 +426,6 @@ let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols = {
             \ 'psy': 'Ψ',
             \ 'bgt': '祥',
             \ }
-let s:ks_blue = '03658c'
-let g:NERDTreeExtensionHighlightColor = {
-            \ 'psy': s:ks_blue,
-            \ 'bgt': s:ks_blue,
-            \ }
 
 " telescope ####################################################################
 
@@ -573,7 +563,9 @@ EOF
 lua << EOF
 require'nvim-treesitter.configs'.setup {
   -- A list of parser names, or "all"
-  ensure_installed = { "c", "rst" },
+  ensure_installed = {
+      "c", "rst", "bash", "json", "hjson",
+  },
 
   -- Install parsers synchronously (only applied to `ensure_installed`)
   sync_install = false,
@@ -589,7 +581,7 @@ require'nvim-treesitter.configs'.setup {
     -- disable highlighting for the `tex` filetype, you need to include `latex` in this list as this is
     -- the name of the parser)
     -- list of language that will be disabled
-    disable = { "c", "rust" },
+    disable = { "help", "markdown" },
 
     -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
     -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).

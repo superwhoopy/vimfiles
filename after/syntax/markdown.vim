@@ -10,3 +10,6 @@ exe 'syn region markdownCode matchgroup=markdownCodeDelimiter start="`" end="`" 
 
 " enable concealing
 set conceallevel=2
+
+" the only kind of comments we want are quoting blocks
+set comments=nb:>

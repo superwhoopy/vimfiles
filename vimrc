@@ -62,7 +62,7 @@ Plug 'yamatsum/nvim-cursorline'
 Plug 'zchee/vim-flatbuffers'
 
 if has('win32')
-  Plug 'kkoenig/wimproved.vim'
+  " no, nothing
 else
   Plug 'direnv/direnv.vim'
 endif

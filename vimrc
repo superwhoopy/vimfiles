@@ -14,6 +14,7 @@ Plug 'garbas/vim-snipmate'
 Plug 'ggandor/leap.nvim'
 Plug 'hiphish/jinja.vim'
 Plug 'honza/vim-snippets'
+Plug 'itchyny/vim-cursorword'
 Plug 'jeffkreeftmeijer/vim-numbertoggle'
 Plug 'jenterkin/vim-autosource'
 Plug 'jlanzarotta/bufexplorer'
@@ -58,7 +59,6 @@ Plug 'vim-python/python-syntax'
 Plug 'vim-scripts/DrawIt'
 Plug 'Vimjas/vim-python-pep8-indent'
 Plug 'w0rp/ale'
-Plug 'yamatsum/nvim-cursorline'
 Plug 'zchee/vim-flatbuffers'
 
 if has('win32')
@@ -263,11 +263,13 @@ nnoremap <C-S-g> :lua require('telescope.builtin').live_grep()<CR>
 nnoremap <C-b> :lua require('telescope.builtin').buffers()<CR>
 " Ctrl + N to browse files from CWD
 nnoremap <C-n>
-        \ :lua require('telescope').extensions.file_browser.file_browser()<CR>
+            \ :lua require('telescope').extensions.file_browser.
+            \ file_browser({respect_gitignore=false})<CR>
 " Ctrl + Shift + N to browse files from the current buffer
 nnoremap <C-S-n>
             \ :lua require('telescope').extensions.file_browser.
-            \ file_browser({path='%:p:h', select_buffer=true})<CR>
+            \ file_browser({path='%:p:h', select_buffer=true,
+            \               respect_gitignore=false})<CR>
 
 
 " <Leader>g to grep the word under the cursor
@@ -617,23 +619,6 @@ lua << EOF
     require'lspconfig'.jsonls.setup {
         cmd = { "vscode-json-languageserver", "--stdio" },
         capabilities = capabilities,
-    }
-EOF
-
-" nvim-cursorline ##############################################################
-
-lua << EOF
-    require('nvim-cursorline').setup {
-        cursorline = {
-            enable = true,
-            timeout = 500,
-            number = false,
-        },
-        cursorword = {
-            enable = true,
-            min_length = 3,
-            hl = { underline = true },
-        }
     }
 EOF
 

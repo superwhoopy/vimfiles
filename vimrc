@@ -439,6 +439,7 @@ require('telescope').setup{
             i = {
                 ["<C-j>"] = 'move_selection_next',
                 ["<C-k>"] = 'move_selection_previous',
+                ["jj"] = { "<esc>", type="command" },
             },
             n = {
                 ["<C-j>"] = 'move_selection_next',

@@ -40,6 +40,7 @@ Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-telescope/telescope-symbols.nvim'
 Plug 'nvim-telescope/telescope-file-browser.nvim'
+Plug 'nvim-telescope/telescope-live-grep-args.nvim'
 Plug 'nvim-treesitter/nvim-treesitter' , {'do': ':TSUpdate'} " We recommend updating the parsers on update
 Plug 'ryanoasis/vim-devicons'
 Plug 'raimon49/requirements.txt.vim'
@@ -258,7 +259,7 @@ nnoremap <C-p> :lua require('telescope.builtin').fd()<CR>
 " Ctrl+Shift+P to find tags
 nnoremap <C-S-p> :lua require('telescope.builtin').tags()<CR>
 " Ctrl+Shift+G to grep into directory (Ctrl+G displays file name)
-nnoremap <C-S-g> :lua require('telescope.builtin').live_grep()<CR>
+nnoremap <C-S-g> :lua require('telescope').extensions.live_grep_args.live_grep_args()<CR>
 " Ctrl + B to browse openned buffers
 nnoremap <C-b> :lua require('telescope.builtin').buffers()<CR>
 " Ctrl + N to browse files from CWD
@@ -433,6 +434,7 @@ let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols = {
 
 lua << EOF
 local fb_actions = require('telescope').extensions.file_browser.actions
+local lga_actions = require('telescope-live-grep-args.actions')
 require('telescope').setup{
     defaults = {
         mappings = {
@@ -478,9 +480,17 @@ require('telescope').setup{
             },
             grouped = true,
         },
+        live_grep_args = {
+            auto_quoting = true, -- enable/disable auto-quoting
+            -- define mappings, e.g.
+            mappings = { -- extend mappings
+            i = { },
+            },
+        }
     },
 }
 require("telescope").load_extension "file_browser"
+require("telescope").load_extension("live_grep_args")
 EOF
 
 " nvim-tree ####################################################################

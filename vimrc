@@ -19,7 +19,6 @@ Plug 'jeffkreeftmeijer/vim-numbertoggle'
 Plug 'jenterkin/vim-autosource'
 Plug 'jlanzarotta/bufexplorer'
 Plug 'jremmen/vim-ripgrep'
-Plug 'junegunn/goyo.vim'
 Plug 'junegunn/vim-easy-align'
 Plug 'junegunn/vim-peekaboo'
 Plug 'justinmk/vim-syntax-extra'
@@ -45,6 +44,7 @@ Plug 'nvim-treesitter/nvim-treesitter' , {'do': ':TSUpdate'} " We recommend upda
 Plug 'ryanoasis/vim-devicons'
 Plug 'raimon49/requirements.txt.vim'
 Plug 'sainnhe/everforest' " Theme
+Plug 'shortcuts/no-neck-pain.nvim'
 Plug 'sunjon/Shade.nvim'
 Plug 'shime/vim-livedown'
 Plug 'tmhedberg/SimpylFold' " better Python folding
@@ -430,9 +430,9 @@ let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols = {
             \ 'bgt': '祥',
             \ }
 
-" telescope ####################################################################
+" telescope ###################################################################
 
-lua << EOF
+:lua << EOF
 local fb_actions = require('telescope').extensions.file_browser.actions
 local lga_actions = require('telescope-live-grep-args.actions')
 require('telescope').setup{
@@ -493,37 +493,6 @@ require("telescope").load_extension "file_browser"
 require("telescope").load_extension("live_grep_args")
 EOF
 
-" nvim-tree ####################################################################
-
-" lua << EOF
-" require'nvim-tree'.setup{
-"     hijack_netrw = true,
-"     update_cwd = true,
-"     update_focused_file = {
-"         enable = true,
-"     },
-"     filters = {
-"         custom = { '.git', '__pycache__', '.venv', '*.egg-info' }
-"     },
-"     git = {
-"         ignore = true,
-"     },
-"     renderer = {
-"         add_trailing = true,
-"         highlight_opened_files = 'all',
-"     },
-"     actions = {
-"         open_file = {
-"             window_picker = {
-"                 enable = false
-"             }
-"         },
-"     },
-" }
-" EOF
-"
-" nmap <C-n> :NvimTreeToggle<CR>
-
 " Startify #####################################################################
 
 let g:startify_change_to_vcs_root = 1
@@ -551,15 +520,9 @@ let g:startify_bookmarks = readfile(s:startify_bookmarks_file)
 " quickly edit the file that stores startify bookmarks
 command! StartifyEditBookmarks execute('edit ' . s:startify_bookmarks_file)
 
-" Goyo #########################################################################
-
-let g:goyo_width = 120
-let g:goyo_linenr = 1
-let g:goyo_height = 100
-
 " Shade ########################################################################
 
-lua << EOF
+:lua << EOF
 require('shade').setup{
   overlay_opacity = 70,
   opacity_step = 5,
@@ -573,7 +536,7 @@ EOF
 
 " Treesitter ###################################################################
 
-lua << EOF
+:lua << EOF
 require'nvim-treesitter.configs'.setup {
   -- A list of parser names, or "all"
   ensure_installed = {
@@ -623,7 +586,7 @@ execute('lua require("lspconfig").bashls.setup('
 lua require'lspconfig'.vimls.setup{}
 
 " JSON
-lua << EOF
+:lua << EOF
     --Enable (broadcasting) snippet capability for completion
     local capabilities = vim.lsp.protocol.make_client_capabilities()
     capabilities.textDocument.completion.completionItem.snippetSupport = true
@@ -635,26 +598,31 @@ EOF
 
 " leap #########################################################################
 
-lua << EOF
-    require('leap').setup {
-      max_aot_targets = nil,
-      highlight_unlabeled = false,
-      max_highlighted_traversal_targets = 10,
-      case_sensitive = false,
-      -- Sets of characters that should match each other.
-      -- Obvious candidates are braces and quotes ('([{', ')]}', '`"\'').
-      equivalence_classes = { ' \t\r\n', },
-      -- Leaving the appropriate list empty effectively disables "smart" mode,
-      -- and forces auto-jump to be on or off.
-      special_keys = {
-        repeat_search  = '<enter>',
-        next_aot_match = '<enter>',
-        next_match     = {';', '<enter>'},
-        prev_match     = {',', '<tab>'},
-        next_group     = '<space>',
-        prev_group     = '<tab>',
-      },
-    }
+:lua << EOF
     require('leap').set_default_keymaps()
 EOF
 
+" NoNeckPain ###################################################################
+
+:lua << EOF
+require("no-neck-pain").setup({
+      mappings = {
+          enabled = true,
+          toggle = "<Leader>np",
+          widthUp = false,
+          widthDown = false,
+          scratchPad = false,
+      },
+
+      buffers = {
+          setNames = false,
+          -- colors to apply to both side buffers, for buffer scopped options @see |NoNeckPain.bufferOptions|
+          --- see |NoNeckPain.bufferOptionsColors|
+          colors = {
+              background = nil,
+              blend = 0.1,
+              text = nil,
+          },
+      },
+})
+EOF

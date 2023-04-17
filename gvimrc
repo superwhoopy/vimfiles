@@ -9,14 +9,14 @@
 "endif
 
 if has('win32')
-    let s:fontname = "UbuntuMono\\ NF"
-    let s:fontsize = 8
+    let s:fontname = "CaskaydiaCove\\ NFM"
+    let s:fontsize = 7
 else " Unix
     let s:fontname = "UbuntuMono\\ Nerd\\ Font"
     let s:fontsize = 14
 endif
 
-function! SetFont()
+function! s:setFont()
     if has('nvim')
         execute("GuiFont! " . s:fontname . ":h" . s:fontsize)
     else
@@ -26,11 +26,11 @@ endfunction
 
 function! AdjustFontSize(amount)
     let s:fontsize = s:fontsize + a:amount
-    call SetFont()
+    call s:setFont()
 endfunction
 
 
-call SetFont()
+call s:setFont()
 
 set guioptions-=T                  " ne pas afficher la toolbar
 set guioptions-=m                  " ne pas afficher la menubar
@@ -41,6 +41,9 @@ set guioptions-=L
 set lines=60 columns=90   " taille de la fenêtre au démarrage
 
 set mouse=a " enable mouse support
+
+" render ligatures - disabled because too damn slow on Windows :(
+" GuiRenderLigatures 1
 
 " adjust font size
 nnoremap <C-=> :call AdjustFontSize(1)<CR><C-W>=

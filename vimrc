@@ -40,8 +40,8 @@ Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-telescope/telescope-symbols.nvim'
 Plug 'nvim-telescope/telescope-file-browser.nvim'
 Plug 'nvim-telescope/telescope-live-grep-args.nvim'
+Plug 'nvim-tree/nvim-web-devicons'
 Plug 'nvim-treesitter/nvim-treesitter' , {'do': ':TSUpdate'} " We recommend updating the parsers on update
-Plug 'ryanoasis/vim-devicons'
 Plug 'raimon49/requirements.txt.vim'
 Plug 'sainnhe/everforest' " Theme
 Plug 'shortcuts/no-neck-pain.nvim'

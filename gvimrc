@@ -44,3 +44,9 @@ set mouse=a " enable mouse support
 " adjust font size
 nnoremap <C-=> :call AdjustFontSize(1)<CR><C-W>=
 nnoremap <C--> :call AdjustFontSize(-1)<CR><C-W>=
+
+" Fvim stuff
+if exists('g:fvim_loaded')
+    " no, nothing
+endif
+

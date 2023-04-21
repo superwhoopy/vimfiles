@@ -85,7 +85,7 @@ set tabstop=2              " ...probably the same thing
 set expandtab              " use spaces, not tabs
 set autoindent             " auto-indentation
 set textwidth=80           " default text width: 80 chars
-set colorcolumn=81         " light up the 80-th column
+set colorcolumn=+1,+2,+3   " light up the 80-th column
 hi ColorColumn ctermbg=lightgrey guibg=lightgrey
 set wrap                   " Wrap if the line extends...
 set shortmess=Aat          " short messages: do not prompt warning message if

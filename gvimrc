@@ -9,19 +9,15 @@
 "endif
 
 if has('win32')
-    let s:fontname = "CaskaydiaCove\\ NFM"
-    let s:fontsize = 7
+    let s:fontname = "Hack\\ NFM"
+    let s:fontsize = 12
 else " Unix
     let s:fontname = "UbuntuMono\\ Nerd\\ Font"
     let s:fontsize = 14
 endif
 
 function! s:setFont()
-    if has('nvim')
-        execute("GuiFont! " . s:fontname . ":h" . s:fontsize)
-    else
-        execute("set guifont=" . s:fontname . ":h" . s:fontsize)
-    endif
+    execute("set guifont=" . s:fontname . ":h" . s:fontsize)
 endfunction
 
 function! AdjustFontSize(amount)

@@ -10,6 +10,7 @@ Plug 'cespare/vim-toml'
 Plug 'dhruvasagar/vim-table-mode'
 Plug 'dstein64/vim-startuptime'
 Plug 'editorconfig/editorconfig-vim'
+Plug 'folke/tokyonight.nvim', { 'branch': 'main' }
 Plug 'garbas/vim-snipmate'
 Plug 'ggandor/leap.nvim'
 Plug 'hiphish/jinja.vim'
@@ -19,7 +20,6 @@ Plug 'jeffkreeftmeijer/vim-numbertoggle'
 Plug 'jenterkin/vim-autosource'
 Plug 'jlanzarotta/bufexplorer'
 Plug 'jremmen/vim-ripgrep'
-Plug 'junegunn/goyo.vim'
 Plug 'junegunn/vim-easy-align'
 Plug 'junegunn/vim-peekaboo'
 Plug 'justinmk/vim-syntax-extra'
@@ -37,16 +37,16 @@ Plug 'ntpeters/vim-better-whitespace'
 Plug 'neovim/nvim-lspconfig'
 Plug 'neovimhaskell/haskell-vim'
 Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-lualine/lualine.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-telescope/telescope-symbols.nvim'
 Plug 'nvim-telescope/telescope-file-browser.nvim'
 Plug 'nvim-telescope/telescope-live-grep-args.nvim'
+Plug 'nvim-tree/nvim-web-devicons'
 Plug 'nvim-treesitter/nvim-treesitter' , {'do': ':TSUpdate'} " We recommend updating the parsers on update
-Plug 'ryanoasis/vim-devicons'
 Plug 'raimon49/requirements.txt.vim'
 Plug 'sainnhe/everforest' " Theme
 Plug 'shortcuts/no-neck-pain.nvim'
-Plug 'sunjon/Shade.nvim'
 Plug 'shime/vim-livedown'
 Plug 'tmhedberg/SimpylFold' " better Python folding
 Plug 'tomtom/tlib_vim'
@@ -54,8 +54,6 @@ Plug 'tpope/vim-dispatch'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
 Plug 'vim-latex/vim-latex'
 Plug 'vim-python/python-syntax'
 Plug 'vim-scripts/DrawIt'
@@ -87,7 +85,7 @@ set tabstop=2              " ...probably the same thing
 set expandtab              " use spaces, not tabs
 set autoindent             " auto-indentation
 set textwidth=80           " default text width: 80 chars
-set colorcolumn=81         " light up the 80-th column
+set colorcolumn=+1,+2,+3   " light up the 80-th column
 hi ColorColumn ctermbg=lightgrey guibg=lightgrey
 set wrap                   " Wrap if the line extends...
 set shortmess=Aat          " short messages: do not prompt warning message if
@@ -126,8 +124,9 @@ set laststatus=2
 
 " set colorscheme once in this variable, and use it for all plugins that require
 " it
-let s:colorscheme = 'everforest'
+" let s:colorscheme = 'everforest'
 " let s:colorscheme = 'gruvbox'
+let s:colorscheme = 'tokyonight'
 execute("colorscheme " . s:colorscheme)
 
 " Show tabs, trailing and non-breakable spaces
@@ -141,7 +140,6 @@ if has('win32')
   " Windows dark magic to make the backspace key work properly...
   set backspace=2
   set noshellslash
-
   set shell=cmd.exe
 endif
 
@@ -316,59 +314,55 @@ let g:strip_whitespace_on_save = 0
 let g:strip_whitespace_confirm = 0
 
 
-" Airline ######################################################################
+" Lualine ######################################################################
 
-" airline stuff
-let g:airline_theme = s:colorscheme
-" short ids for mode
-let g:airline_mode_map = {
-      \ '__' : '-',
-      \ 'n'  : 'N',
-      \ 'i'  : 'I',
-      \ 'R'  : 'R',
-      \ 'c'  : 'C',
-      \ 'v'  : 'V',
-      \ 'V'  : 'V',
-      \ '' : 'V',
-      \ 's'  : 'S',
-      \ 'S'  : 'S',
-      \ '' : 'S',
-      \ }
-" truncate those fields early
-let g:airline#extensions#default#section_truncate_width = {
-    \ 'b': 79,
-    \ 'x': 88,
-    \ 'y': 88,
-    \ 'z': 88,
-    \ 'warning': 80,
-    \ 'error': 80,
-    \ }
-
-" use powerline fonts
-let g:airline_powerline_fonts = 1
-
-" show git diff hunks count only if nonzero
-let g:airline#extensions#hunks#non_zero_only = 1
-
-" enable ALE status
-let g:airline#extensions#ale#enabled = 1
-let g:airline#extensions#coc#enabled = 1
-
+:lua << END
+require('lualine').setup {
+  options = {
+    icons_enabled = true,
+    theme = 'auto',
+    component_separators = { left = '', right = ''},
+    section_separators = { left = '', right = ''},
+    disabled_filetypes = {
+      statusline = {},
+      winbar = {},
+    },
+    ignore_focus = {},
+    always_divide_middle = true,
+    globalstatus = false,
+    refresh = {
+      statusline = 1000,
+      tabline = 1000,
+      winbar = 1000,
+    }
+  },
+  sections = {
+    lualine_a = {'searchcount'},
+    lualine_b = {'branch', { 'diagnostics', sources = {'ale'} }},
+    lualine_c = {'filename'},
+    lualine_x = {'encoding', 'fileformat', 'filetype'},
+    lualine_y = {'progress'},
+    lualine_z = {'location'}
+  },
+  inactive_sections = {
+    lualine_a = {},
+    lualine_b = {},
+    lualine_c = {'filename'},
+    lualine_x = {'location'},
+    lualine_y = {},
+    lualine_z = {}
+  },
+  tabline = {},
+  winbar = {},
+  inactive_winbar = {},
+  extensions = {}
+}
+END
 
 " python-syntax ################################################################
 
 " enable Python highlighting plugin
 let g:python_highlight_all = 1
-
-
-" wimproved ####################################################################
-
-if has('win32')
-    " Windows full-screen stuff
-    augroup WinFullScreen
-        autocmd GUIEnter * silent! WToggleClean
-    augroup END
-endif
 
 
 " EasyAlign ####################################################################
@@ -431,9 +425,9 @@ let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols = {
             \ 'bgt': '祥',
             \ }
 
-" telescope ####################################################################
+" telescope ###################################################################
 
-lua << EOF
+:lua << EOF
 local fb_actions = require('telescope').extensions.file_browser.actions
 local lga_actions = require('telescope-live-grep-args.actions')
 require('telescope').setup{
@@ -521,23 +515,9 @@ let g:startify_bookmarks = readfile(s:startify_bookmarks_file)
 " quickly edit the file that stores startify bookmarks
 command! StartifyEditBookmarks execute('edit ' . s:startify_bookmarks_file)
 
-" Shade ########################################################################
-
-lua << EOF
-require('shade').setup{
-  overlay_opacity = 70,
-  opacity_step = 5,
-  keys = {
-      brightness_up    = '<C-Up>',
-      brightness_down  = '<C-Down>',
-      toggle           = '<Leader>s',
-  }
-}
-EOF
-
 " Treesitter ###################################################################
 
-lua << EOF
+:lua << EOF
 require'nvim-treesitter.configs'.setup {
   -- A list of parser names, or "all"
   ensure_installed = {
@@ -587,7 +567,7 @@ execute('lua require("lspconfig").bashls.setup('
 lua require'lspconfig'.vimls.setup{}
 
 " JSON
-lua << EOF
+:lua << EOF
     --Enable (broadcasting) snippet capability for completion
     local capabilities = vim.lsp.protocol.make_client_capabilities()
     capabilities.textDocument.completion.completionItem.snippetSupport = true
@@ -601,3 +581,27 @@ EOF
 
 lua require('leap').set_default_keymaps()
 
+" NoNeckPain ###################################################################
+
+:lua << EOF
+require("no-neck-pain").setup({
+      mappings = {
+          enabled = true,
+          toggle = "<Leader>np",
+          widthUp = false,
+          widthDown = false,
+          scratchPad = false,
+      },
+
+      buffers = {
+          setNames = false,
+          -- colors to apply to both side buffers, for buffer scopped options @see |NoNeckPain.bufferOptions|
+          --- see |NoNeckPain.bufferOptionsColors|
+          colors = {
+              background = nil,
+              blend = 0.1,
+              text = nil,
+          },
+      },
+})
+EOF

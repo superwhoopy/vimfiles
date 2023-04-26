@@ -275,6 +275,8 @@ nnoremap <C-S-n>
 " <Leader>g to grep the word under the cursor
 nnoremap <Leader>g :lua require('telescope.builtin').grep_string()<CR>
 
+" <Leader>D to show diagnostics
+nnoremap <Leader>D :lua require('telescope.builtin').diagnostics()<CR>
 
 "###############################################################################
 " AUTO-COMMANDS AND FILETYPE-SPECIFIC STUFF
@@ -338,7 +340,9 @@ require('lualine').setup {
   },
   sections = {
     lualine_a = {'searchcount'},
-    lualine_b = {'branch', { 'diagnostics', sources = {'ale'} }},
+    lualine_b = {'branch',
+                 {'diagnostics', sources = {'ale', 'nvim_lsp'}}
+                },
     lualine_c = {'filename'},
     lualine_x = {'encoding', 'fileformat', 'filetype'},
     lualine_y = {'progress'},
@@ -397,6 +401,7 @@ let g:ale_linters = {
             \ 'c' : ['gcc'],
             \ 'sh': ['shellcheck'],
             \ 'haskell': ['hls', 'ghc'],
+            \ 'python': [],
             \ }
 
 " vim-asterios #################################################################
@@ -552,10 +557,76 @@ EOF
 
 " LSP servers ##################################################################
 
-" Python
-" lua require'lspconfig'.pyright.setup{}
-" Rust
-lua require'lspconfig'.rust_analyzer.setup{}
+:lua << EOF
+  -- Rust
+  require'lspconfig'.rust_analyzer.setup{}
+
+  -- Vimscript
+  require'lspconfig'.vimls.setup{}
+
+  -- JSON
+  --Enable (broadcasting) snippet capability for completion
+  local capabilities = vim.lsp.protocol.make_client_capabilities()
+  capabilities.textDocument.completion.completionItem.snippetSupport = true
+  require'lspconfig'.jsonls.setup {
+      cmd = { "vscode-json-languageserver", "--stdio" },
+      capabilities = capabilities,
+  }
+
+  -- Python
+  require'lspconfig'.pylsp.setup{
+    settings = {
+      pylsp = {
+        plugins = {
+          autopep8 = { enabled=false },
+          pyflakes = { enabled=false },
+
+          yapf = { enabled=true },
+          ruff = { enabled=true },
+        }
+      }
+    }
+  }
+
+  -- Global mappings.
+  -- See `:help vim.diagnostic.*` for documentation on any of the below functions
+  vim.keymap.set('n', '<space>e', vim.diagnostic.open_float)
+  vim.keymap.set('n', '[d', vim.diagnostic.goto_prev)
+  vim.keymap.set('n', ']d', vim.diagnostic.goto_next)
+  vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist)
+
+  -- Use LspAttach autocommand to only map the following keys
+  -- after the language server attaches to the current buffer
+  vim.api.nvim_create_autocmd('LspAttach', {
+    group = vim.api.nvim_create_augroup('UserLspConfig', {}),
+    callback = function(ev)
+      -- Enable completion triggered by <c-x><c-o>
+      vim.bo[ev.buf].omnifunc = 'v:lua.vim.lsp.omnifunc'
+
+      -- Buffer local mappings.
+      -- See `:help vim.lsp.*` for documentation on any of the below functions
+      local opts = { buffer = ev.buf }
+      vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts)
+      vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
+      vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
+      vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, opts)
+      vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, opts)
+      vim.keymap.set('n', '<space>wa', vim.lsp.buf.add_workspace_folder, opts)
+      vim.keymap.set('n', '<space>wr', vim.lsp.buf.remove_workspace_folder, opts)
+      vim.keymap.set('n', '<space>wl', function()
+        print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
+      end, opts)
+      vim.keymap.set('n', '<space>D', vim.lsp.buf.type_definition, opts)
+      vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, opts)
+      vim.keymap.set({ 'n', 'v' }, '<space>ca', vim.lsp.buf.code_action, opts)
+      vim.keymap.set('n', 'gr', vim.lsp.buf.references, opts)
+      vim.keymap.set('n', '<space>f', function()
+        vim.lsp.buf.format { async = true }
+      end, opts)
+    end,
+  })
+EOF
+
 " Bash (requires to tweak the starting command on windows)
 execute('lua require("lspconfig").bashls.setup('
             \ . ( has('win32')
@@ -563,19 +634,12 @@ execute('lua require("lspconfig").bashls.setup('
             \     : '{}' )
             \ . ')')
 
-" Vimscript
-lua require'lspconfig'.vimls.setup{}
+" pretty signs
+sign define DiagnosticSignError text=🔴 texthl=DiagnosticSignError linehl= numhl=
+sign define DiagnosticSignWarn text=⚠ texthl=DiagnosticSignWarn linehl= numhl=
+sign define DiagnosticSignInfo text=ℹ texthl=DiagnosticSignInfo linehl= numhl=
+sign define DiagnosticSignHint text=👉 texthl=DiagnosticSignHint linehl= numhl=
 
-" JSON
-:lua << EOF
-    --Enable (broadcasting) snippet capability for completion
-    local capabilities = vim.lsp.protocol.make_client_capabilities()
-    capabilities.textDocument.completion.completionItem.snippetSupport = true
-    require'lspconfig'.jsonls.setup {
-        cmd = { "vscode-json-languageserver", "--stdio" },
-        capabilities = capabilities,
-    }
-EOF
 
 " leap #########################################################################
 

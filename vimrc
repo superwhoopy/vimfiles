@@ -11,10 +11,10 @@ Plug 'dhruvasagar/vim-table-mode'
 Plug 'dstein64/vim-startuptime'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'folke/tokyonight.nvim', { 'branch': 'main' }
-Plug 'garbas/vim-snipmate'
 Plug 'ggandor/leap.nvim'
 Plug 'hiphish/jinja.vim'
-Plug 'honza/vim-snippets'
+" TODO: find a recent snippet engine
+" Plug 'honza/vim-snippets'
 Plug 'itchyny/vim-cursorword'
 Plug 'jeffkreeftmeijer/vim-numbertoggle'
 Plug 'jenterkin/vim-autosource'
@@ -296,13 +296,6 @@ augroup END
 
 " PlantUML #####################################################################
 let g:plantuml_executable_script='plantuml -o out/'
-
-" SnipMate #####################################################################
-
-imap <Tab> <Plug>snipMateNextOrTrigger
-smap <Tab> <Plug>snipMateNextOrTrigger
-let g:snipMate = { 'snippet_version' : 1 }
-
 
 " Better Wihtespaces ###########################################################
 

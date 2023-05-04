@@ -69,3 +69,16 @@ function! utils#FillLine(str) abort
     endif
 endfunction
 
+" Align text to right
+function! utils#AlignRightFrom(line, pos, textwidth) abort
+    if a:textwidth == 0
+        return
+    endif
+    let l:spaces_to_insert = a:textwidth - len(a:line)
+    if l:spaces_to_insert >= 0
+        execute 'normal! i' . repeat(' ', l:spaces_to_insert)
+    else
+        " TODO: see if we can remove spaces under the cursor?
+    endif
+endfunction
+

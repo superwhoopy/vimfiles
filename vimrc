@@ -176,9 +176,6 @@ endif
 "###############################################################################
 
 " Mappings
-" Ouvrir le Buffer explorer avec la touche F12
-nnoremap <F12> :BufExplorer<CR>
-
 " Ctrl-S : sauvegarder fichier courant, meme en mode edition
 inoremap <C-s> <Esc>:w<CR>a
 noremap  <C-s> :w<CR>:echo "File saved."<CR>
@@ -194,13 +191,10 @@ inoremap <C-H> <Esc>:vertical botright help
 noremap <C-Tab>   <C-]>
 noremap <C-S-Tab> :ptag <C-R><C-W><CR>
 " Open tag under cursor in buffer to the left/right/top/bottom
-function s:OpenTagInDirection()
-    for l:direction in ["h","j","k","l"]
-        execute("noremap <Leader>t" . l:direction . " yiw<C-W>"
-                    \ . l:direction . ":tag <C-R>\"<CR>")
-    endfor
-endfunction
-call s:OpenTagInDirection()
+for s:direction in ["h","j","k","l"]
+    execute("noremap <Leader>t" . s:direction . " yiw<C-W>"
+                \ . s:direction . ":tag <C-R>\"<CR>")
+endfor
 
 " Move across visual lines inside wrapped long lines
 nnoremap k gk
@@ -230,14 +224,11 @@ noremap <Leader>fo :call utils#ToggleAutoFormat()<CR>
 " Window navigation: map <Alt-[hjkl]> to 'move around' instructions, in normal
 " and insertion mode. Also handle the case of terminal emulators that convert
 " keystroke <A-l> into l for some reason...
-function s:MapMove()
-    for l:key in ['h', 'j', 'k', 'l']
-        execute('nnoremap <A-' . l:key . '> :wincmd ' . l:key . '<CR>')
-        execute('inoremap <A-' . l:key . '> '
-                    \ . '<Esc>:wincmd ' . l:key . '<CR>a')
-    endfor
-endfunction
-call s:MapMove()
+for s:key in ['h', 'j', 'k', 'l']
+    execute('nnoremap <A-' . s:key . '> :wincmd ' . s:key . '<CR>')
+    execute('inoremap <A-' . s:key . '> '
+                \ . '<Esc>:wincmd ' . s:key . '<CR>a')
+endfor
 
 " Quickly edit vimrc
 nmap <F8> :e ~/.vim/vimrc<CR>
@@ -247,28 +238,12 @@ vnoremap // y/<C-R>"<CR>
 
 " Align what remains of the line to the right, according to textwidth. Mapped to
 " command :AlignRight, and to <A-Right>
-function! AlignRightFrom(line, pos, textwidth) abort
-    if a:textwidth == 0
-        return
-    endif
-    let l:spaces_to_insert = a:textwidth - len(a:line)
-    if l:spaces_to_insert >= 0
-        execute 'normal! i' . repeat(' ', l:spaces_to_insert)
-    else
-        " TODO: see if we can remove spaces under the cursor?
-    endif
-endfunction
-
-command! AlignRight call AlignRightFrom(getline('.'), getpos('.')[2] - 1,
+command! AlignRight call utils#AlignRightFrom(getline('.'), getpos('.')[2] - 1,
             \                           &textwidth)
+inoremap <A-Right> <Esc>:AlignRight<CR>i
 
-inoremap <A-Right> <Esc>:call AlignRightFrom(getline('.'), getpos('.')[2] - 1,
-            \ &textwidth)<CR>i
-
-" Use <C-L> to clear the highlighting of :set hlsearch.
-if maparg('<C-L>', 'n') ==# ''
-  nnoremap <silent> <C-L> :nohlsearch<C-R>=has('diff')?'<Bar>diffupdate':''<CR><CR><C-L>
-endif
+" switch known words (see lua/utils.lua)
+nnoremap <Leader>s :lua require('utils').switch_word_under_cursor()<CR>
 
 " telescope mappings -----------------------------------------------------------
 
@@ -357,7 +332,8 @@ require('lualine').setup {
     lualine_b = {'branch',
                  {'diagnostics', sources = {'ale', 'nvim_lsp'}}
                 },
-    lualine_c = {'filename'},
+    lualine_c = {{'filename',
+                  path = 1}},
     lualine_x = {'encoding', 'fileformat', 'filetype'},
     lualine_y = {'progress'},
     lualine_z = {'location'}
@@ -600,6 +576,29 @@ EOF
         }
       }
     }
+  }
+
+  -- Lua
+  require'lspconfig'.lua_ls.setup {
+    Lua = {
+        runtime = {
+          -- Tell the language server which version of Lua you're using (most
+          -- likely LuaJIT in the case of Neovim)
+          version = 'LuaJIT',
+        },
+        diagnostics = {
+          -- Get the language server to recognize the `vim` global
+          globals = {'vim'},
+        },
+        workspace = {
+          -- Make the server aware of Neovim runtime files
+          library = vim.api.nvim_get_runtime_file("", true),
+        },
+        -- Do not send telemetry data containing a randomized but unique identifier
+        telemetry = {
+          enable = false,
+        },
+    },
   }
 
   -- Global mappings.

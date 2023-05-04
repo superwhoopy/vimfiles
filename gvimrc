@@ -10,7 +10,7 @@
 
 if has('win32')
     let s:fontname = "Hack\\ NFM"
-    let s:fontsize = 6
+    let s:fontsize = 8
 else " Unix
     let s:fontname = "UbuntuMono\\ Nerd\\ Font"
     let s:fontsize = 14

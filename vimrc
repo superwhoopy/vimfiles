@@ -5,69 +5,88 @@ let g:plug_threads = 16
 
 call plug#begin()
 
-Plug 'aklt/plantuml-syntax'
-Plug 'cespare/vim-toml'
-Plug 'dhruvasagar/vim-table-mode'
-Plug 'dstein64/vim-startuptime'
-Plug 'editorconfig/editorconfig-vim'
-Plug 'folke/tokyonight.nvim', { 'branch': 'main' }
-Plug 'ggandor/leap.nvim'
-Plug 'hiphish/jinja.vim'
-" TODO: find a recent snippet engine
-" Plug 'honza/vim-snippets'
-Plug 'itchyny/vim-cursorword'
-Plug 'jeffkreeftmeijer/vim-numbertoggle'
-Plug 'jenterkin/vim-autosource'
-Plug 'jlanzarotta/bufexplorer'
-Plug 'jremmen/vim-ripgrep'
-Plug 'junegunn/vim-easy-align'
-Plug 'junegunn/vim-peekaboo'
-Plug 'justinmk/vim-syntax-extra'
-Plug 'krono-safe/vim-asterios'
-Plug 'lepture/vim-velocity'
-Plug 'LnL7/vim-nix'
-Plug 'Lokaltog/vim-easymotion'
-Plug 'MarcWeber/vim-addon-mw-utils'
-Plug 'martinda/Jenkinsfile-vim-syntax'
-Plug 'majutsushi/tagbar'
-Plug 'mhinz/vim-startify'
-Plug 'morhetz/gruvbox' " colorscheme
-Plug 'ngg/vim-gn'
-Plug 'ntpeters/vim-better-whitespace'
-Plug 'neovim/nvim-lspconfig'
-Plug 'neovimhaskell/haskell-vim'
-Plug 'nvim-lua/plenary.nvim'
-Plug 'nvim-lualine/lualine.nvim'
-Plug 'nvim-telescope/telescope.nvim'
-Plug 'nvim-telescope/telescope-symbols.nvim'
-Plug 'nvim-telescope/telescope-file-browser.nvim'
-Plug 'nvim-telescope/telescope-live-grep-args.nvim'
-Plug 'nvim-tree/nvim-web-devicons'
-Plug 'nvim-treesitter/nvim-treesitter' , {'do': ':TSUpdate'} " We recommend updating the parsers on update
-Plug 'raimon49/requirements.txt.vim'
-Plug 'sainnhe/everforest' " Theme
-Plug 'shortcuts/no-neck-pain.nvim'
-Plug 'shime/vim-livedown'
-Plug 'tmhedberg/SimpylFold' " better Python folding
-Plug 'tomtom/tlib_vim'
-Plug 'tpope/vim-dispatch'
-Plug 'tpope/vim-commentary'
-Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-surround'
-Plug 'vim-latex/vim-latex'
-Plug 'vim-python/python-syntax'
-Plug 'vim-scripts/DrawIt'
-Plug 'Vimjas/vim-python-pep8-indent'
-Plug 'w0rp/ale'
-Plug 'zchee/vim-flatbuffers'
+    Plug 'aklt/plantuml-syntax'
+        " syntax highlighting
+    Plug 'cespare/vim-toml'
+        " syntax highlighting
+    Plug 'dhruvasagar/vim-table-mode'
+    Plug 'dstein64/vim-startuptime'
+        " profiling: run nvim --startuptime
+    Plug 'editorconfig/editorconfig-vim'
+    Plug 'folke/tokyonight.nvim', { 'branch': 'main' }
+        " colorscheme
+    Plug 'ggandor/leap.nvim'
+        " easymotion-like (s)
+    Plug 'hiphish/jinja.vim'
+        " syntax highlighting
 
-if has('win32')
-  " no, nothing
-else
-  Plug 'direnv/direnv.vim'
-endif
+    " TODO: find a recent snippet engine
+    " Plug 'honza/vim-snippets'
 
-Plug 'ssh://git@dev.ks.int:7999/prot/vim-ks.git'
+    Plug 'itchyny/vim-cursorword'
+        " underline the word under the cursor
+    Plug 'jeffkreeftmeijer/vim-numbertoggle'
+        " disable relative line number on disabled buffers
+    Plug 'jenterkin/vim-autosource'
+    Plug 'jremmen/vim-ripgrep'
+    Plug 'junegunn/vim-easy-align'
+    Plug 'junegunn/vim-peekaboo'
+        " visualize registers content
+    Plug 'justinmk/vim-syntax-extra'
+        " extraneous enhanced(?) syntax highlighting, for C, flex, bison
+    Plug 'krono-safe/vim-asterios'
+    Plug 'lepture/vim-velocity'
+        " syntax highlighting
+    Plug 'LnL7/vim-nix'
+    Plug 'Lokaltog/vim-easymotion'
+    Plug 'MarcWeber/vim-addon-mw-utils'
+    Plug 'martinda/Jenkinsfile-vim-syntax'
+        " syntax highlighting
+    Plug 'majutsushi/tagbar'
+    Plug 'mhinz/vim-startify'
+    Plug 'morhetz/gruvbox'
+        " colorscheme
+    Plug 'ngg/vim-gn'
+        " syntax highlighting
+    Plug 'ntpeters/vim-better-whitespace'
+    Plug 'neovim/nvim-lspconfig'
+    Plug 'neovimhaskell/haskell-vim'
+    Plug 'nvim-lua/plenary.nvim'
+    Plug 'nvim-lualine/lualine.nvim'
+    Plug 'nvim-telescope/telescope.nvim'
+    Plug 'nvim-telescope/telescope-symbols.nvim'
+    Plug 'nvim-telescope/telescope-file-browser.nvim'
+    Plug 'nvim-telescope/telescope-live-grep-args.nvim'
+    Plug 'nvim-tree/nvim-web-devicons'
+    Plug 'nvim-treesitter/nvim-treesitter' , {'do': ':TSUpdate'}
+    Plug 'raimon49/requirements.txt.vim'
+        " syntax highlighting
+    Plug 'sainnhe/everforest'
+        " colorscheme
+    Plug 'shortcuts/no-neck-pain.nvim'
+    Plug 'shime/vim-livedown'
+    Plug 'tmhedberg/SimpylFold' " better Python folding
+    Plug 'tomtom/tlib_vim'
+    Plug 'tpope/vim-dispatch'
+        " use :Make instead of :make to run in background
+    Plug 'tpope/vim-commentary'
+    Plug 'tpope/vim-fugitive'
+    Plug 'tpope/vim-surround'
+    Plug 'vim-latex/vim-latex'
+    Plug 'vim-python/python-syntax'
+    Plug 'vim-scripts/DrawIt'
+    Plug 'Vimjas/vim-python-pep8-indent'
+    Plug 'w0rp/ale'
+    Plug 'zchee/vim-flatbuffers'
+        " syntax highlighting
+
+    if has('win32')
+      " no, nothing
+    else
+      Plug 'direnv/direnv.vim'
+    endif
+
+    Plug 'ssh://git@dev.ks.int:7999/prot/vim-ks.git'
 
 call plug#end()
 
@@ -165,11 +184,11 @@ inoremap <C-s> <Esc>:w<CR>a
 noremap  <C-s> :w<CR>:echo "File saved."<CR>
 
 " Insert non-breaking space (do not remove trailing whitespace!)
-inoremap <C-S-Space>  
+inoremap <C-S-Space>
 
 " Open help in a vertical window (do not remove trailing whitespaces!)
-nnoremap <C-H> :vertical botright help 
-inoremap <C-H> <Esc>:vertical botright help 
+nnoremap <C-H> :vertical botright help
+inoremap <C-H> <Esc>:vertical botright help
 
 " Tag navigation
 noremap <C-Tab>   <C-]>
@@ -260,16 +279,18 @@ nnoremap <C-S-p> :lua require('telescope.builtin').tags()<CR>
 " Ctrl+Shift+G to grep into directory (Ctrl+G displays file name)
 nnoremap <C-S-g> :lua require('telescope').extensions.live_grep_args.live_grep_args()<CR>
 " Ctrl + B to browse openned buffers
-nnoremap <C-b> :lua require('telescope.builtin').buffers()<CR>
+nnoremap <C-b> :lua require('telescope.builtin').buffers({sort_mru=true})<CR>
 " Ctrl + N to browse files from CWD
 nnoremap <C-n>
             \ :lua require('telescope').extensions.file_browser.
-            \ file_browser({respect_gitignore=false})<CR>
+            \ file_browser({respect_gitignore=false,
+            \ layout_config={bottom_pane={height=80}}})<CR>
 " Ctrl + Shift + N to browse files from the current buffer
 nnoremap <C-S-n>
             \ :lua require('telescope').extensions.file_browser.
             \ file_browser({path='%:p:h', select_buffer=true,
-            \               respect_gitignore=false})<CR>
+            \               respect_gitignore=false,
+            \               layout_config={bottom_pane={height=80}}})<CR>
 
 
 " <Leader>g to grep the word under the cursor

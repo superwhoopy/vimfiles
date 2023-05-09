@@ -82,3 +82,9 @@ function! utils#AlignRightFrom(line, pos, textwidth) abort
     endif
 endfunction
 
+function! utils#DeleteAllBuffersButCurrent() abort
+    let l:this_buffer = bufnr()
+    let l:bufs_deleted = 0
+    bufdo if bufnr() !=# l:this_buffer | bdelete | let l:bufs_deleted += 1 | endif
+    echom "Cleared " . l:bufs_deleted . " buffers."
+endfunction

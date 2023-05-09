@@ -245,6 +245,9 @@ inoremap <A-Right> <Esc>:AlignRight<CR>i
 " switch known words (see lua/utils.lua)
 nnoremap <Leader>s :lua require('utils').switch_word_under_cursor()<CR>
 
+" clear all buffers but the one active
+command! ClearBufs call utils#DeleteAllBuffersButCurrent()
+
 " telescope mappings -----------------------------------------------------------
 
 " Ctrl+P to find files

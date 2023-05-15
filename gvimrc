@@ -9,7 +9,7 @@
 "endif
 
 if has('win32')
-    let s:fontname = "Hack\\ NFM"
+    let s:fontname = "CaskaydiaCove\\ Nerd\\ Font\\ Mono"
     let s:fontsize = 8
 else " Unix
     let s:fontname = "UbuntuMono\\ Nerd\\ Font"

@@ -184,8 +184,8 @@ noremap  <C-s> :w<CR>:echo "File saved."<CR>
 inoremap <C-S-Space>
 
 " Open help in a vertical window (do not remove trailing whitespaces!)
-nnoremap <C-H> :vertical botright help
-inoremap <C-H> <Esc>:vertical botright help
+nnoremap <C-H> :vertical botright help 
+inoremap <C-H> <Esc>:vertical botright help 
 
 " Tag navigation
 noremap <C-Tab>   <C-]>
@@ -276,6 +276,18 @@ nnoremap <Leader>g :lua require('telescope.builtin').grep_string()<CR>
 
 " <Leader>D to show diagnostics
 nnoremap <Leader>D :lua require('telescope.builtin').diagnostics()<CR>
+
+
+" Neovim Terminal Emulator configuration ---------------------------------------
+autocmd TermOpen * DisableWhitespace
+
+" <Esc> to exit terminal-mode
+tnoremap <Esc> <C-\><C-n>
+" window navigation
+tnoremap <A-h> <C-\><C-N><C-w>h
+tnoremap <A-j> <C-\><C-N><C-w>j
+tnoremap <A-k> <C-\><C-N><C-w>k
+tnoremap <A-l> <C-\><C-N><C-w>l
 
 "###############################################################################
 " AUTO-COMMANDS AND FILETYPE-SPECIFIC STUFF

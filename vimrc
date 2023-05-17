@@ -30,8 +30,6 @@ call plug#begin()
     Plug 'jenterkin/vim-autosource'
     Plug 'jremmen/vim-ripgrep'
     Plug 'junegunn/vim-easy-align'
-    Plug 'junegunn/vim-peekaboo'
-        " visualize registers content
     Plug 'justinmk/vim-syntax-extra'
         " extraneous enhanced(?) syntax highlighting, for C, flex, bison
     Plug 'krono-safe/vim-asterios'

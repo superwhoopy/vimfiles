@@ -519,8 +519,9 @@ let g:startify_lists = [
       \ ]
 
 let g:startify_commands = [
-    \ ['New Mail', 'enew | set ft=mail'],
-    \ ['New Markdown', 'enew | Markdown'],
+    \ ['Mail', 'enew | set ft=mail'],
+    \ ['Markdown', 'enew | Markdown'],
+    \ ['Terminal', 'terminal'],
     \ ]
 
 " Load Startify bookmarks from file; create an empty bookmarks file if it does

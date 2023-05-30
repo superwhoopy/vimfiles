@@ -30,8 +30,6 @@ call plug#begin()
     Plug 'jenterkin/vim-autosource'
     Plug 'jremmen/vim-ripgrep'
     Plug 'junegunn/vim-easy-align'
-    Plug 'junegunn/vim-peekaboo'
-        " visualize registers content
     Plug 'justinmk/vim-syntax-extra'
         " extraneous enhanced(?) syntax highlighting, for C, flex, bison
     Plug 'krono-safe/vim-asterios'
@@ -247,6 +245,28 @@ nnoremap <Leader>s :lua require('utils').switch_word_under_cursor()<CR>
 
 " clear all buffers but the one active
 command! ClearBufs call utils#DeleteAllBuffersButCurrent()
+
+" terminal configuration -------------------------------------------------------
+
+" jj to exit terminal-mode
+tnoremap jj <C-\><C-n>
+
+" window navigation
+tnoremap <A-h> <C-\><C-N><C-w>h
+tnoremap <A-j> <C-\><C-N><C-w>j
+tnoremap <A-k> <C-\><C-N><C-w>k
+tnoremap <A-l> <C-\><C-N><C-w>l
+
+" disable trailing whitespaces highlighting in terminal windows
+autocmd TermOpen * DisableWhitespace
+" enter insertion mode immediately when opening/focusing the terminal
+autocmd BufWinEnter,WinEnter term://* startinsert
+
+if has('win32')
+    " shorthand command to spawn a terminal with my zsh shell - need to define a
+    " msys2.cmd command somewhere in the PATH that does what's necessary
+    command! Terminal execute('terminal msys2')
+endif
 
 " telescope mappings -----------------------------------------------------------
 
@@ -511,8 +531,9 @@ let g:startify_lists = [
       \ ]
 
 let g:startify_commands = [
-    \ ['New Mail', 'enew | set ft=mail'],
-    \ ['New Markdown', 'enew | Markdown'],
+    \ ['Mail', 'enew | set ft=mail'],
+    \ ['Markdown', 'enew | Markdown'],
+    \ ['Terminal', 'terminal'],
     \ ]
 
 " Load Startify bookmarks from file; create an empty bookmarks file if it does

@@ -17,7 +17,7 @@ else " Unix
 endif
 
 function! s:setFont()
-    execute("set guifont=" . s:fontname . ":h" . s:fontsize)
+    execute("GuiFont! " . s:fontname . ":h" . s:fontsize)
 endfunction
 
 function! AdjustFontSize(amount)

@@ -248,7 +248,8 @@ command! ClearBufs call utils#DeleteAllBuffersButCurrent()
 
 " terminal configuration -------------------------------------------------------
 
-" jj to exit terminal-mode
+" jj to exit terminal-mode, do not map <Esc> (to use vim mode as one would
+" expect)
 tnoremap jj <C-\><C-n>
 
 " window navigation
@@ -298,16 +299,6 @@ nnoremap <Leader>g :lua require('telescope.builtin').grep_string()<CR>
 nnoremap <Leader>D :lua require('telescope.builtin').diagnostics()<CR>
 
 
-" Neovim Terminal Emulator configuration ---------------------------------------
-autocmd TermOpen * DisableWhitespace
-
-" <Esc> to exit terminal-mode
-tnoremap <Esc> <C-\><C-n>
-" window navigation
-tnoremap <A-h> <C-\><C-N><C-w>h
-tnoremap <A-j> <C-\><C-N><C-w>j
-tnoremap <A-k> <C-\><C-N><C-w>k
-tnoremap <A-l> <C-\><C-N><C-w>l
 
 "###############################################################################
 " AUTO-COMMANDS AND FILETYPE-SPECIFIC STUFF

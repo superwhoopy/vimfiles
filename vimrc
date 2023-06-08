@@ -20,6 +20,12 @@ call plug#begin()
     Plug 'hiphish/jinja.vim'
         " syntax highlighting
 
+    Plug 'hrsh7th/nvim-cmp'
+    Plug 'hrsh7th/cmp-nvim-lsp'
+    Plug 'hrsh7th/cmp-nvim-lsp-signature-help'
+    Plug 'hrsh7th/cmp-vsnip'
+    Plug 'hrsh7th/vim-vsnip'
+
     " TODO: find a recent snippet engine
     " Plug 'honza/vim-snippets'
 
@@ -149,6 +155,9 @@ execute("colorscheme " . s:colorscheme)
 " Show tabs, trailing and non-breakable spaces
 set list
 set listchars=tab:>\ ,trail:-,nbsp:·
+
+" set exrc, so that .exrc files are automatically sourced (see :help exrc)
+set exrc
 
 " Leader key is ','
 let mapleader=','
@@ -575,13 +584,42 @@ EOF
 " LSP servers ##################################################################
 
 :lua << EOF
-  -- Rust
+  -- nvim-cmp for autocompletion
+  local cmp = require('cmp')
+  cmp.setup({
+      snippet = {
+          -- REQUIRED - you must specify a snippet engine
+          expand = function(args)
+                     vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` users.
+                   end,
+      },
+      window = {
+          completion = cmp.config.window.bordered(),
+          documentation = cmp.config.window.bordered(),
+      },
+      mapping = cmp.mapping.preset.insert({
+          ['<C-b>'] = cmp.mapping.scroll_docs(-4),
+          ['<C-f>'] = cmp.mapping.scroll_docs(4),
+          ['<C-Space>'] = cmp.mapping.complete(),
+          ['<C-e>'] = cmp.mapping.abort(),
+          ['<CR>'] = cmp.mapping.confirm({ select = true }),
+          -- Accept currently selected item. Set `select` to `false` to only
+          -- confirm explicitly selected items.
+      }),
+      sources = cmp.config.sources({
+          { name = 'nvim_lsp' },
+          { name = 'nvim_lsp_signature_help' },
+          { name = 'vsnip' }, -- For vsnip users.
+          }, { { name = 'buffer' }, })
+  })
+
+  -- Rust LS
   require'lspconfig'.rust_analyzer.setup{}
 
-  -- Vimscript
+  -- Vimscript LS
   require'lspconfig'.vimls.setup{}
 
-  -- JSON
+  -- JSON LS
   --Enable (broadcasting) snippet capability for completion
   local capabilities = vim.lsp.protocol.make_client_capabilities()
   capabilities.textDocument.completion.completionItem.snippetSupport = true
@@ -589,7 +627,8 @@ EOF
       capabilities = capabilities,
   }
 
-  -- Python
+  -- Python LS
+  capabilities = require('cmp_nvim_lsp').default_capabilities()
   require'lspconfig'.pylsp.setup{
     settings = {
       pylsp = {
@@ -601,7 +640,8 @@ EOF
           ruff = { enabled=true },
         }
       }
-    }
+    },
+    capabilities = capabilities,
   }
 
   -- Lua

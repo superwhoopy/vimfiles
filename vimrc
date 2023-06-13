@@ -21,6 +21,7 @@ call plug#begin()
         " syntax highlighting
 
     Plug 'hrsh7th/nvim-cmp'
+    Plug 'hrsh7th/cmp-buffer'
     Plug 'hrsh7th/cmp-nvim-lsp'
     Plug 'hrsh7th/cmp-nvim-lsp-signature-help'
     Plug 'hrsh7th/cmp-vsnip'
@@ -376,7 +377,7 @@ require('lualine').setup {
   inactive_sections = {
     lualine_a = {},
     lualine_b = {},
-    lualine_c = {'filename'},
+    lualine_c = {{'filename', path = 1}},
     lualine_x = {'location'},
     lualine_y = {},
     lualine_z = {}
@@ -610,6 +611,7 @@ EOF
           { name = 'nvim_lsp' },
           { name = 'nvim_lsp_signature_help' },
           { name = 'vsnip' }, -- For vsnip users.
+          { name = 'buffer' },
           }, { { name = 'buffer' }, })
   })
 

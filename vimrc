@@ -532,9 +532,9 @@ let g:startify_lists = [
       \ ]
 
 let g:startify_commands = [
-    \ ['Mail', 'enew | set ft=mail'],
-    \ ['Markdown', 'enew | Markdown'],
-    \ ['Terminal', 'terminal'],
+    \ ['New Mail',     'execute("edit " . tempname() . ".txt") | set ft=mail'],
+    \ ['New Markdown', 'execute("edit " . tempname() . ".md")'],
+    \ ['Terminal', 'Terminal'],
     \ ]
 
 " Load Startify bookmarks from file; create an empty bookmarks file if it does
@@ -611,8 +611,10 @@ EOF
           { name = 'nvim_lsp' },
           { name = 'nvim_lsp_signature_help' },
           { name = 'vsnip' }, -- For vsnip users.
-          { name = 'buffer' },
-          }, { { name = 'buffer' }, })
+          { name = 'buffer',
+            option = { get_bufnrs = vim.api.nvim_list_bufs },
+          },
+      })
   })
 
   -- Rust LS

@@ -188,9 +188,6 @@ endif
 inoremap <C-s> <Esc>:w<CR>a
 noremap  <C-s> :w<CR>:echo "File saved."<CR>
 
-" Insert non-breaking space (do not remove trailing whitespace!)
-inoremap <C-S-Space>
-
 " Open help in a vertical window (do not remove trailing whitespaces!)
 nnoremap <C-H> :vertical botright help 
 inoremap <C-H> <Esc>:vertical botright help 

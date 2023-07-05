@@ -505,6 +505,7 @@ require('telescope').setup{
                 },
             },
             grouped = true,
+            git_status = false,
         },
         live_grep_args = {
             auto_quoting = true, -- enable/disable auto-quoting

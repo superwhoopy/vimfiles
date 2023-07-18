@@ -45,6 +45,15 @@ set mouse=a " enable mouse support
 nnoremap <C-=> :call AdjustFontSize(1)<CR><C-W>=
 nnoremap <C--> :call AdjustFontSize(-1)<CR><C-W>=
 
+" toggle fullscreen
+let s:fullscreen = 0
+function! ToggleFullScreen()
+    let s:fullscreen = ! s:fullscreen
+    call GuiWindowFullScreen(s:fullscreen)
+endfunction
+
+nnoremap <F11> :call ToggleFullScreen()<CR>
+
 " Fvim stuff
 if exists('g:fvim_loaded')
     " no, nothing

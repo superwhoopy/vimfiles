@@ -5,3 +5,4 @@ spell/*.spl
 coc-settings.json
 startify.bookmarks
 localrc.vim
+lazy-lock.json

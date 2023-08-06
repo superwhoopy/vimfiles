@@ -210,6 +210,11 @@ local function nvim_cmp_fn()
   })
 end
 
+-- markdown preview
+local function markdown_preview_fn()
+  -- nothing for now
+end
+
 -- lspconfig for various languages
 local function lspconfig_fn()
   -- Rust LS
@@ -305,6 +310,9 @@ P.plugins = {
   'hrsh7th/cmp-vsnip',
   'hrsh7th/vim-vsnip',
 
+  {'iamcco/markdown-preview.nvim',
+  build=':call mkdp#util#install()',
+  config=markdown_preview_fn},
   'itchyny/vim-cursorword', -- underline the word under the cursor
   'jeffkreeftmeijer/vim-numbertoggle', -- disable relative line number on
                                        -- disabled buffers
@@ -344,7 +352,6 @@ P.plugins = {
   'sainnhe/everforest', -- colorscheme
 
   {'shortcuts/no-neck-pain.nvim', opts=noneckpain_opts},
-  'shime/vim-livedown',
   'tmhedberg/SimpylFold', -- better Python folding
   'tomtom/tlib_vim',
   'tpope/vim-dispatch', -- use :Make instead of :make to run in background

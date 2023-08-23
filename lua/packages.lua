@@ -285,6 +285,7 @@ end
 
 P.plugins = {
   'aklt/plantuml-syntax',
+  'azabiong/vim-highlighter',
   'cespare/vim-toml',
   'dhruvasagar/vim-table-mode',
 

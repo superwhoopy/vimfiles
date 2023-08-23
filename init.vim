@@ -112,16 +112,16 @@ endif
 
 " Mappings
 " Ctrl-S : sauvegarder fichier courant, meme en mode edition
-inoremap <C-s> <Esc>:w<CR>a
-noremap  <C-s> :w<CR>:echo "File saved."<CR>
+inoremap <C-s> <Cmd>w<CR>
+noremap  <C-s> <Cmd>w<CR>
 
 " Open help in a vertical window (do not remove trailing whitespaces!)
-nnoremap <C-H> :vertical botright help 
-inoremap <C-H> <Esc>:vertical botright help 
+nnoremap <C-H> <Cmd>vertical botright help 
+inoremap <C-H> <Cmd>vertical botright help 
 
 " Tag navigation
 noremap <C-Tab>   <C-]>
-noremap <C-S-Tab> :ptag <C-R><C-W><CR>
+noremap <C-S-Tab> <Cmd>ptag <C-R><C-W><CR>
 " Open tag under cursor in buffer to the left/right/top/bottom
 for s:direction in ["h","j","k","l"]
     execute("noremap <Leader>t" . s:direction . " yiw<C-W>"
@@ -146,12 +146,12 @@ command! Markdown set ft=markdown tw=0 linebreak
 command! Cd     cd\ %:p:h
 
 " Diff mode switch
-noremap <A-d>  :call utils#DiffSwitch()<CR>
+noremap <A-d>  <Cmd>call utils#DiffSwitch()<CR>
 " Run git diff on the current file
-noremap <Leader>d :Gvdiff<CR>
+noremap <Leader>d <Cmd>Gvdiff<CR>
 
 " Toggle auto-format option with <Leader>fo
-noremap <Leader>fo :call utils#ToggleAutoFormat()<CR>
+noremap <Leader>fo <Cmd>call utils#ToggleAutoFormat()<CR>
 
 " Window navigation: map <Alt-[hjkl]> to 'move around' instructions, in normal
 " and insertion mode. Also handle the case of terminal emulators that convert
@@ -163,7 +163,7 @@ for s:key in ['h', 'j', 'k', 'l']
 endfor
 
 " Quickly edit vimrc
-nmap <F8> :e ~/.vim/vimrc<CR>
+nmap <F8> <Cmd>e ~/.vim/vimrc<CR>
 
 " Search for visually selected text
 vnoremap // y/<C-R>"<CR>
@@ -172,10 +172,10 @@ vnoremap // y/<C-R>"<CR>
 " command :AlignRight, and to <A-Right>
 command! AlignRight call utils#AlignRightFrom(getline('.'), getpos('.')[2] - 1,
             \                           &textwidth)
-inoremap <A-Right> <Esc>:AlignRight<CR>i
+inoremap <A-Right> <Cmd>AlignRight<CR>
 
 " switch known words (see lua/utils.lua)
-nnoremap <Leader>s :lua require('utils').switch_word_under_cursor()<CR>
+nnoremap <Leader>s <Cmd>lua require('utils').switch_word_under_cursor()<CR>
 
 " clear all buffers but the one active
 command! ClearBufs call utils#DeleteAllBuffersButCurrent()
@@ -206,31 +206,31 @@ endif
 " telescope mappings -----------------------------------------------------------
 
 " Ctrl+P to find files
-nnoremap <C-p> :lua require('telescope.builtin').fd()<CR>
+nnoremap <C-p> <Cmd>lua require('telescope.builtin').fd()<CR>
 " Ctrl+Shift+P to find tags
-nnoremap <C-S-p> :lua require('telescope.builtin').tags()<CR>
+nnoremap <C-S-p> <Cmd>lua require('telescope.builtin').tags()<CR>
 " Ctrl+Shift+G to grep into directory (Ctrl+G displays file name)
-nnoremap <C-S-g> :lua require('telescope').extensions.live_grep_args.live_grep_args()<CR>
+nnoremap <C-S-g> <Cmd>lua require('telescope').extensions.live_grep_args.live_grep_args()<CR>
 " Ctrl + B to browse openned buffers
-nnoremap <C-b> :lua require('telescope.builtin').buffers({sort_mru=true})<CR>
+nnoremap <C-b> <Cmd>lua require('telescope.builtin').buffers({sort_mru=true})<CR>
 " Ctrl + N to browse files from CWD
 nnoremap <C-n>
-            \ :lua require('telescope').extensions.file_browser.
+            \ <Cmd>lua require('telescope').extensions.file_browser.
             \ file_browser({respect_gitignore=false,
             \ layout_config={bottom_pane={height=80}}})<CR>
 " Ctrl + Shift + N to browse files from the current buffer
 nnoremap <C-S-n>
-            \ :lua require('telescope').extensions.file_browser.
+            \ <Cmd>lua require('telescope').extensions.file_browser.
             \ file_browser({path='%:p:h', select_buffer=true,
             \               respect_gitignore=false,
             \               layout_config={bottom_pane={height=80}}})<CR>
 
 
 " <Leader>g to grep the word under the cursor
-nnoremap <Leader>g :lua require('telescope.builtin').grep_string()<CR>
+nnoremap <Leader>g <Cmd>lua require('telescope.builtin').grep_string()<CR>
 
 " <Leader>D to show diagnostics
-nnoremap <Leader>D :lua require('telescope.builtin').diagnostics()<CR>
+nnoremap <Leader>D <Cmd>lua require('telescope.builtin').diagnostics()<CR>
 
 
 
@@ -258,7 +258,7 @@ let g:plantuml_executable_script='plantuml -o out/'
 hi ExtraWhitespace guibg=red ctermbg=red
 
 " Strip trailing whitespaces
-nmap <F10>  :StripWhitespace<CR>
+nmap <F10>  <Cmd>StripWhitespace<CR>
 
 " auto-strip trailing whitespaces on save
 let g:strip_whitespace_on_save = 0
@@ -409,3 +409,10 @@ sign define DiagnosticSignHint text=👉 texthl=DiagnosticSignHint linehl= numhl
 " vim-vsnip ####################################################################
 imap <expr> <Tab> vsnip#available(1) ? '<Plug>(vsnip-expand-or-jump)' : '<Tab>'
 smap <expr> <Tab> vsnip#available(1) ? '<Plug>(vsnip-expand-or-jump)' : '<Tab>'
+
+" vim-highlighter
+nnoremap <CR> <Cmd>Hi><CR>
+nnoremap <S-CR> <Cmd>Hi<<CR>
+nnoremap [<CR> <Cmd>Hi{<CR>
+nnoremap ]<CR> <Cmd>Hi}<CR>
+let g:HiSyncMode = 1 " highlight across windows

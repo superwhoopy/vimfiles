@@ -405,3 +405,7 @@ sign define DiagnosticSignError text=🔴 texthl=DiagnosticSignError linehl= num
 sign define DiagnosticSignWarn text=⚠ texthl=DiagnosticSignWarn linehl= numhl=
 sign define DiagnosticSignInfo text=ℹ texthl=DiagnosticSignInfo linehl= numhl=
 sign define DiagnosticSignHint text=👉 texthl=DiagnosticSignHint linehl= numhl=
+
+" vim-vsnip ####################################################################
+imap <expr> <Tab> vsnip#available(1) ? '<Plug>(vsnip-expand-or-jump)' : '<Tab>'
+smap <expr> <Tab> vsnip#available(1) ? '<Plug>(vsnip-expand-or-jump)' : '<Tab>'

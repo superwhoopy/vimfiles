@@ -163,7 +163,7 @@ for s:key in ['h', 'j', 'k', 'l']
 endfor
 
 " Quickly edit vimrc
-nmap <F8> <Cmd>e ~/.vim/vimrc<CR>
+nmap <F8> <Cmd>e ~/.vim/init.vim<CR>
 
 " Search for visually selected text
 vnoremap // y/<C-R>"<CR>

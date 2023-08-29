@@ -296,6 +296,20 @@ P.plugins = {
   {'folke/tokyonight.nvim', branch='main'}, -- colorscheme
 
   {
+    "folke/which-key.nvim",
+    event = "VeryLazy",
+    init = function()
+      vim.o.timeout = true
+      vim.o.timeoutlen = 300
+    end,
+    opts = {
+      -- your configuration comes here
+      -- or leave it empty to use the default settings
+      -- refer to the configuration section below
+    }
+  },
+
+  {
     'ggandor/leap.nvim',
     init=function()
       require('leap').set_default_keymaps()

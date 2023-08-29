@@ -226,12 +226,16 @@ nnoremap <Leader>D <Cmd>lua require('telescope.builtin').diagnostics()<CR>
 " AUTO-COMMANDS AND FILETYPE-SPECIFIC STUFF
 "###############################################################################
 
-augroup vimrc_filetypes
+augroup vimrc
     autocmd!
     autocmd FileType markdown setlocal spell
     autocmd FileType rst      setlocal spell
     autocmd FileType vim      setlocal tabstop=4 shiftwidth=4
+
+    " auto-resize all windows when GUI or term is resized
+    autocmd VimResized * wincmd =
 augroup END
+
 
 
 "###############################################################################

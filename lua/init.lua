@@ -11,11 +11,13 @@ vim.keymap.set({ 'i', 'n' }, '<C-h>', '<Cmd>vertical botright help ',
 
 vim.keymap.set('n', '<C-Tab>', '<C-]>',
                { desc = "Goto Tag Definition" })
-vim.keymap.set('n', '<C-S-Tab>', '<Cmd>ptag <C-R><C-W><CR>',
+-- do not use <Cmd> or else <C-R><C-W> won't work
+vim.keymap.set('n', '<C-S-Tab>', ':ptag <C-r><C-w><CR>',
                { desc = "Open Tag in preview window" })
 
 for direction, key in pairs({ left = 'h', right = 'l', down = 'j', up = 'k' }) do
-  vim.keymap.set('n', '<Leader>t' .. key, '<Cmd>:tag <C-R><C-W><CR>',
+  vim.keymap.set('n', '<Leader>t' .. key,
+                 'yiw<C-W>' .. key .. ':tag <C-R>"<CR>',
                  { desc = "Open tag in window " .. direction })
 end
 

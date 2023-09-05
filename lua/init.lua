@@ -6,7 +6,7 @@ vim.keymap.set({ 'i', 'n' }, '<C-s>', '<Cmd>w<CR>',
                { desc = "Save current file" })
 
 -- (do not remove trailing whitespaces!)
-vim.keymap.set({ 'i', 'n' }, '<C-h>', '<Cmd>vertical botright help ',
+vim.keymap.set({ 'n' }, '<C-h>', ':vertical botright help ',
                { desc = "Open help in a vertical window" })
 
 vim.keymap.set('n', '<C-Tab>', '<C-]>',

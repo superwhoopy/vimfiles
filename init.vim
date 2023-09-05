@@ -366,8 +366,8 @@ imap <expr> <Tab> vsnip#available(1) ? '<Plug>(vsnip-expand-or-jump)' : '<Tab>'
 smap <expr> <Tab> vsnip#available(1) ? '<Plug>(vsnip-expand-or-jump)' : '<Tab>'
 
 " vim-highlighter
-nnoremap <CR> <Cmd>Hi><CR>
+nnoremap <C-CR> <Cmd>Hi><CR>
 nnoremap <S-CR> <Cmd>Hi<<CR>
-nnoremap [<CR> <Cmd>Hi{<CR>
-nnoremap ]<CR> <Cmd>Hi}<CR>
+nnoremap [<CR>  <Cmd>Hi{<CR>
+nnoremap ]<CR>  <Cmd>Hi}<CR>
 let g:HiSyncMode = 1 " highlight across windows

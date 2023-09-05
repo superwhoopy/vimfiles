@@ -17,6 +17,9 @@ local _switch_table = {
   {'enabled', 'disabled'},
   {'on', 'off'},
   {'ON', 'OFF'},
+
+  {'TASK_STATUS_RUNNING', 'TASK_STATUS_DEAD'},
+  {'TASK_AGENT', 'TASK_JOB'},
 }
 
 -- build a faster lookup table with every pair declared in _switch_table

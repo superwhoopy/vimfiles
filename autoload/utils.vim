@@ -54,18 +54,21 @@ endfunction
 
 
 "" Fill rest of line with characters
-function! utils#FillLine(str) abort
+function! utils#FillLine() abort
+    call inputsave()
+    let l:str = input("Fill the line with char: ")
+    call inputrestore()
     " set tw to the desired total length
     let l:tw = &textwidth
     if l:tw == 0 | let l:tw = 80 | endif
     " strip trailing spaces first
     execute('.s/[[:space:]]*$//')
     " calculate total number of 'str's to insert
-    let l:reps = (l:tw - col('$')) / len(a:str)
+    let l:reps = (l:tw - col('$')) / len(l:str)
     " insert them, if there's room, removing trailing spaces (though forcing
     " there to be one)
     if l:reps > 0
-        execute('s/$/\=(" ".repeat(a:str, l:reps))/')
+        execute('s/$/\=(" ".repeat(l:str, l:reps))/')
     endif
 endfunction
 

@@ -174,6 +174,12 @@ local noneckpain_opts = {
   },
 }
 
+-- INDENT-BLANKLINE ------------------------------------------------------------
+local indent_blankline_opts = {
+  show_current_context = true,
+  show_current_context_start = true,
+}
+
 -- LSP SERVERS -----------------------------------------------------------------
 
 -- nvim-cmp (autocompletion)
@@ -340,6 +346,7 @@ P.plugins = {
   'lepture/vim-velocity',
   'LnL7/vim-nix', -- syntax highlighting
   'Lokaltog/vim-easymotion',
+  { 'lukas-reineke/indent-blankline.nvim', opts = indent_blankline_opts },
   'MarcWeber/vim-addon-mw-utils',
   'martinda/Jenkinsfile-vim-syntax', -- syntax highlighting
   'majutsushi/tagbar',

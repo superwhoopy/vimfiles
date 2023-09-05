@@ -21,6 +21,19 @@ for direction, key in pairs({ left = 'h', right = 'l', down = 'j', up = 'k' }) d
                  { desc = "Open tag in window " .. direction })
 end
 
+vim.keymap.set('n', '<Leader>s',
+               '<Cmd>lua require("utils").switch_word_under_cursor()<CR>',
+               { nowait = true,
+                 desc = 'Switch "boolean" word under cursor', })
+
+vim.keymap.set('i', '<C-f>', '<Cmd>call utils#FillLine()<CR>',
+   { desc = 'Fill the remaining of the line with a repeated string' })
+
+vim.keymap.set({ 'i', 'n' }, '<Leader>d', '<Cmd>Gvdiff<CR>',
+  { desc = 'Run git diff on the current file (Gvdiffsplit)' })
+
+vim.keymap.set({ 'i', 'n' }, '<A-d>', '<Cmd>call utils#DiffSwitch()<CR>',
+  { desc = 'Switch diff mode on and off for the current buffer' })
 
 -- LSP SERVERS
 -- Global mappings.

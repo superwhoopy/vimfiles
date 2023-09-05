@@ -133,11 +133,6 @@ command! Markdown set ft=markdown tw=0 linebreak
 " Change to the directory of the current file
 command! Cd     cd\ %:p:h
 
-" Diff mode switch
-noremap <A-d>  <Cmd>call utils#DiffSwitch()<CR>
-" Run git diff on the current file
-noremap <Leader>d <Cmd>Gvdiff<CR>
-
 " Toggle auto-format option with <Leader>fo
 noremap <Leader>fo <Cmd>call utils#ToggleAutoFormat()<CR>
 
@@ -161,9 +156,6 @@ vnoremap // y/<C-R>"<CR>
 command! AlignRight call utils#AlignRightFrom(getline('.'), getpos('.')[2] - 1,
             \                           &textwidth)
 inoremap <A-Right> <Cmd>AlignRight<CR>
-
-" switch known words (see lua/utils.lua)
-nnoremap <Leader>s <Cmd>lua require('utils').switch_word_under_cursor()<CR>
 
 " clear all buffers but the one active
 command! ClearBufs call utils#DeleteAllBuffersButCurrent()

@@ -35,7 +35,25 @@ vim.keymap.set({ 'i', 'n' }, '<Leader>d', '<Cmd>Gvdiff<CR>',
 vim.keymap.set({ 'i', 'n' }, '<A-d>', '<Cmd>call utils#DiffSwitch()<CR>',
   { desc = 'Switch diff mode on and off for the current buffer' })
 
--- LSP SERVERS
+-- TERMINAL MAPPINGS ###########################################################
+
+-- <C-j><C-j> to exit terminal-mode, do not map <Esc> (to use vim mode as one
+-- would expect), and do not map jj either, because its painful when scrolling a
+-- pager
+vim.keymap.set('t', '<C-j><C-j>', '<C-\\><C-n>',
+  { desc = 'Exit Terminal mode' } )
+
+vim.keymap.set('t', '<A-h>', '<C-\\><C-N><C-w>h',
+  { desc = 'Unfocus from terminal and move to window to the left' })
+vim.keymap.set('t', '<A-j>', '<C-\\><C-N><C-w>j',
+  { desc = 'Unfocus from terminal and move to window below' })
+vim.keymap.set('t', '<A-k>', '<C-\\><C-N><C-w>k',
+  { desc = 'Unfocus from terminal and move to window above' })
+vim.keymap.set('t', '<A-l>', '<C-\\><C-N><C-w>l',
+  { desc = 'Unfocus from terminal and move to window to the right' })
+
+
+-- LSP SERVERS #################################################################
 -- Global mappings.
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions
 vim.keymap.set('n', '<space>e', vim.diagnostic.open_float,

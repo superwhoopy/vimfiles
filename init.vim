@@ -162,21 +162,6 @@ command! ClearBufs call utils#DeleteAllBuffersButCurrent()
 
 " terminal configuration -------------------------------------------------------
 
-" jj to exit terminal-mode, do not map <Esc> (to use vim mode as one would
-" expect)
-tnoremap jj <C-\><C-n>
-
-" window navigation
-tnoremap <A-h> <C-\><C-N><C-w>h
-tnoremap <A-j> <C-\><C-N><C-w>j
-tnoremap <A-k> <C-\><C-N><C-w>k
-tnoremap <A-l> <C-\><C-N><C-w>l
-
-" disable trailing whitespaces highlighting in terminal windows
-autocmd TermOpen * DisableWhitespace
-" enter insertion mode immediately when opening/focusing the terminal
-autocmd BufWinEnter,WinEnter term://* startinsert
-
 if has('win32')
     " shorthand command to spawn a terminal with my zsh shell - need to define a
     " msys2.cmd command somewhere in the PATH that does what's necessary
@@ -220,12 +205,18 @@ nnoremap <Leader>D <Cmd>lua require('telescope.builtin').diagnostics()<CR>
 
 augroup vimrc
     autocmd!
+    " file type personal preferences
     autocmd FileType markdown setlocal spell
     autocmd FileType rst      setlocal spell
     autocmd FileType vim      setlocal tabstop=4 shiftwidth=4
 
     " auto-resize all windows when GUI or term is resized
     autocmd VimResized * wincmd =
+
+    " disable trailing whitespaces highlighting in terminal windows
+    autocmd TermOpen * DisableWhitespace
+    " enter insertion mode immediately when opening/focusing the terminal
+    autocmd BufWinEnter,WinEnter term://* startinsert
 augroup END
 
 

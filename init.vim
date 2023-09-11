@@ -132,9 +132,6 @@ command! Markdown set ft=markdown tw=0 linebreak
 " Change to the directory of the current file
 command! Cd     cd\ %:p:h
 
-command! -range RemoveDuplicateWords
-            \ <line1>,<line2>lua require'utils'.RemoveDuplicateWords(<line1>, <line2>)
-
 " Toggle auto-format option with <Leader>fo
 noremap <Leader>fo <Cmd>call utils#ToggleAutoFormat()<CR>
 
@@ -219,6 +216,9 @@ augroup vimrc
     autocmd TermOpen * DisableWhitespace
     " enter insertion mode immediately when opening/focusing the terminal
     autocmd BufWinEnter,WinEnter term://* startinsert
+
+    autocmd User StartifyBufferOpened
+                \ lua require('utils').run_exrc(vim.fn.getcwd())
 augroup END
 
 

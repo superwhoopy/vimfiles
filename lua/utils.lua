@@ -48,29 +48,21 @@ end
 
 -- #############################################################################
 
--- Remove duplicate words found in a range of lines
-function P.RemoveDuplicateWords(line1, line2)
-  -- get text in range
-  local text = vim.fn.getline(line1, line2)
-
-  -- filter out shit
-  local word_already_seen = {}
-  local deleted_words = 0
-  for lineno, line in ipairs(text) do
-    local current_line = {}
-    for word in line:gmatch("%S+") do
-      if not word_already_seen[word] then
-        word_already_seen[word] = true
-        table.insert(current_line, word)
-      else
-        deleted_words = deleted_words + 1
-      end
-    end
-    -- print out the filtered line
-    vim.fn.setline(line1 + lineno - 1, table.concat(current_line, " "))
+function P.run_exrc(basedir)
+  local exrc_lua = basedir .. '/.nvim.lua'
+  if not vim.fn.filereadable(exrc_lua) then
+    -- file does not exist: nothing to do
+    return
+  end
+  if vim.secure.read(exrc_lua) == nil then
+    print('Did not source ' .. exrc_lua .. ': untrusted file')
+    return
   end
 
-  print("Removed " .. deleted_words .. " duplicate words")
+  -- now we know that exrc_lua exists, and is trusted: source it
+  print('Auto-Sourcing file ' .. exrc_lua)
+  vim.cmd('luafile ' .. exrc_lua)
 end
 
 return utils
+

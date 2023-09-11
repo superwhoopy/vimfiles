@@ -48,4 +48,29 @@ end
 
 -- #############################################################################
 
+-- Remove duplicate words found in a range of lines
+function P.RemoveDuplicateWords(line1, line2)
+  -- get text in range
+  local text = vim.fn.getline(line1, line2)
+
+  -- filter out shit
+  local word_already_seen = {}
+  local deleted_words = 0
+  for lineno, line in ipairs(text) do
+    local current_line = {}
+    for word in line:gmatch("%S+") do
+      if not word_already_seen[word] then
+        word_already_seen[word] = true
+        table.insert(current_line, word)
+      else
+        deleted_words = deleted_words + 1
+      end
+    end
+    -- print out the filtered line
+    vim.fn.setline(line1 + lineno - 1, table.concat(current_line, " "))
+  end
+
+  print("Removed " .. deleted_words .. " duplicate words")
+end
+
 return utils

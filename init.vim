@@ -129,9 +129,11 @@ command! MkTags call utils#MkTags()
 " Switch to markdown mode: no 80 chars, linebreak
 command! Markdown set ft=markdown tw=0 linebreak
 
-
 " Change to the directory of the current file
 command! Cd     cd\ %:p:h
+
+command! -range RemoveDuplicateWords
+            \ <line1>,<line2>lua require'utils'.RemoveDuplicateWords(<line1>, <line2>)
 
 " Toggle auto-format option with <Leader>fo
 noremap <Leader>fo <Cmd>call utils#ToggleAutoFormat()<CR>

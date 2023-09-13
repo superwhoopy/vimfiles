@@ -35,6 +35,9 @@ vim.keymap.set({ 'i', 'n' }, '<Leader>d', '<Cmd>Gvdiff<CR>',
 vim.keymap.set({ 'i', 'n' }, '<A-d>', '<Cmd>call utils#DiffSwitch()<CR>',
   { desc = 'Switch diff mode on and off for the current buffer' })
 
+vim.keymap.set('i', '<S-Tab>', '<Cmd>lua require("utils").ShiftTab()<CR>',
+  { desc = 'Insert spaces to align with the line above' })
+
 -- TERMINAL MAPPINGS ###########################################################
 
 -- <C-j><C-j> to exit terminal-mode, do not map <Esc> (to use vim mode as one

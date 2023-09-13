@@ -48,6 +48,7 @@ end
 
 -- #############################################################################
 
+-- TODO
 function P.run_exrc(basedir)
   local exrc_lua = basedir .. '/.nvim.lua'
   if not vim.fn.filereadable(exrc_lua) then
@@ -62,6 +63,31 @@ function P.run_exrc(basedir)
   -- now we know that exrc_lua exists, and is trusted: source it
   print('Auto-Sourcing file ' .. exrc_lua)
   vim.cmd('luafile ' .. exrc_lua)
+end
+
+-- #############################################################################
+
+-- Insert as many whitespaces as necessary at the current position to align the
+-- next character on the first non-blank character on the line above
+function P.ShiftTab()
+  local pos = vim.fn.getpos('.')
+  local bufnum = pos[1]
+  local lnum   = pos[2]
+  local col    = pos[3]
+
+  local current_line = vim.fn.getline(lnum)
+  local line_above_content = vim.fn.getline(lnum - 1)
+  local spaces_to_insert = ''
+  while line_above_content:sub(col, col) == ' ' do
+    spaces_to_insert = spaces_to_insert .. ' '
+    col = col + 1
+  end
+
+  -- insert the necessary number of spaces
+  local new_line = current_line:sub(1, col) .. spaces_to_insert
+                   .. current_line:sub(col + 1)
+  vim.fn.setline(lnum, new_line)
+  vim.fn.setpos('.', { bufnum, lnum, col, 0 })
 end
 
 return utils

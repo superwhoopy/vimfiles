@@ -29,7 +29,7 @@ vim.keymap.set('n', '<Leader>s',
 vim.keymap.set('i', '<C-f>', '<Cmd>call utils#FillLine()<CR>',
    { desc = 'Fill the remaining of the line with a repeated string' })
 
-vim.keymap.set({ 'i', 'n' }, '<Leader>d', '<Cmd>Gvdiff<CR>',
+vim.keymap.set({ 'n' }, '<Leader>d', '<Cmd>Gvdiff<CR>',
   { desc = 'Run git diff on the current file (Gvdiffsplit)' })
 
 vim.keymap.set({ 'i', 'n' }, '<A-d>', '<Cmd>call utils#DiffSwitch()<CR>',

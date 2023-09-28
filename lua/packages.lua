@@ -154,24 +154,22 @@ end
 -- NO NECK PAIN ----------------------------------------------------------------
 local noneckpain_opts = {
   mappings = {
-    enabled = true,
+    enabled = false,
     toggle = "<Leader>np",
     widthUp = false,
     widthDown = false,
     scratchPad = false,
   },
 
-  buffers = {
-    setNames = false,
-    -- colors to apply to both side buffers, for buffer scopped options @see
-    -- |NoNeckPain.bufferOptions|
-    --- see |NoNeckPain.bufferOptionsColors|
-    colors = {
-      background = nil,
-      blend = 0.1,
-      text = nil,
-    },
-  },
+  -- buffers = {
+  --   setNames = true,
+  --   -- colors to apply to both side buffers, for buffer scopped options @see
+  --   -- |NoNeckPain.bufferOptions|
+  --   --- see |NoNeckPain.bufferOptionsColors|
+  --   colors = {
+  --     blend = 0.1,
+  --   },
+  -- },
 }
 
 -- INDENT-BLANKLINE ------------------------------------------------------------
@@ -221,6 +219,18 @@ local gitsigns_opts = {
     enable = false
   },
 }
+
+-- VIM-CURSORWORD --------------------------------------------------------------
+
+local function vim_cursorword_fn()
+  -- disable default highlighting
+  -- vim.g.cursorword_highlight = 0
+  -- define highlighting group
+  vim.api.nvim_cmd({
+    cmd = "highlight",
+    args = { 'CursorWord', 'guisp=Gray', 'cterm=underline', 'gui=underline' },
+  }, {})
+end
 
 -- LSP SERVERS -----------------------------------------------------------------
 
@@ -376,10 +386,15 @@ P.plugins = {
   'hrsh7th/cmp-vsnip',
   'hrsh7th/vim-vsnip',
 
-  {'iamcco/markdown-preview.nvim',
-  build=':call mkdp#util#install()',
-  config=markdown_preview_fn},
-  'itchyny/vim-cursorword', -- underline the word under the cursor
+  {
+    'iamcco/markdown-preview.nvim',
+    build = ':call mkdp#util#install()',
+    config = markdown_preview_fn
+  },
+  {
+    'itchyny/vim-cursorword', -- underline the word under the cursor
+    init = vim_cursorword_fn,
+  },
   'jeffkreeftmeijer/vim-numbertoggle', -- disable relative line number on
                                        -- disabled buffers
   'jenterkin/vim-autosource',
@@ -416,6 +431,7 @@ P.plugins = {
   build=':TSUpdate',
   config=nvim_treesitter_fn},
 
+  'psliwka/vim-smoothie', -- smooth scrolling
   'raimon49/requirements.txt.vim', -- syntax highlighting
   'sainnhe/everforest', -- colorscheme
 

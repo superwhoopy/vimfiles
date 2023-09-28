@@ -175,10 +175,9 @@ local noneckpain_opts = {
 }
 
 -- INDENT-BLANKLINE ------------------------------------------------------------
-local indent_blankline_opts = {
-  show_current_context = true,
-  show_current_context_start = true,
-}
+local function indent_blankline_fn ()
+  require('ibl').setup()
+end
 
 -- GITSIGNS --------------------------------------------------------------------
 local gitsigns_opts = {
@@ -393,7 +392,7 @@ P.plugins = {
   { 'lewis6991/gitsigns.nvim', opts = gitsigns_opts },
   'LnL7/vim-nix', -- syntax highlighting
   'Lokaltog/vim-easymotion',
-  { 'lukas-reineke/indent-blankline.nvim', opts = indent_blankline_opts },
+  { 'lukas-reineke/indent-blankline.nvim', config = indent_blankline_fn },
   'MarcWeber/vim-addon-mw-utils',
   'martinda/Jenkinsfile-vim-syntax', -- syntax highlighting
   'majutsushi/tagbar',

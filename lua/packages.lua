@@ -414,6 +414,7 @@ P.plugins = {
   'mhinz/vim-startify',
   'morhetz/gruvbox', -- colorscheme
   'ngg/vim-gn', -- syntax highlighting
+  'NoahTheDuke/vim-just',
   'ntpeters/vim-better-whitespace',
   {'neovim/nvim-lspconfig', config=lspconfig_fn},
   'neovimhaskell/haskell-vim',

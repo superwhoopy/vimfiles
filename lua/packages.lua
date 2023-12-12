@@ -121,18 +121,18 @@ local function nvim_treesitter_fn()
   require'nvim-treesitter.configs'.setup {
     -- A list of parser names, or "all"
     ensure_installed = {
-      -- "c", "rst", "bash", "json", "hjson",
+      "c", "rst", "bash", "json", "hjson", "lua", "tlaplus"
     },
 
     -- Install parsers synchronously (only applied to `ensure_installed`)
     sync_install = false,
 
     -- List of parsers to ignore installing (for "all")
-    ignore_install = { "all" },
+    -- ignore_install = { "all" },
 
     highlight = {
       -- `false` will disable the whole extension
-      enable = false,
+      enable = true,
 
       -- NOTE: these are the names of the parsers and not the filetype. (for
       -- example if you want to disable highlighting for the `tex` filetype, you
@@ -434,9 +434,11 @@ P.plugins = {
   'nvim-telescope/telescope-live-grep-args.nvim',
   'nvim-tree/nvim-web-devicons',
 
-  {'nvim-treesitter/nvim-treesitter',
-  build=':TSUpdate',
-  config=nvim_treesitter_fn},
+  {
+    'nvim-treesitter/nvim-treesitter',
+    build=':TSUpdate',
+    config=nvim_treesitter_fn
+  },
 
   'psliwka/vim-smoothie', -- smooth scrolling
   'raimon49/requirements.txt.vim', -- syntax highlighting

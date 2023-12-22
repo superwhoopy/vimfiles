@@ -274,9 +274,9 @@ local function markdown_preview_fn()
 end
 
 -- TLA+
-local tla_opts = {
+local tla_opts = vim.env.SCOOP and {
   tla2tools = vim.env.SCOOP .. "/apps/tlaplus-toolbox/tla2tools.jar"
-}
+} or {}
 
 
 -- lspconfig for various languages

@@ -273,12 +273,6 @@ local function markdown_preview_fn()
   -- nothing for now
 end
 
--- TLA+
-local tla_opts = vim.env.SCOOP and {
-  tla2tools = vim.env.SCOOP .. "/apps/tlaplus-toolbox/tla2tools.jar"
-} or {}
-
-
 -- lspconfig for various languages
 local function lspconfig_fn()
   -- Rust LS
@@ -443,13 +437,6 @@ P.plugins = {
   'psliwka/vim-smoothie', -- smooth scrolling
   'raimon49/requirements.txt.vim', -- syntax highlighting
   'sainnhe/everforest', -- colorscheme
-
-  -- tlaplus language
-  {
-    'susliko/tla.nvim',
-    dependencies = { 'nvim-lua/plenary.nvim' },
-    opts = tla_opts
-  },
 
   {'shortcuts/no-neck-pain.nvim', opts=noneckpain_opts},
   'tmhedberg/SimpylFold', -- better Python folding

@@ -38,6 +38,52 @@ vim.keymap.set({ 'i', 'n' }, '<A-d>', '<Cmd>call utils#DiffSwitch()<CR>',
 vim.keymap.set('i', '<S-Tab>', '<Cmd>lua require("utils").ShiftTab()<CR>',
   { desc = 'Insert spaces to align with the line above' })
 
+
+-- TELESCOPE MAPPINGS ##########################################################
+
+vim.keymap.set({ 'n', }, '<C-p>',
+               require("telescope.builtin").fd,
+               { desc = 'Telescope: Find File' })
+vim.keymap.set({ 'n', }, '<C-P>',
+               require("telescope.builtin").tags,
+               { desc = 'Telescope: Tags' })
+vim.keymap.set({ 'n', }, '<C-G>',
+               require("telescope").extensions.live_grep_args.live_grep_args,
+               { desc = 'Telescope: Live Grep' })
+vim.keymap.set({ 'n', }, '<C-b>',
+               function()
+                 require("telescope.builtin").buffers({ sort_mru = true })
+               end,
+               { desc = 'Telescope: Buffers' })
+vim.keymap.set({ 'n', }, '<C-n>',
+               function()
+                 require("telescope").extensions.file_browser.file_browser({
+                   respect_gitignore = false,
+                   layout_config = { bottom_pane = { height = 80 } }
+                 })
+               end,
+               { desc = 'Telescope: File Browser in CWD' })
+vim.keymap.set({ 'n', }, '<C-N>',
+               function()
+                 require("telescope").extensions.file_browser.file_browser({
+                   path = "%:p:h",
+                   select_buffer = true,
+                   respect_gitignore = false,
+                   layout_config = { bottom_pane = { height = 80 } }
+                 })
+               end,
+               { desc = 'Telescope: File Browser from file' })
+vim.keymap.set({ 'n', }, '<Leader>p',
+               require("telescope").extensions.project.project,
+               { desc = 'Telescope: Projects' })
+vim.keymap.set({ 'n', }, '<Leader>g',
+               require("telescope.builtin").grep_string,
+               { desc = 'Telescope: Grep word under the cursor' })
+vim.keymap.set({ 'n', }, '<Leader>D',
+               require("telescope.builtin").diagnostics,
+               { desc = 'Telescope: Diagnostics' })
+
+
 -- TERMINAL MAPPINGS ###########################################################
 
 -- <C-j><C-j> to exit terminal-mode, do not map <Esc> (to use vim mode as one

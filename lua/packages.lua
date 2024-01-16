@@ -112,6 +112,7 @@ local function telescope_fn()
   }
   require("telescope").load_extension "file_browser"
   require("telescope").load_extension("live_grep_args")
+  require("telescope").load_extension("project")
 end
 
 
@@ -121,7 +122,7 @@ local function nvim_treesitter_fn()
   require'nvim-treesitter.configs'.setup {
     -- A list of parser names, or "all"
     ensure_installed = {
-      "c", "rst", "bash", "json", "hjson", "lua", "tlaplus"
+      "c", "rst", "bash", "json", "hjson", "lua", "tlaplus", "vimdoc"
     },
 
     -- Install parsers synchronously (only applied to `ensure_installed`)
@@ -138,7 +139,7 @@ local function nvim_treesitter_fn()
       -- example if you want to disable highlighting for the `tex` filetype, you
       -- need to include `latex` in this list as this is the name of the parser)
       -- list of language that will be disabled
-      disable = { "help", "markdown" },
+      disable = { "markdown" },
 
       -- Setting this to true will run `:h syntax` and tree-sitter at the same
       -- time. Set this to `true` if you depend on 'syntax' being enabled (like
@@ -153,28 +154,38 @@ end
 
 -- NO NECK PAIN ----------------------------------------------------------------
 local noneckpain_opts = {
+  autocmds = {
+    enableOnVimEnter = false,
+  },
   mappings = {
-    enabled = false,
+    enabled = true,
     toggle = "<Leader>np",
     widthUp = false,
     widthDown = false,
     scratchPad = false,
   },
 
-  -- buffers = {
-  --   setNames = true,
-  --   -- colors to apply to both side buffers, for buffer scopped options @see
-  --   -- |NoNeckPain.bufferOptions|
-  --   --- see |NoNeckPain.bufferOptionsColors|
-  --   colors = {
-  --     blend = 0.1,
-  --   },
-  -- },
+  buffers = {
+    setNames = false,
+
+    -- colors to apply to both side buffers, for buffer scopped options @see |NoNeckPain.bufferOptions|
+    --- see |NoNeckPain.bufferOptionsColors|
+    colors = {
+      -- Hexadecimal color code to override the current background color of the buffer. (e.g. #24273A)
+      -- Transparent backgrounds are supported by default.
+      --- @type string?
+      background = "tokyonight-storm",
+    },
+  },
 }
 
 -- INDENT-BLANKLINE ------------------------------------------------------------
 local function indent_blankline_fn ()
-  require('ibl').setup()
+  require('ibl').setup({
+    exclude = {
+      filetypes = { "dashboard" }
+    }
+  })
 end
 
 -- GITSIGNS --------------------------------------------------------------------
@@ -221,7 +232,6 @@ local gitsigns_opts = {
 }
 
 -- VIM-CURSORWORD --------------------------------------------------------------
-
 local function vim_cursorword_fn()
   -- disable default highlighting
   -- vim.g.cursorword_highlight = 0
@@ -231,6 +241,54 @@ local function vim_cursorword_fn()
     args = { 'CursorWord', 'guisp=Gray', 'cterm=underline', 'gui=underline' },
   }, {})
 end
+
+
+-- DASHBOARD -------------------------------------------------------------------
+local function dashboard_fn()
+  require('dashboard').setup({
+    theme = 'hyper',
+    disable_move = true,
+    shortcut_type = 'number',
+
+    config = {
+      week_header = {
+        enable = true,
+      },
+      header = { 'Hello, World' },
+      disable_move = true,
+
+      packages = { enable = true },
+
+      shortcut = {
+        { icon = '📦 ', desc = 'Packages', group = '@property',
+          action = 'e ~/.vim/lua/packages.lua', key = 'p' },
+        { icon = '⚙ ', desc = 'init.vim', group = '@variable',
+          action = 'e ~/.vim/init.vim', key = 'i' },
+        { icon = '🖥 ', desc = 'GlazeWM', group = '@variable',
+          action = 'e ~/.glaze-wm/config.yaml', key = 'g' },
+        { icon = '⌨ ', desc = 'AutoHotKey', group = '@variable',
+          action = 'e ~/.config/config/ahk/default.ahk', key = 'a' },
+        { icon = '📧 ', desc = 'Mail', group = 'DiagnosticOK',
+          action = function()
+            vim.cmd("edit " .. vim.fn.tempname() .. ".txt")
+            vim.bo.filetype = 'mail'
+          end, key = 'm' },
+        { icon = '📚 ', desc = 'Markdown', group = 'DiagnosticHint',
+          action = function()
+            vim.cmd("edit " .. vim.fn.tempname() .. ".md")
+            vim.bo.filetype = 'mail'
+          end, key = 'd' },
+        { icon = '❌ ', desc = 'Quit', group = 'DiagnosticError',
+          action = 'qall!', key = 'q' },
+      },
+
+      project = { enable = false },
+
+      footer = {'', '', 'ASTERIOS Technologies'}
+    },
+  })
+end
+
 
 -- LSP SERVERS -----------------------------------------------------------------
 
@@ -411,7 +469,6 @@ P.plugins = {
   'MarcWeber/vim-addon-mw-utils',
   'martinda/Jenkinsfile-vim-syntax', -- syntax highlighting
   'majutsushi/tagbar',
-  'mhinz/vim-startify',
   'morhetz/gruvbox', -- colorscheme
   'ngg/vim-gn', -- syntax highlighting
   'NoahTheDuke/vim-just',
@@ -426,12 +483,20 @@ P.plugins = {
   'nvim-telescope/telescope-symbols.nvim',
   'nvim-telescope/telescope-file-browser.nvim',
   'nvim-telescope/telescope-live-grep-args.nvim',
+  'nvim-telescope/telescope-project.nvim',
   'nvim-tree/nvim-web-devicons',
 
   {
     'nvim-treesitter/nvim-treesitter',
     build=':TSUpdate',
     config=nvim_treesitter_fn
+  },
+
+  {
+    'nvimdev/dashboard-nvim',
+    event = 'VimEnter',
+    config = dashboard_fn,
+    dependencies = { {'nvim-tree/nvim-web-devicons'}}
   },
 
   'psliwka/vim-smoothie', -- smooth scrolling

@@ -167,36 +167,6 @@ if has('win32')
     command! Terminal execute('terminal msys2')
 endif
 
-" telescope mappings -----------------------------------------------------------
-
-" Ctrl+P to find files
-nnoremap <C-p> <Cmd>lua require('telescope.builtin').fd()<CR>
-" Ctrl+Shift+P to find tags
-nnoremap <C-S-p> <Cmd>lua require('telescope.builtin').tags()<CR>
-" Ctrl+Shift+G to grep into directory (Ctrl+G displays file name)
-nnoremap <C-S-g> <Cmd>lua require('telescope').extensions.live_grep_args.live_grep_args()<CR>
-" Ctrl + B to browse openned buffers
-nnoremap <C-b> <Cmd>lua require('telescope.builtin').buffers({sort_mru=true})<CR>
-" Ctrl + N to browse files from CWD
-nnoremap <C-n>
-            \ <Cmd>lua require('telescope').extensions.file_browser.
-            \ file_browser({respect_gitignore=false,
-            \ layout_config={bottom_pane={height=80}}})<CR>
-" Ctrl + Shift + N to browse files from the current buffer
-nnoremap <C-S-n>
-            \ <Cmd>lua require('telescope').extensions.file_browser.
-            \ file_browser({path='%:p:h', select_buffer=true,
-            \               respect_gitignore=false,
-            \               layout_config={bottom_pane={height=80}}})<CR>
-
-
-" <Leader>g to grep the word under the cursor
-nnoremap <Leader>g <Cmd>lua require('telescope.builtin').grep_string()<CR>
-
-" <Leader>D to show diagnostics
-nnoremap <Leader>D <Cmd>lua require('telescope.builtin').diagnostics()<CR>
-
-
 
 "###############################################################################
 " AUTO-COMMANDS AND FILETYPE-SPECIFIC STUFF
@@ -205,9 +175,11 @@ nnoremap <Leader>D <Cmd>lua require('telescope.builtin').diagnostics()<CR>
 augroup vimrc
     autocmd!
     " file type personal preferences
-    autocmd FileType markdown setlocal spell
-    autocmd FileType rst      setlocal spell
-    autocmd FileType vim      setlocal tabstop=4 shiftwidth=4
+    autocmd FileType markdown  setlocal spell
+    autocmd FileType rst       setlocal spell
+    autocmd FileType vim       setlocal tabstop=4 shiftwidth=4
+    autocmd FileType dashboard setlocal colorcolumn=
+    autocmd FileType dashboard DisableWhitespace
 
     " auto-resize all windows when GUI or term is resized
     autocmd VimResized * wincmd =

@@ -183,7 +183,7 @@ local noneckpain_opts = {
 local function indent_blankline_fn ()
   require('ibl').setup({
     exclude = {
-      filetypes = { "dashboard" }
+      -- filetypes = { "inserthere" }
     }
   })
 end
@@ -243,50 +243,80 @@ local function vim_cursorword_fn()
 end
 
 
--- DASHBOARD -------------------------------------------------------------------
-local function dashboard_fn()
-  require('dashboard').setup({
-    theme = 'hyper',
-    disable_move = true,
-    shortcut_type = 'number',
+-- ALPHA-NVIM ------------------------------------------------------------------
 
-    config = {
-      week_header = {
-        enable = true,
-      },
-      header = { 'Hello, World' },
-      disable_move = true,
+local function alphanvim_fn()
+  local dashboard = require('alpha.themes.dashboard')
+  local theta = require('alpha.themes.theta')
 
-      packages = { enable = true },
+  theta.header.val = {
+      [[    _    ____ _____ _____ ____  ___ ___  ____              ]],
+      [[   / \  / ___|_   _| ____|  _ \|_ _/ _ \/ ___|             ]],
+      [[  / _ \ \___ \ | | |  _| | |_) || | | | \___ \             ]],
+      [[ / ___ \ ___) || | | |___|  _ < | | |_| |___) |            ]],
+      [[/_/   \_\____/ |_| |_____|_| \_\___\___/|____/             ]],
+      [[                                                           ]],
+      [[ _____         _                 _             _           ]],
+      [[|_   _|__  ___| |__  _ __   ___ | | ___   __ _(_) ___  ___ ]],
+      [[  | |/ _ \/ __| '_ \| '_ \ / _ \| |/ _ \ / _` | |/ _ \/ __|]],
+      [[  | |  __/ (__| | | | | | | (_) | | (_) | (_| | |  __/\__ \]],
+      [[  |_|\___|\___|_| |_|_| |_|\___/|_|\___/ \__, |_|\___||___/]],
+      [[                                         |___/             ]],
+    }
 
-      shortcut = {
-        { icon = '📦 ', desc = 'Packages', group = '@property',
-          action = 'e ~/.vim/lua/packages.lua', key = 'p' },
-        { icon = '⚙ ', desc = 'init.vim', group = '@variable',
-          action = 'e ~/.vim/init.vim', key = 'i' },
-        { icon = '🖥 ', desc = 'GlazeWM', group = '@variable',
-          action = 'e ~/.glaze-wm/config.yaml', key = 'g' },
-        { icon = '⌨ ', desc = 'AutoHotKey', group = '@variable',
-          action = 'e ~/.config/config/ahk/default.ahk', key = 'a' },
-        { icon = '📧 ', desc = 'Mail', group = 'DiagnosticOK',
-          action = function()
-            vim.cmd("edit " .. vim.fn.tempname() .. ".txt")
-            vim.bo.filetype = 'mail'
-          end, key = 'm' },
-        { icon = '📚 ', desc = 'Markdown', group = 'DiagnosticHint',
-          action = function()
-            vim.cmd("edit " .. vim.fn.tempname() .. ".md")
-            vim.bo.filetype = 'mail'
-          end, key = 'd' },
-        { icon = '❌ ', desc = 'Quit', group = 'DiagnosticError',
-          action = 'qall!', key = 'q' },
-      },
+  local section_mru = theta.config.layout[4]
+  section_mru.val[1].opts.hl = "Constant"
 
-      project = { enable = false },
+  local function mybutton(sc, txt, keybind, keybind_opts)
+    local ans = dashboard.button(sc, txt, keybind, keybind_opts)
+    ans.opts.hl = "Question"
+    ans.opts.width = 30
+    return ans
+  end
 
-      footer = {'', '', 'ASTERIOS Technologies'}
+  theta.buttons.val = {
+    { type = "text", val = "Quick links",
+      opts = { hl = "Constant", position = "center" } },
+    { type = "padding", val = 1 },
+    mybutton("e", "  New file", "<cmd>ene<CR>"),
+    mybutton("m", "📧 New Mail",
+        '<cmd>execute("edit " .. tempname() .. ".txt") | setlocal ft=mail<CR>'),
+    mybutton("d", "📚 New Markdown",
+        '<cmd>execute("edit " .. tempname() .. ".md")<CR>'),
+    mybutton("p", "📦 Edit Packages",
+        '<cmd>edit ~/.vim/lua/packages.lua<CR>'),
+    mybutton("i", "⚙  Edit init.vim",
+        '<cmd>edit ~/.vim/init.vim<CR>'),
+    mybutton("a", "🖥 Edit GlazeWM",
+        '<cmd>edit ~/.glaze-wm/config.yaml<CR>'),
+    mybutton("a", "⌨  Edit AHK",
+        '<cmd>edit ~/.config/config/ahk/default.ahk<CR>'),
+    mybutton("p", "🗃 Select Project",
+        '<cmd>Telescope project<CR>'),
+    mybutton("q", "❌ Quit", "<cmd>qa!<CR>"),
+  }
+
+  local _stats = require('lazy').stats()
+  local lazystats = {
+    type = "text",
+    val = {
+      vim.fn.strftime('%a %d %b %Y'),
+      _stats.count .. ' plugins installed'
     },
-  })
+    opts = { position="center", hl = "@keyword" }
+  }
+  theta.config.layout = {
+    { type = "padding", val = 2 },
+    theta.header,
+    { type = "padding", val = 2 },
+    lazystats,
+    { type = "padding", val = 2 },
+    section_mru,
+    { type = "padding", val = 2 },
+    theta.buttons,
+  }
+
+  require('alpha').setup(theta.config)
 end
 
 
@@ -435,6 +465,12 @@ P.plugins = {
     end
   }, -- easymotion-like (s)
 
+  {
+    'goolord/alpha-nvim',
+    dependencies = { 'nvim-tree/nvim-web-devicons' },
+    config = alphanvim_fn,
+  },
+
   'hiphish/jinja.vim',
 
   {'hrsh7th/nvim-cmp', config=nvim_cmp_fn},
@@ -490,13 +526,6 @@ P.plugins = {
     'nvim-treesitter/nvim-treesitter',
     build=':TSUpdate',
     config=nvim_treesitter_fn
-  },
-
-  {
-    'nvimdev/dashboard-nvim',
-    event = 'VimEnter',
-    config = dashboard_fn,
-    dependencies = { {'nvim-tree/nvim-web-devicons'}}
   },
 
   'psliwka/vim-smoothie', -- smooth scrolling

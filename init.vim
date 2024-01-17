@@ -188,9 +188,6 @@ augroup vimrc
     autocmd TermOpen * DisableWhitespace
     " enter insertion mode immediately when opening/focusing the terminal
     autocmd BufWinEnter,WinEnter term://* startinsert
-
-    autocmd User StartifyBufferOpened
-                \ lua require('utils').run_exrc(vim.fn.getcwd())
 augroup END
 
 
@@ -278,34 +275,6 @@ let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols = {
             \ 'psy': 'Ψ',
             \ 'bgt': '祥',
             \ }
-
-" Startify #####################################################################
-
-let g:startify_change_to_vcs_root = 1
-let g:startify_fortune_use_unicode = 1
-
-let g:startify_lists = [
-      \ { 'type': 'files',     'header': ['   MRU']            },
-      \ { 'type': 'bookmarks', 'header': ['   Bookmarks']      },
-      \ { 'type': 'sessions',  'header': ['   Sessions']       },
-      \ { 'type': 'commands',  'header': ['   Commands']       },
-      \ ]
-
-let g:startify_commands = [
-    \ ['New Mail',     'execute("edit " . tempname() . ".txt") | set ft=mail'],
-    \ ['New Markdown', 'execute("edit " . tempname() . ".md")'],
-    \ ['Terminal', 'Terminal'],
-    \ ]
-
-" Load Startify bookmarks from file; create an empty bookmarks file if it does
-" not exist
-let s:startify_bookmarks_file = expand('<sfile>:p:h') . '/startify.bookmarks'
-if !filereadable(s:startify_bookmarks_file)
-    call writefile([], s:startify_bookmarks_file)
-endif
-let g:startify_bookmarks = readfile(s:startify_bookmarks_file)
-" quickly edit the file that stores startify bookmarks
-command! StartifyEditBookmarks execute('edit ' . s:startify_bookmarks_file)
 
 " LSP servers ##################################################################
 

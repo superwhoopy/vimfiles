@@ -1,5 +1,4 @@
 local P = {}
-packages = P
 
 -- #############################################################################
 -- PLUGINS CONFIGURATION
@@ -250,19 +249,24 @@ local function alphanvim_fn()
   local theta = require('alpha.themes.theta')
 
   theta.header.val = {
-      [[    _    ____ _____ _____ ____  ___ ___  ____              ]],
-      [[   / \  / ___|_   _| ____|  _ \|_ _/ _ \/ ___|             ]],
-      [[  / _ \ \___ \ | | |  _| | |_) || | | | \___ \             ]],
-      [[ / ___ \ ___) || | | |___|  _ < | | |_| |___) |            ]],
-      [[/_/   \_\____/ |_| |_____|_| \_\___\___/|____/             ]],
-      [[                                                           ]],
-      [[ _____         _                 _             _           ]],
-      [[|_   _|__  ___| |__  _ __   ___ | | ___   __ _(_) ___  ___ ]],
-      [[  | |/ _ \/ __| '_ \| '_ \ / _ \| |/ _ \ / _` | |/ _ \/ __|]],
-      [[  | |  __/ (__| | | | | | | (_) | | (_) | (_| | |  __/\__ \]],
-      [[  |_|\___|\___|_| |_|_| |_|\___/|_|\___/ \__, |_|\___||___/]],
-      [[                                         |___/             ]],
-    }
+    [[                            ,((.                       ]],
+    [[                     ((((((((((((((((((                ]],
+    [[                 #((#####(,.......#(((((((             ]],
+    [[               ######*****,,,,,........(((((/          ]],
+    [[              ((###********,,,,,,,.......(((((         ]],
+    [[             ((((**********,,,,,,,,,......%%%%%        ]],
+    [[            (((((***********,. ,,,,,,......%%%%%       ]],
+    [[                     &&&&&&&&&&&. ,,,......*%###       ]],
+    [[...(&&&&&&&&&&&&&&&&&&&&&&&&&&&& ,,,,,.....#####       ]],
+    [[             %&&&##*****, &&&&  ,,,,,......####.       ]],
+    [[             %%%%&##**** &&&& ,,,,,,.....(#(((.        ]],
+    [[               #%%&&##* &&&  *,,,,...../#((((.         ]],
+    [[                 #%%%% &&& **,,.....##((//(.           ]],
+    [[                   .#.&&. ###%####((((((,              ]],
+    [[                    .%&.,###(((((((,                   ]],
+    [[                    ...,                               ]],
+  }
+  theta.header.opts.hl = "Title"
 
   local section_mru = theta.config.layout[4]
   section_mru.val[1].opts.hl = "Constant"
@@ -283,37 +287,75 @@ local function alphanvim_fn()
         '<cmd>execute("edit " .. tempname() .. ".txt") | setlocal ft=mail<CR>'),
     mybutton("d", "📚 New Markdown",
         '<cmd>execute("edit " .. tempname() .. ".md")<CR>'),
-    mybutton("p", "📦 Edit Packages",
-        '<cmd>edit ~/.vim/lua/packages.lua<CR>'),
-    mybutton("i", "⚙  Edit init.vim",
-        '<cmd>edit ~/.vim/init.vim<CR>'),
-    mybutton("a", "🖥 Edit GlazeWM",
-        '<cmd>edit ~/.glaze-wm/config.yaml<CR>'),
-    mybutton("a", "⌨  Edit AHK",
-        '<cmd>edit ~/.config/config/ahk/default.ahk<CR>'),
-    mybutton("p", "🗃 Select Project",
+    mybutton("P", "🗃 Select Project",
         '<cmd>Telescope project<CR>'),
     mybutton("q", "❌ Quit", "<cmd>qa!<CR>"),
   }
+
+  local conffiles_buttons = {
+    type = "group",
+    val = {
+      { type = "text", val = "Conf. files",
+        opts = { hl = "Constant", position = "center" } },
+      { type = "padding", val = 1 },
+      mybutton("p", "📦 Neovim: Packages",
+        '<cmd>edit ~/.vim/lua/packages.lua<CR>'),
+      mybutton("i", "⚙  Neovim: init.vim", '<cmd>edit ~/.vim/init.vim<CR>'),
+      mybutton("l", "⚙  Neovim: init.lua", '<cmd>edit ~/.vim/init.vim<CR>'),
+      mybutton("g", "🖥 GlazeWM", '<cmd>edit ~/.glaze-wm/config.yaml<CR>'),
+      mybutton("a", "⌨  AutoHotKey",
+        '<cmd>edit ~/.config/config/ahk/default.ahk<CR>'),
+    },
+    position = "center",
+  }
+
 
   local _stats = require('lazy').stats()
   local lazystats = {
     type = "text",
     val = {
-      vim.fn.strftime('%a %d %b %Y'),
       _stats.count .. ' plugins installed'
     },
     opts = { position="center", hl = "@keyword" }
   }
+  local date = {
+    type = "text",
+    val = {
+      vim.fn.strftime('%a %d %b %Y')
+    },
+    opts = { position="center", hl = "@keyword" }
+  }
+
+  local footer = {
+    type = "text",
+    val = {
+      [[      _____ __ __   __  __  ]],
+      [[  /\ (_  | |_ |__)|/  \(_   ]],
+      [[ /--\__) | |__| \ |\__/__)  ]],
+      [[___                         ]],
+      [[ | _ _|_  _  _ | _  _ . _ _ ]],
+      [[ |(-(_| )| )(_)|(_)(_)|(-_) ]],
+      [[                   _/       ]],
+    },
+    opts = {
+      position = "center",
+      hl = "Type",
+    },
+  }
+
   theta.config.layout = {
     { type = "padding", val = 2 },
     theta.header,
-    { type = "padding", val = 2 },
-    lazystats,
+    -- footer,
     { type = "padding", val = 2 },
     section_mru,
     { type = "padding", val = 2 },
     theta.buttons,
+    { type = "padding", val = 2 },
+    conffiles_buttons,
+    { type = "padding", val = 2 },
+    date,
+    lazystats,
   }
 
   require('alpha').setup(theta.config)
@@ -556,4 +598,4 @@ else
 end
 
 
-return packages
+return P

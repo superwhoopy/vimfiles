@@ -44,10 +44,10 @@ vim.keymap.set('i', '<S-Tab>', '<Cmd>lua require("utils").ShiftTab()<CR>',
 vim.keymap.set({ 'n', }, '<C-p>',
                require("telescope.builtin").fd,
                { desc = 'Telescope: Find File' })
-vim.keymap.set({ 'n', }, '<C-P>',
+vim.keymap.set({ 'n', }, '<C-S-p>',
                require("telescope.builtin").tags,
                { desc = 'Telescope: Tags' })
-vim.keymap.set({ 'n', }, '<C-G>',
+vim.keymap.set({ 'n', }, '<C-S-g>',
                require("telescope").extensions.live_grep_args.live_grep_args,
                { desc = 'Telescope: Live Grep' })
 vim.keymap.set({ 'n', }, '<C-b>',
@@ -63,7 +63,7 @@ vim.keymap.set({ 'n', }, '<C-n>',
                  })
                end,
                { desc = 'Telescope: File Browser in CWD' })
-vim.keymap.set({ 'n', }, '<C-N>',
+vim.keymap.set({ 'n', }, '<C-S-n>',
                function()
                  require("telescope").extensions.file_browser.file_browser({
                    path = "%:p:h",

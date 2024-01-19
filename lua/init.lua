@@ -38,6 +38,8 @@ vim.keymap.set({ 'i', 'n' }, '<A-d>', '<Cmd>call utils#DiffSwitch()<CR>',
 vim.keymap.set('i', '<S-Tab>', '<Cmd>lua require("utils").ShiftTab()<CR>',
   { desc = 'Insert spaces to align with the line above' })
 
+vim.keymap.set('n', '<C-a>', '<Cmd>Alpha<CR>', { desc = 'Goto startup screen' })
+
 
 -- TELESCOPE MAPPINGS ##########################################################
 
@@ -158,3 +160,9 @@ vim.api.nvim_create_autocmd('LspAttach', {
   end,
 })
 
+local initlua_augroup = vim.api.nvim_create_augroup('initlua', {})
+vim.api.nvim_create_autocmd('DirChanged', {
+  group = initlua_augroup,
+  pattern = "*",
+  callback = function(args) require('utils').run_exrc(args.file) end
+})

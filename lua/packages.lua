@@ -55,60 +55,69 @@ local lualine_opts = {
 local function telescope_fn()
   local fb_actions = require('telescope').extensions.file_browser.actions
   require('telescope').setup{
-      defaults = {
-          mappings = {
-              i = {
-                  ["<C-j>"] = 'move_selection_next',
-                  ["<C-k>"] = 'move_selection_previous',
-                  ["jj"] = { "<esc>", type="command" },
-              },
-              n = {
-                  ["<C-j>"] = 'move_selection_next',
-                  ["<C-k>"] = 'move_selection_previous',
-              },
+    defaults = {
+      mappings = {
+        i = {
+          ["<C-j>"] = 'move_selection_next',
+          ["<C-k>"] = 'move_selection_previous',
+          ["jj"] = { "<esc>", type="command" },
+        },
+        n = {
+          ["<C-j>"] = 'move_selection_next',
+          ["<C-k>"] = 'move_selection_previous',
+        },
+      },
+      vimgrep_arguments = {
+        "rg",
+        "--color=never",
+        "--no-heading",
+        "--with-filename",
+        "--line-number",
+        "--column",
+        "--smart-case",
+        "--glob=!tags"
+      }
+    },
+    pickers = {
+      tags = {
+        only_sort_tags = true
+      }
+    },
+    extensions = {
+      file_browser = {
+        theme = "ivy",
+        -- disables netrw and use telescope-file-browser in its place
+        hijack_netrw = true,
+        mappings = {
+          ["i"] = {
+            -- your custom insert mode mappings
+            ["<Left>"] = fb_actions.goto_parent_dir
           },
-          vimgrep_arguments = {
-            "rg",
-            "--color=never",
-            "--no-heading",
-            "--with-filename",
-            "--line-number",
-            "--column",
-            "--smart-case",
-            "--glob=!tags"
-          }
-      },
-      pickers = {
-          tags = {
-              only_sort_tags = true
-          }
-      },
-      extensions = {
-          file_browser = {
-              theme = "ivy",
-              -- disables netrw and use telescope-file-browser in its place
-              hijack_netrw = true,
-              mappings = {
-                  ["i"] = {
-                      -- your custom insert mode mappings
-                      ["<Left>"] = fb_actions.goto_parent_dir
-                  },
-                  ["n"] = {
-                      -- your custom normal mode mappings
-                  },
-              },
-              grouped = true,
-              git_status = false,
+          ["n"] = {
+            -- your custom normal mode mappings
           },
-          live_grep_args = {
-              auto_quoting = true, -- enable/disable auto-quoting
-              -- define mappings, e.g.
-              mappings = { -- extend mappings
-              i = { },
-              },
-          }
+        },
+        grouped = true,
+        git_status = false,
       },
-  }
+      live_grep_args = {
+        auto_quoting = true, -- enable/disable auto-quoting
+        -- define mappings, e.g.
+        mappings = { -- extend mappings
+        i = { },
+      },
+      project = {
+        -- TODO: for some reason, this doesn't work
+        -- on_project_selected = function(prompt_bufnr)
+        --   local project_actions = require('telescope').extensions.project.actions
+        --   local proj_dir = project_actions.get_selected_path(prompt_bufnr)
+        --   require('utils').run_exrc(proj_dir)
+        --   project_actions.change_working_directory(prompt_bufnr)
+        -- end
+      }
+    },
+  },
+}
   require("telescope").load_extension "file_browser"
   require("telescope").load_extension("live_grep_args")
   require("telescope").load_extension("project")
@@ -289,6 +298,8 @@ local function alphanvim_fn()
         '<cmd>execute("edit " .. tempname() .. ".md")<CR>'),
     mybutton("P", "🗃 Select Project",
         '<cmd>Telescope project<CR>'),
+    mybutton("c", "🧹 Clear all buffers",
+        '<cmd>call utils#DeleteAllBuffersButCurrent() | AlphaRedraw<CR>'),
     mybutton("q", "❌ Quit", "<cmd>qa!<CR>"),
   }
 
@@ -301,8 +312,8 @@ local function alphanvim_fn()
       mybutton("p", "📦 Neovim: Packages",
         '<cmd>edit ~/.vim/lua/packages.lua<CR>'),
       mybutton("i", "⚙  Neovim: init.vim", '<cmd>edit ~/.vim/init.vim<CR>'),
-      mybutton("l", "⚙  Neovim: init.lua", '<cmd>edit ~/.vim/init.vim<CR>'),
-      mybutton("g", "🖥 GlazeWM", '<cmd>edit ~/.glaze-wm/config.yaml<CR>'),
+      mybutton("l", "⚙  Neovim: init.lua", '<cmd>edit ~/.vim/lua/init.lua<CR>'),
+      mybutton("g", "🔵 GlazeWM", '<cmd>edit ~/.glaze-wm/config.yaml<CR>'),
       mybutton("a", "⌨  AutoHotKey",
         '<cmd>edit ~/.config/config/ahk/default.ahk<CR>'),
     },

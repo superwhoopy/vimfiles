@@ -51,6 +51,7 @@ end
 -- TODO
 function P.run_exrc(basedir)
   local exrc_lua = basedir .. '/.nvim.lua'
+  print('Looking for exrc file in new directory…')
   if vim.fn.filereadable(exrc_lua) == 0 then
     -- file does not exist: nothing to do
     return

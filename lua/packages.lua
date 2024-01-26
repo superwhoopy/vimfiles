@@ -166,11 +166,11 @@ local noneckpain_opts = {
     enableOnVimEnter = false,
   },
   mappings = {
-    enabled = true,
-    toggle = "<Leader>np",
-    widthUp = false,
-    widthDown = false,
-    scratchPad = false,
+    enabled = false,
+    -- toggle = "<Leader>np",
+    -- widthUp = false,
+    -- widthDown = false,
+    -- scratchPad = false,
   },
 
   buffers = {

@@ -32,6 +32,9 @@ vim.keymap.set('i', '<C-f>', '<Cmd>call utils#FillLine()<CR>',
 vim.keymap.set({ 'n' }, '<Leader>d', '<Cmd>Gvdiff<CR>',
   { desc = 'Run git diff on the current file (Gvdiffsplit)' })
 
+vim.keymap.set({ 'n' }, '<Leader>np', '<Cmd>NoNeckPain<CR>',
+  { desc = 'Toggle NoNeckPain mode' })
+
 vim.keymap.set({ 'i', 'n' }, '<A-d>', '<Cmd>call utils#DiffSwitch()<CR>',
   { desc = 'Switch diff mode on and off for the current buffer' })
 

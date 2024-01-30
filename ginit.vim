@@ -17,7 +17,12 @@ else " Unix
 endif
 
 function! s:setFont()
-    execute("GuiFont! " . s:fontname . ":h" . s:fontsize)
+    if exists(':GuiFont')
+        let s:fontcmd = 'GuiFont! '
+    else
+        let s:fontcmd = 'set guifont='
+    endif
+    execute(s:fontcmd . s:fontname . ":h" . s:fontsize)
 endfunction
 
 function! AdjustFontSize(amount)

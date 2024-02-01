@@ -76,7 +76,8 @@ local function telescope_fn()
         "--column",
         "--smart-case",
         "--glob=!tags"
-      }
+      },
+      winblend = 70
     },
     pickers = {
       tags = {

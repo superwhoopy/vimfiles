@@ -28,7 +28,7 @@ for direction, key in pairs({ left = 'h', right = 'l', down = 'j', up = 'k' }) d
                  { desc = "Open tag in window " .. direction })
 end
 
-vim.keymap.set('n', '<Leader>s',
+vim.keymap.set('n', '<Leader>sb',
                '<Cmd>lua require("utils").switch_word_under_cursor()<CR>',
                { nowait = true,
                  desc = 'Switch "boolean" word under cursor', })
@@ -53,6 +53,13 @@ vim.keymap.set('n', '<C-a>', '<Cmd>Alpha<CR>', { desc = 'Goto startup screen' })
 vim.keymap.set('n', '<Leader>e', '<Cmd>Neotree toggle<CR>',
                { desc = 'Neotree (toggle)' })
 
+vim.keymap.set('n', '<Leader>S', '<Cmd>lua require("spectre").toggle()<CR>',
+               { desc = 'Spectre search & replace (toggle)' })
+vim.keymap.set(
+  'n', '<leader>sw',
+  '<cmd>lua require("spectre").open_visual({select_word=true})<CR>',
+  { desc = "Search current word in Spectre" }
+)
 -- TELESCOPE MAPPINGS ##########################################################
 
 vim.keymap.set({ 'n', }, '<C-p>',

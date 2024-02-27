@@ -590,6 +590,11 @@ P.plugins = {
     opts = neotree_opts
   },
 
+  {
+    'nvim-pack/nvim-spectre',
+    dependencies = { 'nvim-lua/plenary.nvim' }
+  },
+
   {'nvim-telescope/telescope.nvim', config=telescope_fn},
   'nvim-telescope/telescope-symbols.nvim',
   'nvim-telescope/telescope-file-browser.nvim',
@@ -616,7 +621,6 @@ P.plugins = {
   'tpope/vim-surround',
   'vim-latex/vim-latex',
   'vim-python/python-syntax',
-  'vim-scripts/DrawIt',
   'Vimjas/vim-python-pep8-indent',
   'w0rp/ale',
   'zchee/vim-flatbuffers', -- syntax highlighting

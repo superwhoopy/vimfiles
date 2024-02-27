@@ -50,6 +50,8 @@ vim.keymap.set('i', '<S-Tab>', '<Cmd>lua require("utils").ShiftTab()<CR>',
 
 vim.keymap.set('n', '<C-a>', '<Cmd>Alpha<CR>', { desc = 'Goto startup screen' })
 
+vim.keymap.set('n', '<Leader>e', '<Cmd>Neotree toggle<CR>',
+               { desc = 'Neotree (toggle)' })
 
 -- TELESCOPE MAPPINGS ##########################################################
 

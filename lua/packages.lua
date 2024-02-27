@@ -373,6 +373,14 @@ local function alphanvim_fn()
   require('alpha').setup(theta.config)
 end
 
+-- NEO-TREE --------------------------------------------------------------------
+
+local neotree_opts = {
+  close_if_last_window = true,
+  source_selector = {
+    winbar = true
+  }
+}
 
 -- LSP SERVERS -----------------------------------------------------------------
 
@@ -406,7 +414,10 @@ local function nvim_cmp_fn()
           { name = 'buffer',
             option = { get_bufnrs = vim.api.nvim_list_bufs },
           },
-      })
+      }),
+      completion = {
+        autocomplete = false
+      }
   })
 end
 
@@ -568,6 +579,16 @@ P.plugins = {
   'nvim-lua/plenary.nvim',
 
   {'nvim-lualine/lualine.nvim', opts=lualine_opts},
+
+  {
+    'nvim-neo-tree/neo-tree.nvim',
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
+      "MunifTanjim/nui.nvim"
+    },
+    opts = neotree_opts
+  },
 
   {'nvim-telescope/telescope.nvim', config=telescope_fn},
   'nvim-telescope/telescope-symbols.nvim',

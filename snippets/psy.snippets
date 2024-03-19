@@ -1,0 +1,75 @@
+snippet worker
+	worker ${1:WorkerName} (uses ${2:realtime})
+	{
+	  global
+	  {
+	    /* global vars */${3}
+	  }
+
+	  init
+	  {
+	    /* initialization code */${4}
+	  }
+
+	  input
+	  {
+	    /* input jobs */${5}
+	  }
+
+	  output
+	  {
+	    /* output jobs */${6}
+	  }
+
+	  internal
+	  {
+	    /* internal jobs */${7}
+	  }
+	}
+
+snippet job
+	job ${1:JobName} (onclock ${2}, starttime ${3}${4:, jitter JJ})
+	{
+	  khibody${4: (timebudget BB)}
+	  {
+	    ${5}
+	  }
+	}
+
+snippet agent
+	agent ${1:AgName} (uses ${2:realtime}, defaultclock ${3:<default_clock>}, starttime ${4} with ${5})
+	{
+	  global
+	  {
+	    /* global vars */${6}
+	  }
+	
+	  body ${7:start}
+	  {
+	    /* execution starts here */
+	    ${8}
+	  }
+	}
+
+snippet display
+	display
+	{
+	  ${1:tv}: ${2:TaskName};
+	}
+
+snippet consult
+	consult
+	{
+	  ${1:depth} $ ${2:tv}
+
+snippet fractional
+	fractional clock ${1:fracClockName} within ${2:clockName};
+
+snippet stream
+	stream ${1:<type>} ${2:streamName}, expiration ${3:<duration>};
+
+snippet pushto
+	pushto
+	{
+	  ${1:streamName} expiration ${2:<duration>};
+	}

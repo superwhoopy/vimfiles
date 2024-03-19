@@ -288,6 +288,7 @@ sign define DiagnosticSignInfo text=ℹ texthl=DiagnosticSignInfo linehl= numhl=
 sign define DiagnosticSignHint text=👉 texthl=DiagnosticSignHint linehl= numhl=
 
 " vim-vsnip ####################################################################
+let g:vsnip_snippet_dir = expand('<sfile>:p:h') . '/snippets'
 imap <expr> <Tab> vsnip#available(1) ? '<Plug>(vsnip-expand-or-jump)' : '<Tab>'
 smap <expr> <Tab> vsnip#available(1) ? '<Plug>(vsnip-expand-or-jump)' : '<Tab>'
 

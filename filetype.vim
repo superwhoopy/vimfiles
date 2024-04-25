@@ -6,8 +6,8 @@ if exists('did_load_filetypes')
 endif
 
 augroup filetypedetect
-  au BufRead,BufNewFile *.gcov     set filetype=gcov
-  au BufRead,BufNewFile *.md       set filetype=markdown
-  au BufRead,BufNewFile git-ci.tmp set filetype=gitcommit
-  au BufRead,BufNewFile *.cmm      set filetype=practice
+  au BufRead,BufNewFile *.gcov     setfiletype=gcov
+  au BufRead,BufNewFile *.md       setfiletype=cpp
+  au BufRead,BufNewFile git-ci.tmp setfiletype=gitcommit
+  au BufRead,BufNewFile *.cmm      setfiletype=practice
 augroup END

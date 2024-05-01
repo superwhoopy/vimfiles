@@ -62,14 +62,29 @@ snippet consult
 	{
 	  ${1:depth} $ ${2:tv}
 
+snippet pushto
+	pushto
+	{
+	  ${1:streamName} expiration ${2:<duration>};
+	}
+
+snippet popfrom
+	popfrom
+	{
+	  ${1:streamName} : ${2:all};
+	}
+
 snippet fractional
 	fractional clock ${1:fracClockName} within ${2:clockName};
 
 snippet stream
 	stream ${1:<type>} ${2:streamName}, expiration ${3:<duration>};
 
-snippet pushto
-	pushto
-	{
-	  ${1:streamName} expiration ${2:<duration>};
-	}
+snippet duration
+	duration ${1:<duration>} = clockperiod(${2:<clock>});
+
+snippet adv
+	timebudget ${1:<tb>},
+	  releasein ${2} with ${3},
+	  advance ${4} with ${5},
+	  waitfor ${6} with ${7};

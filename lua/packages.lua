@@ -379,7 +379,8 @@ local neotree_opts = {
   close_if_last_window = true,
   source_selector = {
     winbar = true
-  }
+  },
+  buffers = { follow_current_file = { enabled = true } }
 }
 
 -- LSP SERVERS -----------------------------------------------------------------

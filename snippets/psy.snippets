@@ -30,9 +30,9 @@ snippet worker
 snippet job
 	job ${1:JobName} (onclock ${2}, starttime ${3}${4:, jitter JJ})
 	{
-	  khibody${4: (timebudget BB)}
+	  khibody${5: (timebudget BB)}
 	  {
-	    ${5}
+	    ${6}
 	  }
 	}
 

@@ -179,9 +179,29 @@ vim.api.nvim_create_autocmd('LspAttach', {
   end,
 })
 
+
+-- OTHER STUFF #################################################################
+
+-- TODO: comment
 local initlua_augroup = vim.api.nvim_create_augroup('initlua', {})
 vim.api.nvim_create_autocmd('DirChanged', {
   group = initlua_augroup,
   pattern = "*",
   callback = function(args) require('utils').run_exrc(args.file) end
 })
+
+-- setup the snippets directory: find where friendly-snippets plugin is
+-- installed
+local function find_snippets_dir()
+  local plugins = require('lazy').plugins()
+  for _, item in ipairs(plugins) do
+    if item[1] == 'rafamadriz/friendly-snippets' then
+      return item.dir
+    end
+  end
+  return nil
+end
+local snippets_dir = find_snippets_dir()
+if snippets_dir ~= nil then
+  vim.g.vsnip_snippet_dir = snippets_dir .. '/snippets'
+end

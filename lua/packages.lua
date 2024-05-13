@@ -544,8 +544,7 @@ P.plugins = {
   'hrsh7th/cmp-nvim-lsp',
   'hrsh7th/cmp-nvim-lsp-signature-help',
   'hrsh7th/cmp-vsnip',
-  'hrsh7th/vim-vsnip',
-
+  { 'hrsh7th/vim-vsnip' },
   {
     'iamcco/markdown-preview.nvim',
     build = ':call mkdp#util#install()',
@@ -591,6 +590,7 @@ P.plugins = {
     opts = neotree_opts
   },
 
+  -- Visual search and replace
   {
     'nvim-pack/nvim-spectre',
     dependencies = { 'nvim-lua/plenary.nvim' }
@@ -610,6 +610,7 @@ P.plugins = {
   },
 
   'psliwka/vim-smoothie', -- smooth scrolling
+  "rafamadriz/friendly-snippets", -- snippets
   'raimon49/requirements.txt.vim', -- syntax highlighting
   'sainnhe/everforest', -- colorscheme
 

@@ -76,24 +76,6 @@ vim.keymap.set({ 'n', }, '<C-b>',
                  require("telescope.builtin").buffers({ sort_mru = true })
                end,
                { desc = 'Telescope: Buffers' })
-vim.keymap.set({ 'n', }, '<C-n>',
-               function()
-                 require("telescope").extensions.file_browser.file_browser({
-                   respect_gitignore = false,
-                   layout_config = { bottom_pane = { height = 80 } }
-                 })
-               end,
-               { desc = 'Telescope: File Browser in CWD' })
-vim.keymap.set({ 'n', }, '<C-S-n>',
-               function()
-                 require("telescope").extensions.file_browser.file_browser({
-                   path = "%:p:h",
-                   select_buffer = true,
-                   respect_gitignore = false,
-                   layout_config = { bottom_pane = { height = 80 } }
-                 })
-               end,
-               { desc = 'Telescope: File Browser from file' })
 vim.keymap.set({ 'n', }, '<Leader>p',
                require("telescope").extensions.project.project,
                { desc = 'Telescope: Projects' })
@@ -205,3 +187,12 @@ local snippets_dir = find_snippets_dir()
 if snippets_dir ~= nil then
   vim.g.vsnip_snippet_dir = snippets_dir .. '/snippets'
 end
+
+-- TODO
+vim.filetype.add({
+  extension = {
+    cmm  = 'practice',
+    psy  = 'psy',
+    psyh = 'psy',
+  }
+})

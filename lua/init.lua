@@ -174,19 +174,19 @@ vim.api.nvim_create_autocmd('DirChanged', {
 
 -- setup the snippets directory: find where friendly-snippets plugin is
 -- installed
-local function find_snippets_dir()
+local function _find_friendly_snippets_dir()
   local plugins = require('lazy').plugins()
   for _, item in ipairs(plugins) do
     if item[1] == 'rafamadriz/friendly-snippets' then
       return item.dir
     end
   end
-  return nil
+  return ""
 end
-local snippets_dir = find_snippets_dir()
-if snippets_dir ~= nil then
-  vim.g.vsnip_snippet_dir = snippets_dir .. '/snippets'
-end
+vim.g.vsnip_snippet_dirs = {
+  _find_friendly_snippets_dir(),
+  vim.fn.stdpath('config') .. '/snippets',
+}
 
 -- TODO
 vim.filetype.add({

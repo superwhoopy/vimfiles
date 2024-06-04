@@ -262,12 +262,9 @@ if has('unix')
         \ [expand('~/.vim/plugged/vim-asterios/tests/psy/flags.psymodule.json')]
 
 elseif has('win32')
-
-    let s:ks_root = expand('F:\Programs\Krono-Safe')
-    let g:ast_psyko_path = s:ks_root . '\psyko-8.13.1\bin\psyko.exe'
-    let g:ast_kernel_dir = s:ks_root . '\rtk-power-mpc5777m-module-4.4.3'
-    let g:ast_product_name = 'power-mpc5777m-module'
-
+    let s:ks_root = expand("$KRONOSAFE_INSTALL_DIR")
+    let g:ast_psyko_path = s:ks_root . '\psyko-9.5.0\bin\psyko.exe'
+    let g:ast_kernel_dir = s:ks_root . '\ksim-9.5.0'
 endif
 
 " WebDevIcons and NERDTree coloring stuff

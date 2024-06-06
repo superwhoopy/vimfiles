@@ -90,6 +90,10 @@ set listchars=tab:>\ ,trail:-,nbsp:·
 " set exrc, so that .exrc files are automatically sourced (see :help exrc)
 set exrc
 
+" indent wrapped text when needed
+set breakindent
+set breakindentopt=list:-1 " pay attention to list prefixes
+
 if has('win32')
   " Windows dark magic to make the backspace key work properly...
   set backspace=2

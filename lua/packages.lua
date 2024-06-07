@@ -596,6 +596,8 @@ P.plugins = {
   'raimon49/requirements.txt.vim', -- syntax highlighting
   'sainnhe/everforest', -- colorscheme
 
+  'sindrets/diffview.nvim',
+
   {'shortcuts/no-neck-pain.nvim', opts=noneckpain_opts},
   'tmhedberg/SimpylFold', -- better Python folding
   'tomtom/tlib_vim',

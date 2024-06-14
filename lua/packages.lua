@@ -425,6 +425,11 @@ local function lspconfig_fn()
       capabilities = capabilities,
   }
 
+  -- CSS LS
+  require'lspconfig'.cssls.setup {
+    capabilities = capabilities,
+  }
+
   -- Python LS
   capabilities = require('cmp_nvim_lsp').default_capabilities()
   require'lspconfig'.pylsp.setup{

@@ -217,9 +217,6 @@ local gitsigns_opts = {
     row = 0,
     col = 1
   },
-  yadm = {
-    enable = false
-  },
 }
 
 -- VIM-CURSORWORD --------------------------------------------------------------
@@ -479,6 +476,9 @@ local function lspconfig_fn()
     _bash_opts = { cmd = { "bash-language-server.cmd", "start" } }
   end
   require('lspconfig').bashls.setup(_bash_opts)
+
+  -- typescript / javascript
+  require'lspconfig'.tsserver.setup{}
 end
 
 -- #############################################################################

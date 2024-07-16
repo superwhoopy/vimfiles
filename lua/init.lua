@@ -2,7 +2,9 @@
 -- OPTIONS
 -- #############################################################################
 
+-- floating windows default transparency
 vim.o.winblend = 30
+-- popup-menu default transparency
 vim.o.pumblend = 30
 
 -- #############################################################################

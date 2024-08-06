@@ -257,14 +257,11 @@ let g:ale_linters = {
 " vim-asterios #################################################################
 
 if has('unix')
-    let s:core_sdk = expand('~/workspace/core/out/Debug/sdk')
+    let s:core_sdk = expand('~/.local/share/psyko-9.5.1')
     let g:ast_psyko_path = s:core_sdk . '/bin/psyko'
     let g:ast_kernel_dir = s:core_sdk . '/k2'
 
     let g:ale_json_vscode_ls = expand('/usr/bin/vscode-json-languageserver')
-    let g:ale_psy_psyko_jsonconf =
-        \ [expand('~/.vim/plugged/vim-asterios/tests/psy/flags.psymodule.json')]
-
 elseif has('win32')
     let s:ks_root = expand("$KRONOSAFE_INSTALL_DIR")
     let g:ast_psyko_path = s:ks_root . '\psyko-9.5.0\bin\psyko.exe'

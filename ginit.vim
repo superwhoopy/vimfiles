@@ -54,7 +54,11 @@ nnoremap <C--> :call AdjustFontSize(-1)<CR><C-W>=
 let s:fullscreen = 0
 function! ToggleFullScreen()
     let s:fullscreen = ! s:fullscreen
-    call GuiWindowFullScreen(s:fullscreen)
+    if exists("g:neovide")
+        let g:neovide_fullscreen = s:fullscreen
+    else
+        call GuiWindowFullScreen(s:fullscreen)
+    endif
 endfunction
 
 nnoremap <F11> :call ToggleFullScreen()<CR>

@@ -38,8 +38,15 @@ vim.keymap.set('n', '<Leader>sb',
 vim.keymap.set('i', '<C-f>', '<Cmd>call utils#FillLine()<CR>',
    { desc = 'Fill the remaining of the line with a repeated string' })
 
-vim.keymap.set({ 'n' }, '<Leader>d', '<Cmd>Gvdiff<CR>',
+require('which-key').add({
+  { "<Leader>d", group = "Diff tools…" },
+})
+vim.keymap.set({ 'n' }, '<Leader>dg', '<Cmd>Gvdiff<CR>',
   { desc = 'Run git diff on the current file (Gvdiffsplit)' })
+vim.keymap.set({ 'n' }, '<Leader>dt', '<Cmd>diffthis<CR>',
+  { desc = 'Enable diff mode on the current buffer' })
+vim.keymap.set({ 'n' }, '<Leader>do', '<Cmd>diffoff!<CR>',
+  { desc = 'Disable diff mode globally' })
 
 vim.keymap.set({ 'n' }, '<Leader>np', '<Cmd>NoNeckPain<CR>',
   { desc = 'Toggle NoNeckPain mode' })

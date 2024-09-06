@@ -478,7 +478,7 @@ local function lspconfig_fn()
   require('lspconfig').bashls.setup(_bash_opts)
 
   -- typescript / javascript
-  require'lspconfig'.tsserver.setup{}
+  require'lspconfig'.ts_ls.setup{}
 end
 
 -- #############################################################################

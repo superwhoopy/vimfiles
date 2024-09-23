@@ -252,6 +252,7 @@ let g:ale_linters = {
             \ 'sh': ['shellcheck'],
             \ 'haskell': ['hls', 'ghc'],
             \ 'python': [],
+            \ 'rust': [],
             \ }
 
 " vim-asterios #################################################################

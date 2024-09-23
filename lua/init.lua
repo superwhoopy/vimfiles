@@ -173,7 +173,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
 
 -- OTHER STUFF #################################################################
 
--- TODO: comment
+-- Run exrc file upon changing directory
 local initlua_augroup = vim.api.nvim_create_augroup('initlua', {})
 vim.api.nvim_create_autocmd('DirChanged', {
   group = initlua_augroup,
@@ -197,7 +197,7 @@ vim.g.vsnip_snippet_dirs = {
   vim.fn.stdpath('config') .. '/snippets',
 }
 
--- TODO
+-- Define some file types from extensions
 vim.filetype.add({
   extension = {
     cmm  = 'practice',
@@ -205,3 +205,10 @@ vim.filetype.add({
     psyh = 'psy',
   }
 })
+
+-- Define gutter symbols for diagnostics
+local signs = { Error = "⛔", Warn = "⚠", Hint = "💡", Info = "ℹ" }
+for type, icon in pairs(signs) do
+  local hl = "DiagnosticSign" .. type
+  vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
+end

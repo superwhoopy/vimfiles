@@ -13,3 +13,6 @@ set conceallevel=2
 
 " the only kind of comments we want are quoting blocks
 set comments=nb:>
+
+" we don't want 80 chars limit
+set tw=0
